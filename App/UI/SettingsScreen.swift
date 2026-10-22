@@ -1,12 +1,10 @@
 import SwiftUI
 
 struct SettingsScreenState {
-    enum Appearance: String, CaseIterable, Identifiable { case system, light, dark; var id: String { rawValue } }
     enum Language: String, CaseIterable, Identifiable { case system, english, russian; var id: String { rawValue } }
 
     var launchAtLogin = false
     var stopVPNOnQuit = false
-    var appearance: Appearance = .system
     var language: Language = .system
     var extensionStatus = String(localized: "vpn-component-installed", defaultValue: "Installed and allowed")
     var extensionReady = true
@@ -37,16 +35,7 @@ struct SettingsScreen: View {
                                                         defaultValue: "When off, the VPN stays on after you quit."))
                         }
                     }
-                    section(String(localized: "settings-appearance", defaultValue: "Appearance")) {
-                        settingLabel(String(localized: "settings-theme", defaultValue: "Theme"))
-                        SegmentedChoice(options: SettingsScreenState.Appearance.allCases, selection: $state.appearance) {
-                            switch $0 {
-                            case .system: return String(localized: "appearance-system", defaultValue: "System")
-                            case .light: return String(localized: "appearance-light", defaultValue: "Light")
-                            case .dark: return String(localized: "appearance-dark", defaultValue: "Dark")
-                            }
-                        }
-                        settingLabel(String(localized: "settings-language", defaultValue: "Language"))
+                    section(String(localized: "settings-language", defaultValue: "Language")) {
                         SegmentedChoice(options: SettingsScreenState.Language.allCases, selection: $state.language) {
                             switch $0 {
                             case .system: return String(localized: "language-system", defaultValue: "System language")

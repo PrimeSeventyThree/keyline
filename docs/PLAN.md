@@ -70,7 +70,7 @@ ca.pulsbeat.keyline.tunnel.systemextension (runs as root)
 | 10 | `ss`/`ssconf` URL schemes | `Outline-Info.plist`, `url_interceptor.ts` | `CFBundleURLTypes` (done) + handler |
 | 11 | Clipboard key detection when the app becomes active | `client/web/app/clipboard.ts` | `NSPasteboard` check |
 | 12 | Privacy acknowledgement on first run | privacy dialog | First-run sheet |
-| 13 | Appearance (light/dark/system) | appearance view | Setting |
+| 13 | Appearance (light/dark/system) | appearance view | Dark only in v1; follow the system setting in the next version |
 | 14 | Languages | `client/web/messages/*.json` | English + Russian String Catalog |
 | 15 | Menu bar item | `AppKitBridge/StatusItemController.swift` | `NSStatusItem` + server picker |
 | 16 | Stop VPN on quit | `OutlinePlugin.swift` | Setting, off by default, with a warning on quit |
@@ -112,7 +112,7 @@ Visual direction: a dark, calm window with a green accent, based on a reference 
 3. **Settings:**
    - Launch at login
    - Stop VPN on quit (off by default, with a warning on quit)
-   - Appearance and language
+   - Language (dark theme only in v1; following the system light/dark setting and accent colour comes in the next version)
    - VPN component status and install/uninstall
    - Split tunneling (Phase 4)
    - About: licenses, the DB-IP credit, Send report (Phase 5)

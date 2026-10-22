@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>Keyline — concept B: keyhole line</title>
+  <!-- A line runs through a keyhole: your traffic, passing through a private tunnel.
+       Colours live in the palette below. -->
+  <style>
+    svg {
+      --tile-top: #12382d;
+      --tile-bottom: #06130f;
+      --tile-edge: rgba(255, 255, 255, 0.07);
+      --glow: rgba(61, 219, 143, 0.28);
+      --mark: #3ddb8f;
+      --mark-highlight: #8af0bd;
+      --line-fade: rgba(61, 219, 143, 0);
+      --hole: #0a1f19;
+    }
+    .tile-top { stop-color: var(--tile-top); }
+    .tile-bottom { stop-color: var(--tile-bottom); }
+    .tile-edge { fill: none; stroke: var(--tile-edge); stroke-width: 3; }
+    .glow-stop { stop-color: var(--glow); }
+    .glow-clear { stop-color: var(--glow); stop-opacity: 0; }
+    .mark-top { stop-color: var(--mark-highlight); }
+    .mark-bottom { stop-color: var(--mark); }
+    .line-faded { stop-color: var(--line-fade); }
+    .line-solid { stop-color: var(--mark); }
+    .keyhole { fill: url(#mark-gradient); }
+    .hole { fill: var(--hole); }
+    .line { fill: none; stroke: url(#line-gradient); stroke-width: 30; stroke-linecap: round; }
+  </style>
+  <defs>
+    <linearGradient id="tile-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop class="tile-top" offset="0"/>
+      <stop class="tile-bottom" offset="1"/>
+    </linearGradient>
+    <radialGradient id="glow-gradient" cx="512" cy="470" r="340" gradientUnits="userSpaceOnUse">
+      <stop class="glow-stop" offset="0"/>
+      <stop class="glow-clear" offset="1"/>
+    </radialGradient>
+    <linearGradient id="mark-gradient" x1="0" y1="250" x2="0" y2="780" gradientUnits="userSpaceOnUse">
+      <stop class="mark-top" offset="0"/>
+      <stop class="mark-bottom" offset="1"/>
+    </linearGradient>
+    <linearGradient id="line-gradient" x1="170" y1="0" x2="854" y2="0" gradientUnits="userSpaceOnUse">
+      <stop class="line-faded" offset="0"/>
+      <stop class="line-solid" offset="0.3"/>
+      <stop class="line-solid" offset="0.7"/>
+      <stop class="line-faded" offset="1"/>
+    </linearGradient>
+  </defs>
+
+  <g id="tile">
+    <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#tile-gradient)"/>
+    <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#glow-gradient)"/>
+    <rect class="tile-edge" x="101.5" y="101.5" width="821" height="821" rx="184"/>
+  </g>
+
+  <g id="mark">
+    <!-- Keyhole: a round head and a flared foot. -->
+    <path id="keyhole" class="keyhole"
+          d="M 512 250 A 170 170 0 0 1 593 569 L 652 760 Q 656 776 640 776 L 384 776 Q 368 776 372 760 L 431 569 A 170 170 0 0 1 512 250 Z"/>
+    <!-- The opening the line passes through. -->
+    <circle id="opening" class="hole" cx="512" cy="420" r="62"/>
+    <!-- The line: fades in from the left, passes behind the keyhole and shows through the
+         opening, then leaves on the right. Gaps of 24 either side of the keyhole's edge. -->
+    <path id="line" class="line" d="M 190 420 L 318 420 M 464 420 L 560 420 M 706 420 L 834 420"/>
+  </g>
+</svg>

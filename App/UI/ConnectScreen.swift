@@ -30,8 +30,14 @@ struct ConnectScreen: View {
     var onSelectServer: (ServerSummary) -> Void = { _ in }
     var onChangeServer: () -> Void = {}
 
+    /// Width of the stats column. The same width is kept empty on the left, so the main
+    /// column sits in the middle of the window.
+    static let statsWidth: CGFloat = 270
+
     var body: some View {
         HStack(spacing: 24) {
+            Color.clear.frame(width: Self.statsWidth)
+                .accessibilityHidden(true)
             VStack(spacing: 0) {
                 Spacer(minLength: 12)
                 RecentServersStrip(servers: state.recentServers, selectedID: state.server?.id, onSelect: onSelectServer)
@@ -51,7 +57,7 @@ struct ConnectScreen: View {
             .frame(maxWidth: .infinity)
 
             StatsColumn(state: state)
-                .frame(width: 270)
+                .frame(width: Self.statsWidth)
         }
         .padding(.vertical, 24)
         .padding(.horizontal, 28)
