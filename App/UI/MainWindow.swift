@@ -46,8 +46,10 @@ struct Sidebar: View {
     var body: some View {
         VStack(spacing: 6) {
             HStack(spacing: 0) {
-                Image(systemName: "key.fill")
-                    .font(.system(size: 18, weight: .semibold))
+                Image("KeylineMark", bundle: .keylineResources)
+                    .resizable()
+                    .renderingMode(.template)
+                    .frame(width: 26, height: 26)
                     .foregroundColor(Color.black.opacity(0.85))
                     .frame(width: 38, height: 38)
                     .background(RoundedRectangle(cornerRadius: 10).fill(Theme.accent))

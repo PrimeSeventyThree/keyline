@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="237 229 550 550" width="550" height="550">
+  <title>Keyline mark</title>
+  <!-- The power key from keyline-icon.svg without the tile, in one colour (currentColor),
+       for the menu bar and in-app use. Same geometry as the icon; square view box. -->
+  <g id="mark" fill="none" stroke="currentColor" stroke-width="58" stroke-linecap="round">
+    <path id="bow" d="M 591.5 472.8 A 150 150 0 1 1 432.5 472.8"/>
+    <path id="shaft" d="M 512 258 L 512 570"/>
+  </g>
+  <g id="teeth" fill="currentColor">
+    <rect x="512" y="292" width="98" height="44" rx="12"/>
+    <rect x="512" y="366" width="66" height="40" rx="12"/>
+  </g>
+</svg>

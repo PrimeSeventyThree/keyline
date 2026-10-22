@@ -30,12 +30,14 @@ enum Theme {
 /// A rounded translucent panel used for cards and lists.
 struct Card<Content: View>: View {
     var padding: CGFloat = 14
+    /// Stretch to the height on offer, so cards in a group line up.
+    var fillsHeight = false
     @ViewBuilder var content: Content
 
     var body: some View {
         content
             .padding(padding)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, maxHeight: fillsHeight ? .infinity : nil, alignment: .topLeading)
             .background(RoundedRectangle(cornerRadius: Theme.cornerRadius).fill(Theme.surface))
             .overlay(RoundedRectangle(cornerRadius: Theme.cornerRadius).stroke(Theme.surfaceStroke, lineWidth: 1))
     }
