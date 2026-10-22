@@ -1,4 +1,4 @@
-import Foundation
+import AppKit
 import os
 import SystemExtensions
 
@@ -31,6 +31,32 @@ final class SystemExtensionManager: NSObject, ObservableObject {
             forExtensionWithIdentifier: KeylineIdentifiers.tunnelExtension, queue: .main)
         request.delegate = self
         OSSystemExtensionManager.shared.submitRequest(request)
+    }
+
+    /// Where the user allows the extension, which moved between macOS versions.
+    static var approvalLocation: String {
+        if #available(macOS 15, *) {
+            return String(localized: "System Settings › General › Login Items & Extensions › Network Extensions")
+        } else if #available(macOS 13, *) {
+            return String(localized: "System Settings › Privacy & Security")
+        } else {
+            return String(localized: "System Preferences › Security & Privacy › General")
+        }
+    }
+
+    /// Opens the settings pane named by `approvalLocation`.
+    func openApprovalSettings() {
+        let pane: String
+        if #available(macOS 15, *) {
+            pane = "com.apple.LoginItems-Settings.extension"
+        } else if #available(macOS 13, *) {
+            pane = "com.apple.settings.PrivacySecurity.extension"
+        } else {
+            pane = "com.apple.preference.security?General"
+        }
+        if let url = URL(string: "x-apple.systempreferences:\(pane)") {
+            NSWorkspace.shared.open(url)
+        }
     }
 
     /// Removes the extension. macOS asks the user to confirm.

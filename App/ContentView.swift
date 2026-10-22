@@ -18,6 +18,9 @@ struct ContentView: View {
                 HStack {
                     Text(extensionStateText)
                     Spacer()
+                    if systemExtension.state == .needsApproval {
+                        Button("Open System Settings") { systemExtension.openApprovalSettings() }
+                    }
                     Button("Install") { systemExtension.activate() }
                     Button("Uninstall") { systemExtension.deactivate() }
                 }
@@ -28,9 +31,13 @@ struct ContentView: View {
                     Text("Status: \(statusText)")
                     Spacer()
                     Button("Connect", action: connect)
-                        .disabled(isBusy || accessKey.isEmpty)
+                        .disabled(isBusy || accessKey.isEmpty || systemExtension.state != .activated)
                     Button("Disconnect") { Task { await tunnel.stop(id: Self.tunnelID) } }
                         .disabled(isBusy)
+                }
+                if systemExtension.state != .activated {
+                    Text("Install and allow the VPN component to connect.")
+                        .foregroundColor(.secondary)
                 }
             }
             if let errorText {
@@ -85,7 +92,7 @@ struct ContentView: View {
         switch systemExtension.state {
         case .unknown: return "Not installed"
         case .activating: return "Installing…"
-        case .needsApproval: return "Allow Keyline in System Settings › Privacy & Security"
+        case .needsApproval: return "Allow Keyline Tunnel in \(SystemExtensionManager.approvalLocation)"
         case .activated: return "Installed"
         case .notInApplications: return "Move Keyline to /Applications first"
         case .failed(let message): return "Failed: \(message)"
