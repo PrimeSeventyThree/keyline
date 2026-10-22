@@ -12,7 +12,7 @@
 	</array>
 	<key>com.apple.developer.networking.networkextension</key>
 	<array>
-		<string>packet-tunnel-provider-systemextension</string>
+		<string>$(KEYLINE_NE_PROVIDER)</string>
 	</array>
 	<key>com.apple.developer.system-extension.install</key>
 	<true/>
