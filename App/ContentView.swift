@@ -1,16 +1,16 @@
 import NetworkExtension
 import SwiftUI
 
-/// Phase 1 test screen: install the extension, then connect with a pasted access key.
+/// Temporary test screen: install the extension, add servers, connect.
 /// Replaced by the real UI in Phase 3.
 struct ContentView: View {
-    @StateObject private var systemExtension = SystemExtensionManager()
-    @StateObject private var tunnel = TunnelController()
-    @State private var accessKey = ""
-    @State private var isBusy = false
-    @State private var errorText: String?
+    @ObservedObject var systemExtension: SystemExtensionManager
+    @ObservedObject var tunnel: TunnelController
+    @ObservedObject var servers: ServerRepository
+    @ObservedObject var connection: ConnectionModel
 
-    private static let tunnelID = "phase1-test"
+    @State private var accessKey = ""
+    @State private var error: UserFacingError?
 
     var body: some View {
         Form {
@@ -25,67 +25,66 @@ struct ContentView: View {
                     Button("Uninstall") { systemExtension.deactivate() }
                 }
             }
-            Section(header: Text("Access key")) {
-                TextField("ss://… or ssconf://…", text: $accessKey)
+            Section(header: Text("Add server")) {
                 HStack {
-                    Text("Status: \(statusText)")
-                    Spacer()
-                    Button("Connect", action: connect)
-                        .disabled(isBusy || accessKey.isEmpty || systemExtension.state != .activated)
-                    Button("Disconnect") { Task { await tunnel.stop(id: Self.tunnelID) } }
-                        .disabled(isBusy)
-                }
-                if systemExtension.state != .activated {
-                    Text("Install and allow the VPN component to connect.")
-                        .foregroundColor(.secondary)
+                    TextField("ss://… or ssconf://…", text: $accessKey)
+                    Button("Add") {
+                        run { try await servers.add(accessKey: accessKey); accessKey = "" }
+                    }
+                    .disabled(accessKey.isEmpty)
                 }
             }
-            if let errorText {
+            Section(header: Text("Servers")) {
+                ForEach(servers.servers) { server in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(server.name)
+                            Text(server.address.isEmpty ? server.kind.rawValue : server.address)
+                                .font(.caption).foregroundColor(.secondary)
+                        }
+                        Spacer()
+                        Text(statusText(for: server)).foregroundColor(.secondary)
+                        if connection.activeServerID == server.id {
+                            Button("Disconnect") { Task { await connection.disconnect(serverID: server.id) } }
+                        } else {
+                            Button("Connect") { run { try await connection.connect(serverID: server.id) } }
+                                .disabled(connection.busyServerID != nil)
+                        }
+                        Button("Forget") { Task { await connection.forget(serverID: server.id) } }
+                    }
+                }
+            }
+            if let error {
                 Section(header: Text("Last error")) {
-                    Text(errorText)
-                        .font(.system(.caption, design: .monospaced))
-                        .textSelection(.enabled)
+                    Text(error.message)
+                    if let details = error.details {
+                        Text(details)
+                            .font(.system(.caption, design: .monospaced))
+                            .textSelection(.enabled)
+                    }
                 }
             }
         }
         .padding(20)
-        .frame(minWidth: 520, minHeight: 320)
-        .onAppear { systemExtension.activate() }
+        .frame(minWidth: 560, minHeight: 360)
     }
 
-    private func connect() {
-        let key = accessKey.trimmingCharacters(in: .whitespacesAndNewlines)
-        isBusy = true
-        errorText = nil
+    private func run(_ action: @escaping () async throws -> Void) {
+        error = nil
         Task {
-            defer { isBusy = false }
-            do {
-                // Go calls block, and fetching a dynamic key goes over the network.
-                let config = try await Task.detached { try Self.tunnelConfig(forAccessKey: key) }.value
-                guard config.connectionType != "direct" else {
-                    throw KeylineError.invalidConfig(message: "proxyless configs are not supported")
-                }
-                try await tunnel.start(id: Self.tunnelID, name: "Keyline (\(config.firstHop))", transport: config.client)
-            } catch {
-                let error = KeylineError(error)
-                errorText = "\(error.code)\n\(error.json)"
-            }
+            do { try await action() } catch { self.error = UserFacingError(error) }
         }
     }
 
-    /// Static keys are parsed directly. Dynamic keys (ssconf:// or https://) point to a
-    /// config that is downloaded first. The #fragment holds the server name, not config.
-    private nonisolated static func tunnelConfig(forAccessKey key: String) throws -> GoCore.TunnelConfig {
-        let keyWithoutName = String(key.prefix { $0 != "#" })
-        let lowercased = keyWithoutName.lowercased()
-        guard lowercased.hasPrefix("ssconf://") || lowercased.hasPrefix("https://") else {
-            return try GoCore.parseTunnelConfig(keyWithoutName)
+    private func statusText(for server: Server) -> String {
+        guard tunnel.tunnelID == server.id else { return "" }
+        switch tunnel.status {
+        case .connecting: return "connecting"
+        case .connected: return "connected"
+        case .reasserting: return "reconnecting"
+        case .disconnecting: return "disconnecting"
+        default: return ""
         }
-        let httpsKey = "https://" + keyWithoutName.drop { $0 != ":" }.dropFirst(3)
-        guard let url = URL(string: httpsKey) else {
-            throw KeylineError.invalidConfig(message: "not a valid URL")
-        }
-        return try GoCore.parseTunnelConfig(GoCore.fetchResource(url))
     }
 
     private var extensionStateText: String {
@@ -96,18 +95,6 @@ struct ContentView: View {
         case .activated: return "Installed"
         case .notInApplications: return "Move Keyline to /Applications first"
         case .failed(let message): return "Failed: \(message)"
-        }
-    }
-
-    private var statusText: String {
-        switch tunnel.status {
-        case .invalid: return "not configured"
-        case .disconnected: return "disconnected"
-        case .connecting: return "connecting"
-        case .connected: return "connected"
-        case .reasserting: return "reconnecting"
-        case .disconnecting: return "disconnecting"
-        @unknown default: return "unknown"
         }
     }
 }

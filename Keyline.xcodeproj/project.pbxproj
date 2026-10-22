@@ -8,22 +8,50 @@
 
 /* Begin PBXBuildFile section */
 		0FAF9C974A5E10D4ED61B7AB /* TunnelNetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40F2AD463CAD40C1393EE7 /* TunnelNetworkSettings.swift */; };
+		13620B42A000AC0BB8722D6C /* GoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F137E2B0816EBD5E905312BF /* GoCore.swift */; };
+		1B7BDD90A617868C92375656 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACCD9D700A32D3462DAD9B6 /* UserFacingError.swift */; };
 		1FE74E4581604F810316E19E /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */; };
+		282CD860E62C5CDC0C3E32EA /* TunnelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */; };
 		2B73A340504530BA327E4ACC /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
 		38D536778859A167B44D4AA1 /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */; };
+		3CE615F0E2C127D2756F8F4A /* SystemExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAD986A3CA4C3B3E57D4102 /* SystemExtensionManager.swift */; };
 		3E59C42BAE943ED1DB98816D /* TunnelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636E5D24AEC69105346213BF /* TunnelProtocol.swift */; };
 		40470F115C166A69774AC543 /* KeylineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86301E2269BF708FDB7F961A /* KeylineApp.swift */; };
-		44874686634063F512542891 /* SystemExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 590DD52D1B886DAD697269BB /* SystemExtensionManager.swift */; };
-		56EF8541239911F98DC356C7 /* GoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23677CBEC35E1C3E7D8459E7 /* GoCore.swift */; };
+		42451D94BEE4AD3003B2C629 /* AccessKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91909B41BE445A4850BC805 /* AccessKey.swift */; };
+		4C6B0EC1EF500D6F2DF6A98B /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
+		4FF49B424052D23DC4E6D847 /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCA31CED0F58A9BC0D5A76D /* TestSupport.swift */; };
+		59E11E0701618C57C99E1218 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D69C1D05D707286AE3CA2A /* ServerError.swift */; };
+		5E086B82C4FFF4D4D72AE1C0 /* AccessKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD773ED1D7041B4557AF776 /* AccessKeyTests.swift */; };
+		604E2E3EF97522BB86C7518C /* TunnelNetworkSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4073B4B57614639ED81341 /* TunnelNetworkSettingsTests.swift */; };
 		763463CD146B7B3BFE609B51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A887FC6C2A81F6761EACEE /* ContentView.swift */; };
 		78F901F4294DF1D3A9698DFD /* KeylineError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB074B771331C5DEA789C5 /* KeylineError.swift */; };
+		7B2BB2D326E000C1805FFDA1 /* TunnelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636E5D24AEC69105346213BF /* TunnelProtocol.swift */; };
+		81DB0FAF636225E8CF7E65C3 /* SecretStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F02A84AC15E831EC4CCE9 /* SecretStore.swift */; };
 		8374A8C0A60A4E9246F7B848 /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
 		83AEB62235D9346B8F2EF2B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA4EA4DF178190787FC6A17 /* AppDelegate.swift */; };
+		841A5439C7FFFFBEA68FCF3B /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D6C3103625B6AC7A0C0D85 /* ConnectionModel.swift */; };
+		9392354EE4FA8D7068449224 /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */; };
+		945412FAF6A6421266E432F4 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CFE108A620F3E25E31D1E2 /* Server.swift */; };
 		97B9E4A12D12310E8D26D163 /* TunnelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636E5D24AEC69105346213BF /* TunnelProtocol.swift */; };
+		98A0262CB6374677D4EA0B1D /* ConnectionModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5856D10F441C1EA3096E1F /* ConnectionModelTests.swift */; };
 		9D46FEE1BEFA7E3236EE659A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9A0C3B050B9716FCC5CDAF /* main.swift */; };
 		9D707DB1C3974EE7856AF1F4 /* KeylineTunnel.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 3EAE25B7426CB8646B230209 /* KeylineTunnel.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AA61B91A737192D200B8C15E /* TunnelNetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40F2AD463CAD40C1393EE7 /* TunnelNetworkSettings.swift */; };
+		ACC1235B0AFE766DAE413153 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACCD9D700A32D3462DAD9B6 /* UserFacingError.swift */; };
+		B621121473A57B83DB0071AA /* ServerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA1BD551838A0E42B9D9993 /* ServerRepository.swift */; };
+		B6DBD7FD39C9AC1DE3F9F880 /* ServerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA1BD551838A0E42B9D9993 /* ServerRepository.swift */; };
+		B8298E478C8C8C4ED4B6E177 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D69C1D05D707286AE3CA2A /* ServerError.swift */; };
+		BBA62022AAE1AA9F7A08FCDE /* AccessKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91909B41BE445A4850BC805 /* AccessKey.swift */; };
+		C176B00EF5D319C2D2AE514C /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CFE108A620F3E25E31D1E2 /* Server.swift */; };
+		C7EFB8B85711F074D06796C0 /* TunnelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */; };
+		D4C18638CA4FB0B9F5EC2D89 /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D6C3103625B6AC7A0C0D85 /* ConnectionModel.swift */; };
+		DBB0DF6C437AE3B037FA3D9B /* GoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F137E2B0816EBD5E905312BF /* GoCore.swift */; };
+		DD2772B4E5D9D2929208F2D0 /* SystemExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAD986A3CA4C3B3E57D4102 /* SystemExtensionManager.swift */; };
+		E2752AE1F66B7A035CCD5B0E /* ErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B17B8C3AE376F80D78A116 /* ErrorTests.swift */; };
 		E6049793A02A43CA3B61AB8F /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417F0DFC8DDE061CF4A5959C /* PacketTunnelProvider.swift */; };
-		F91F8D808C06F251BC0F2EB0 /* TunnelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CA9036702EA9B120196FE1 /* TunnelController.swift */; };
+		E67AE48E1A14F8898C6B02A1 /* KeylineError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB074B771331C5DEA789C5 /* KeylineError.swift */; };
+		E87FF913F1C6C350CBD5223E /* ServerRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C9B26E43CCDAA766F02CED /* ServerRepositoryTests.swift */; };
+		F20774CB5F0867625C861D1E /* SecretStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F02A84AC15E831EC4CCE9 /* SecretStore.swift */; };
 		FDC2CE8A4ED0B0424CA6737A /* KeylineError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB074B771331C5DEA789C5 /* KeylineError.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,21 +80,35 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07D69C1D05D707286AE3CA2A /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		08A887FC6C2A81F6761EACEE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		10CA9036702EA9B120196FE1 /* TunnelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelController.swift; sourceTree = "<group>"; };
-		23677CBEC35E1C3E7D8459E7 /* GoCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoCore.swift; sourceTree = "<group>"; };
+		1B4073B4B57614639ED81341 /* TunnelNetworkSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelNetworkSettingsTests.swift; sourceTree = "<group>"; };
+		1CD773ED1D7041B4557AF776 /* AccessKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessKeyTests.swift; sourceTree = "<group>"; };
+		20CFE108A620F3E25E31D1E2 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		2ACCD9D700A32D3462DAD9B6 /* UserFacingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFacingError.swift; sourceTree = "<group>"; };
+		3A5856D10F441C1EA3096E1F /* ConnectionModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionModelTests.swift; sourceTree = "<group>"; };
 		3CA4EA4DF178190787FC6A17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3EAE25B7426CB8646B230209 /* KeylineTunnel.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = KeylineTunnel.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		417F0DFC8DDE061CF4A5959C /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
-		590DD52D1B886DAD697269BB /* SystemExtensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensionManager.swift; sourceTree = "<group>"; };
 		5A9A0C3B050B9716FCC5CDAF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		5FA1BD551838A0E42B9D9993 /* ServerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRepository.swift; sourceTree = "<group>"; };
 		636E5D24AEC69105346213BF /* TunnelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelProtocol.swift; sourceTree = "<group>"; };
 		75DF0886ADECFBFEC621F2CF /* Keyline.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Keyline.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		763F02A84AC15E831EC4CCE9 /* SecretStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretStore.swift; sourceTree = "<group>"; };
 		77DB074B771331C5DEA789C5 /* KeylineError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeylineError.swift; sourceTree = "<group>"; };
+		7CAD986A3CA4C3B3E57D4102 /* SystemExtensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensionManager.swift; sourceTree = "<group>"; };
 		83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Tun2socks.xcframework; path = build/core/Tun2socks.xcframework; sourceTree = "<group>"; };
 		86301E2269BF708FDB7F961A /* KeylineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeylineApp.swift; sourceTree = "<group>"; };
 		89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeylineIdentifiers.swift; sourceTree = "<group>"; };
+		A9B17B8C3AE376F80D78A116 /* ErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTests.swift; sourceTree = "<group>"; };
 		AC40F2AD463CAD40C1393EE7 /* TunnelNetworkSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelNetworkSettings.swift; sourceTree = "<group>"; };
+		CBCA31CED0F58A9BC0D5A76D /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
+		D91909B41BE445A4850BC805 /* AccessKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessKey.swift; sourceTree = "<group>"; };
+		DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelController.swift; sourceTree = "<group>"; };
+		E43A7CA907963B678AB8DFE1 /* KeylineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeylineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4C9B26E43CCDAA766F02CED /* ServerRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRepositoryTests.swift; sourceTree = "<group>"; };
+		E7D6C3103625B6AC7A0C0D85 /* ConnectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionModel.swift; sourceTree = "<group>"; };
+		F137E2B0816EBD5E905312BF /* GoCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoCore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +128,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E91D49AA471CC787953A45EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9392354EE4FA8D7068449224 /* Tun2socks.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -93,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				75DF0886ADECFBFEC621F2CF /* Keyline.app */,
+				E43A7CA907963B678AB8DFE1 /* KeylineTests.xctest */,
 				3EAE25B7426CB8646B230209 /* KeylineTunnel.systemextension */,
 			);
 			name = Products;
@@ -113,10 +164,8 @@
 			children = (
 				3CA4EA4DF178190787FC6A17 /* AppDelegate.swift */,
 				08A887FC6C2A81F6761EACEE /* ContentView.swift */,
-				23677CBEC35E1C3E7D8459E7 /* GoCore.swift */,
 				86301E2269BF708FDB7F961A /* KeylineApp.swift */,
-				590DD52D1B886DAD697269BB /* SystemExtensionManager.swift */,
-				10CA9036702EA9B120196FE1 /* TunnelController.swift */,
+				5D0D40E6ED33C99D48769B0E /* Core */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -129,6 +178,36 @@
 				636E5D24AEC69105346213BF /* TunnelProtocol.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		5D0D40E6ED33C99D48769B0E /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D91909B41BE445A4850BC805 /* AccessKey.swift */,
+				E7D6C3103625B6AC7A0C0D85 /* ConnectionModel.swift */,
+				F137E2B0816EBD5E905312BF /* GoCore.swift */,
+				763F02A84AC15E831EC4CCE9 /* SecretStore.swift */,
+				20CFE108A620F3E25E31D1E2 /* Server.swift */,
+				07D69C1D05D707286AE3CA2A /* ServerError.swift */,
+				5FA1BD551838A0E42B9D9993 /* ServerRepository.swift */,
+				7CAD986A3CA4C3B3E57D4102 /* SystemExtensionManager.swift */,
+				DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */,
+				2ACCD9D700A32D3462DAD9B6 /* UserFacingError.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		6BB892FD40F3CC8628F36A87 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1CD773ED1D7041B4557AF776 /* AccessKeyTests.swift */,
+				3A5856D10F441C1EA3096E1F /* ConnectionModelTests.swift */,
+				A9B17B8C3AE376F80D78A116 /* ErrorTests.swift */,
+				E4C9B26E43CCDAA766F02CED /* ServerRepositoryTests.swift */,
+				CBCA31CED0F58A9BC0D5A76D /* TestSupport.swift */,
+				1B4073B4B57614639ED81341 /* TunnelNetworkSettingsTests.swift */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		8D5D8278DD8AB29965B22987 /* Frameworks */ = {
@@ -144,6 +223,7 @@
 			children = (
 				346C4F566CC6ED1C51687A44 /* App */,
 				37BDEE8F3D7C5D28A372937C /* Shared */,
+				6BB892FD40F3CC8628F36A87 /* Tests */,
 				264E094826F438CA587A76C0 /* TunnelExtension */,
 				8D5D8278DD8AB29965B22987 /* Frameworks */,
 				03D5BE274730AA393A54869C /* Products */,
@@ -153,6 +233,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		41D485CAE82568F5A7EF1BD4 /* KeylineTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1528D2B13A15A7A6774607A8 /* Build configuration list for PBXNativeTarget "KeylineTests" */;
+			buildPhases = (
+				21CF1749DD46A150700E66F2 /* Sources */,
+				E91D49AA471CC787953A45EC /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KeylineTests;
+			packageProductDependencies = (
+			);
+			productName = KeylineTests;
+			productReference = E43A7CA907963B678AB8DFE1 /* KeylineTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		68A2A0A94C601CAF0C64544C /* KeylineTunnel */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 212782E1B39F90C7C23206C8 /* Build configuration list for PBXNativeTarget "KeylineTunnel" */;
@@ -200,6 +298,10 @@
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					41D485CAE82568F5A7EF1BD4 = {
+						DevelopmentTeam = 49DY4CP2B4;
+						ProvisioningStyle = Automatic;
+					};
 					68A2A0A94C601CAF0C64544C = {
 						DevelopmentTeam = 49DY4CP2B4;
 						ProvisioningStyle = Automatic;
@@ -226,11 +328,39 @@
 			targets = (
 				BDAAE55470CDCA63B33BC048 /* Keyline */,
 				68A2A0A94C601CAF0C64544C /* KeylineTunnel */,
+				41D485CAE82568F5A7EF1BD4 /* KeylineTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		21CF1749DD46A150700E66F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BBA62022AAE1AA9F7A08FCDE /* AccessKey.swift in Sources */,
+				5E086B82C4FFF4D4D72AE1C0 /* AccessKeyTests.swift in Sources */,
+				D4C18638CA4FB0B9F5EC2D89 /* ConnectionModel.swift in Sources */,
+				98A0262CB6374677D4EA0B1D /* ConnectionModelTests.swift in Sources */,
+				E2752AE1F66B7A035CCD5B0E /* ErrorTests.swift in Sources */,
+				13620B42A000AC0BB8722D6C /* GoCore.swift in Sources */,
+				E67AE48E1A14F8898C6B02A1 /* KeylineError.swift in Sources */,
+				4C6B0EC1EF500D6F2DF6A98B /* KeylineIdentifiers.swift in Sources */,
+				F20774CB5F0867625C861D1E /* SecretStore.swift in Sources */,
+				C176B00EF5D319C2D2AE514C /* Server.swift in Sources */,
+				B8298E478C8C8C4ED4B6E177 /* ServerError.swift in Sources */,
+				B621121473A57B83DB0071AA /* ServerRepository.swift in Sources */,
+				E87FF913F1C6C350CBD5223E /* ServerRepositoryTests.swift in Sources */,
+				DD2772B4E5D9D2929208F2D0 /* SystemExtensionManager.swift in Sources */,
+				4FF49B424052D23DC4E6D847 /* TestSupport.swift in Sources */,
+				C7EFB8B85711F074D06796C0 /* TunnelController.swift in Sources */,
+				AA61B91A737192D200B8C15E /* TunnelNetworkSettings.swift in Sources */,
+				604E2E3EF97522BB86C7518C /* TunnelNetworkSettingsTests.swift in Sources */,
+				7B2BB2D326E000C1805FFDA1 /* TunnelProtocol.swift in Sources */,
+				1B7BDD90A617868C92375656 /* UserFacingError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5B96813DE7FB9BC89E9183E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -248,15 +378,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42451D94BEE4AD3003B2C629 /* AccessKey.swift in Sources */,
 				83AEB62235D9346B8F2EF2B3 /* AppDelegate.swift in Sources */,
+				841A5439C7FFFFBEA68FCF3B /* ConnectionModel.swift in Sources */,
 				763463CD146B7B3BFE609B51 /* ContentView.swift in Sources */,
-				56EF8541239911F98DC356C7 /* GoCore.swift in Sources */,
+				DBB0DF6C437AE3B037FA3D9B /* GoCore.swift in Sources */,
 				40470F115C166A69774AC543 /* KeylineApp.swift in Sources */,
 				FDC2CE8A4ED0B0424CA6737A /* KeylineError.swift in Sources */,
 				8374A8C0A60A4E9246F7B848 /* KeylineIdentifiers.swift in Sources */,
-				44874686634063F512542891 /* SystemExtensionManager.swift in Sources */,
-				F91F8D808C06F251BC0F2EB0 /* TunnelController.swift in Sources */,
+				81DB0FAF636225E8CF7E65C3 /* SecretStore.swift in Sources */,
+				945412FAF6A6421266E432F4 /* Server.swift in Sources */,
+				59E11E0701618C57C99E1218 /* ServerError.swift in Sources */,
+				B6DBD7FD39C9AC1DE3F9F880 /* ServerRepository.swift in Sources */,
+				3CE615F0E2C127D2756F8F4A /* SystemExtensionManager.swift in Sources */,
+				282CD860E62C5CDC0C3E32EA /* TunnelController.swift in Sources */,
 				97B9E4A12D12310E8D26D163 /* TunnelProtocol.swift in Sources */,
+				ACC1235B0AFE766DAE413153 /* UserFacingError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,7 +444,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 49DY4CP2B4;
@@ -400,7 +537,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 49DY4CP2B4;
@@ -451,6 +588,28 @@
 			};
 			name = Release;
 		};
+		85585B2B6ACCEBB466BF6AE5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"build/core\"",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.pulsbeat.keyline.tests;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		90625B9A1055EDA30D751958 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -494,9 +653,40 @@
 			};
 			name = Release;
 		};
+		B833809AC4C9CFD357B06A4A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"build/core\"",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.pulsbeat.keyline.tests;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1528D2B13A15A7A6774607A8 /* Build configuration list for PBXNativeTarget "KeylineTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B833809AC4C9CFD357B06A4A /* Debug */,
+				85585B2B6ACCEBB466BF6AE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		212782E1B39F90C7C23206C8 /* Build configuration list for PBXNativeTarget "KeylineTunnel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

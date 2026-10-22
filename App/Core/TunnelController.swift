@@ -9,13 +9,16 @@ import os
 
 /// Starts and stops the system VPN through the tunnel extension, and publishes its status.
 @MainActor
-final class TunnelController: ObservableObject {
+final class TunnelController: ObservableObject, TunnelControlling {
     @Published private(set) var status: NEVPNStatus = .invalid
     /// ID of the tunnel the system VPN configuration belongs to.
     @Published private(set) var tunnelID: String?
+    /// When the current connection came up, for the connection timer.
+    @Published private(set) var connectedDate: Date?
 
     private let log = Logger.keyline("vpn")
     private var statusObserver: NSObjectProtocol?
+    private var session: NETunnelProviderSession?
 
     init() {
         statusObserver = NotificationCenter.default.addObserver(
@@ -30,7 +33,9 @@ final class TunnelController: ObservableObject {
     /// Loads the current status, for example at launch while the VPN is already on.
     func refresh() async {
         let manager = await Self.loadManager()
-        status = manager?.connection.status ?? .invalid
+        session = manager?.connection as? NETunnelProviderSession
+        status = session?.status ?? .invalid
+        connectedDate = session?.connectedDate
         tunnelID = Self.tunnelID(of: manager)
     }
 
@@ -79,6 +84,20 @@ final class TunnelController: ObservableObject {
             return
         }
         await stopSession(manager)
+    }
+
+    /// Bytes through the running tunnel, or nil when it is not connected.
+    func trafficStats() async -> TrafficStats? {
+        guard let session, session.status == .connected else { return nil }
+        return await withCheckedContinuation { continuation in
+            do {
+                try session.sendProviderMessage(Data(TunnelAppMessage.trafficStats.utf8)) { data in
+                    continuation.resume(returning: data.flatMap { try? JSONDecoder().decode(TrafficStats.self, from: $0) })
+                }
+            } catch {
+                continuation.resume(returning: nil)
+            }
+        }
     }
 
     // MARK: - Helpers
@@ -151,7 +170,9 @@ final class TunnelController: ObservableObject {
         guard let manager = session.manager as? NETunnelProviderManager,
               let id = Self.tunnelID(of: manager)
         else { return } // The system also sends spurious notifications without a manager.
+        self.session = session
         status = session.status
+        connectedDate = session.connectedDate
         tunnelID = id
     }
 

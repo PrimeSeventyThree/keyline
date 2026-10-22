@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Build and test
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Select the latest stable Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.14"
+          cache: false
+
+      - name: Get the upstream commit
+        id: upstream
+        run: echo "sha=$(git -C third_party/outline-apps rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Cache the Go core
+        uses: actions/cache@v4
+        with:
+          path: build/core
+          key: go-core-${{ steps.upstream.outputs.sha }}-${{ hashFiles('core/build-xcframework.sh') }}
+
+      - name: Run unit tests
+        run: scripts/test.sh CODE_SIGNING_ALLOWED=NO

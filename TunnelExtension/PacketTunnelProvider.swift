@@ -12,6 +12,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
     private let log = Logger.keyline("tunnel")
     private let packetQueue = DispatchQueue(label: "\(KeylineIdentifiers.tunnelExtension).packets")
     private var remoteDevice: Tun2socksRemoteDevice?
+    private let traffic = TrafficCounter()
     private var defaultPathObservation: NSKeyValueObservation?
 
     // MARK: - Lifecycle
@@ -77,12 +78,15 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
     // MARK: - App messages
 
     override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)?) {
-        guard String(data: messageData, encoding: .utf8) == TunnelAppMessage.fetchLastError else {
+        switch String(data: messageData, encoding: .utf8) {
+        case TunnelAppMessage.fetchLastError:
+            completionHandler?(UserDefaults.standard.data(forKey: Self.lastErrorKey))
+        case TunnelAppMessage.trafficStats:
+            completionHandler?(try? JSONEncoder().encode(traffic.stats))
+        default:
             log.warning("Unknown app message")
             completionHandler?(nil)
-            return
         }
-        completionHandler?(UserDefaults.standard.data(forKey: Self.lastErrorKey))
     }
 
     // MARK: - Network settings
@@ -174,7 +178,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
     }
 
     private func relayTraffic(isRestart: Bool) -> PlaterrorsPlatformError? {
-        if let error = Tun2socksGoRelayTrafficOneWay(PacketFlowWriter(packetFlow: packetFlow), remoteDevice) {
+        if let error = Tun2socksGoRelayTrafficOneWay(PacketFlowWriter(packetFlow: packetFlow, traffic: traffic), remoteDevice) {
             log.error("Failed to relay traffic to the TUN device: \(error.error())")
             return error
         }
@@ -193,6 +197,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
             for packet in packets {
                 try? self.remoteDevice?.write(packet, ret0_: &written)
             }
+            self.traffic.addSent(packets.reduce(0) { $0 + $1.count })
             self.packetQueue.async { self.readPackets() }
         }
     }
@@ -219,9 +224,11 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
 /// Writes packets from the Go core back to the system.
 private final class PacketFlowWriter: NSObject, Tun2socksTunWriterProtocol {
     private let packetFlow: NEPacketTunnelFlow
+    private let traffic: TrafficCounter
 
-    init(packetFlow: NEPacketTunnelFlow) {
+    init(packetFlow: NEPacketTunnelFlow, traffic: TrafficCounter) {
         self.packetFlow = packetFlow
+        self.traffic = traffic
     }
 
     func close() throws {}
@@ -229,6 +236,28 @@ private final class PacketFlowWriter: NSObject, Tun2socksTunWriterProtocol {
     func write(_ packet: Data?, n: UnsafeMutablePointer<Int>?) throws {
         guard let packet else { return }
         packetFlow.writePackets([packet], withProtocols: [NSNumber(value: AF_INET)])
+        traffic.addReceived(packet.count)
         n?.pointee = packet.count
+    }
+}
+
+/// Counts tunnel bytes. Go calls `addReceived` from its own threads, so access is locked.
+final class TrafficCounter {
+    private let lock = NSLock()
+    private var current = TrafficStats()
+
+    var stats: TrafficStats {
+        lock.lock(); defer { lock.unlock() }
+        return current
+    }
+
+    func addSent(_ bytes: Int) {
+        lock.lock(); defer { lock.unlock() }
+        current.bytesSent &+= UInt64(bytes)
+    }
+
+    func addReceived(_ bytes: Int) {
+        lock.lock(); defer { lock.unlock() }
+        current.bytesReceived &+= UInt64(bytes)
     }
 }

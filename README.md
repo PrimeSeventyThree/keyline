@@ -35,13 +35,26 @@ xcodebuild -project Keyline.xcodeproj -scheme Keyline -derivedDataPath build/Der
 Running the tunnel needs a signed build installed in `/Applications`, because macOS
 only activates system extensions from there.
 
+## Testing
+
+```sh
+scripts/test.sh                          # signed with your team
+scripts/test.sh CODE_SIGNING_ALLOWED=NO  # unsigned, as on CI
+```
+
+The unit tests compile the app core directly and never launch Keyline, so they don't touch
+the system extension or the VPN. CI runs them on every pull request.
+
 ## Layout
 
 | Path | Contents |
 |---|---|
 | `App/` | SwiftUI app: main window and menu bar item |
+| `App/Core/` | App logic without UI: access keys, servers, Keychain, tunnel control, errors |
 | `TunnelExtension/` | Packet tunnel system extension |
 | `Shared/` | Code compiled into both targets |
+| `Tests/` | Unit tests |
+| `scripts/` | Build, test and release scripts |
 | `core/` | Script that builds the Go core into an xcframework |
 | `third_party/outline-apps/` | Upstream Outline, pinned as a git submodule |
 
