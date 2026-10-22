@@ -31,4 +31,18 @@ final class TunnelNetworkSettingsTests: XCTestCase {
         XCTAssertEqual(ipv4.excludedRoutes?.count, TunnelNetworkSettings.excludedSubnets.count)
         XCTAssertEqual(settings.dnsSettings?.servers, ["169.254.113.53"])
     }
+
+    func testRoutableIPv6GoesIntoTheTunnel() throws {
+        let ipv6 = try XCTUnwrap(TunnelNetworkSettings.make().ipv6Settings)
+        let routes = (ipv6.includedRoutes ?? []).map { "\($0.destinationAddress)/\($0.destinationNetworkPrefixLength)" }
+        XCTAssertEqual(routes, ["fc00::/7", "2000::/4", "3000::/4"])
+        XCTAssertFalse(routes.contains { $0.hasPrefix("fe80") }, "link-local stays outside the tunnel")
+    }
+
+    func testOnlyIPv4PacketsReachTheGoCore() {
+        let v4 = Data([0x45, 0, 0, 20]), v6 = Data([0x60, 0, 0, 0])
+        let kept = TunnelNetworkSettings.ipv4Packets(
+            [v4, v6, v4], protocols: [NSNumber(value: AF_INET), NSNumber(value: AF_INET6), NSNumber(value: AF_INET)])
+        XCTAssertEqual(kept, [v4, v4])
+    }
 }

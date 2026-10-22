@@ -191,8 +191,9 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
 
     /// Forwards packets from the system to the Go core, forever.
     private func readPackets() {
-        packetFlow.readPackets { [weak self] packets, _ in
+        packetFlow.readPackets { [weak self] packets, protocols in
             guard let self else { return }
+            let packets = TunnelNetworkSettings.ipv4Packets(packets, protocols: protocols)
             var written = 0
             for packet in packets {
                 try? self.remoteDevice?.write(packet, ret0_: &written)

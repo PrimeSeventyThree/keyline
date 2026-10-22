@@ -39,6 +39,14 @@ enum TunnelNetworkSettings {
         "240.0.0.0/4",
     ]
 
+    /// Routable IPv6 ranges, sent into the tunnel and dropped there because the proxy only
+    /// carries IPv4. Same ranges upstream's Windows client blocks (OutlineService.cs).
+    static let blockedIPv6Subnets: [(address: String, prefixLength: Int)] = [
+        ("fc00::", 7), ("2000::", 4), ("3000::", 4),
+    ]
+    /// The tunnel's own IPv6 address, from a unique local range, needed to claim IPv6 routes.
+    static let vpnIPv6Address = "fd6b:6579:6c69::1"
+
     static func make() -> NEPacketTunnelNetworkSettings {
         // The remote address is not used, but must be valid, or the system rejects the
         // settings with "Invalid NETunnelNetworkSettings tunnelRemoteAddress".
@@ -50,8 +58,19 @@ enum TunnelNetworkSettings {
         ipv4Settings.excludedRoutes = excludedSubnets.compactMap(IPv4Subnet.init(cidr:)).map(\.route)
         settings.ipv4Settings = ipv4Settings
 
+        let ipv6Settings = NEIPv6Settings(addresses: [vpnIPv6Address], networkPrefixLengths: [64])
+        ipv6Settings.includedRoutes = blockedIPv6Subnets.map {
+            NEIPv6Route(destinationAddress: $0.address, networkPrefixLength: NSNumber(value: $0.prefixLength))
+        }
+        settings.ipv6Settings = ipv6Settings
+
         settings.dnsSettings = NEDNSSettings(servers: [dnsResolver])
         return settings
+    }
+
+    /// The packets to pass to the Go core: IPv4 only. IPv6 packets are dropped (blocked).
+    static func ipv4Packets(_ packets: [Data], protocols: [NSNumber]) -> [Data] {
+        zip(packets, protocols).compactMap { $1.int32Value == AF_INET ? $0 : nil }
     }
 
     /// Picks a VPN address in a private subnet no local interface uses. If all candidate
