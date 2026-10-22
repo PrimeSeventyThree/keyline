@@ -1,0 +1,19 @@
+Keyline
+Copyright 2026 Pulsbeat Media Inc.
+
+This product includes software developed by the Outline Foundation and Jigsaw
+(Google LLC) as part of Outline (https://github.com/OutlineFoundation/outline-apps),
+licensed under the Apache License, Version 2.0. That code is included unmodified
+as a git submodule in third_party/outline-apps; its Go client core
+(client/go) is compiled into Keyline.
+
+Parts of Keyline's tunnel and client logic are ported from Outline's Swift,
+Objective-C and TypeScript sources; each ported file notes its origin.
+
+Keyline is an independent project. It is not affiliated with, sponsored by, or
+endorsed by the Outline Foundation, Jigsaw or Google. "Outline" is a trademark of
+its respective owner and is used here only to describe compatibility with Outline
+access keys.
+
+Third-party licenses for bundled dependencies are listed in the app under
+About > Licenses.

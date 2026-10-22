@@ -1,0 +1,4 @@
+[submodule "third_party/outline-apps"]
+	path = third_party/outline-apps
+	url = https://github.com/OutlineFoundation/outline-apps.git
+	shallow = true
