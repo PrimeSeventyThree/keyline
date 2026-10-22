@@ -136,9 +136,9 @@ ca.pulsbeat.keyline.tunnel.systemextension (runs as root)
 
 | Phase | Scope | Estimate | Status |
 |---|---|---|---|
-| 0. Setup | Repo, submodule, license/notice, Go core build, Xcode project with app + system extension | 2–3 days | Done except signing assets and CI |
-| 1. Tunnel spike | Extension activation flow, PacketTunnelProvider port, connect with a hard-coded `ss://` key | 4–6 days | |
-| 2. AppCore | Parsing, dynamic keys, Keychain, TunnelController, errors, extension messages, tests | 5–7 days | |
+| 0. Setup | Repo, submodule, license/notice, Go core build, Xcode project with app + system extension | 2–3 days | Done |
+| 1. Tunnel spike | Extension activation flow, PacketTunnelProvider port, connect with a hard-coded `ss://` key | 4–6 days | Done: connects with a real key |
+| 2. AppCore | Parsing, dynamic keys, Keychain, TunnelController, errors, extension messages, tests | 5–7 days | Done: 38 unit tests, CI on every PR |
 | 3. UI | Window, menu bar, onboarding/approval, dialogs, settings, URL scheme, clipboard, launch at login, quit warning | 7–9 days | |
 | 4. Split tunneling | Rules model, settings UI, route building, domain re-resolution | 3–4 days | |
 | 5. Localization, licenses, diagnostics | English + Russian, license list, MetricKit + GitHub issue reports | 2–3 days | |
