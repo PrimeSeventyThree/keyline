@@ -1,16 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-jo" viewBox="0 0 512 512">
-  <defs>
-    <clipPath id="jo-a">
-      <path fill-opacity=".7" d="M113.6 0H607v493.5H113.6z"/>
-    </clipPath>
-  </defs>
-  <g clip-path="url(#jo-a)" transform="translate(-117.8)scale(1.0375)">
-    <g fill-rule="evenodd" stroke-width="1pt">
-      <path fill="#000001" d="M0 0h987v164.5H0z"/>
-      <path fill="#fff" d="M0 164.5h987V329H0z"/>
-      <path fill="#090" d="M0 329h987v164.5H0z"/>
-      <path fill="red" d="m0 493.5 493.5-246.8L0 0z"/>
-      <path fill="#fff" d="m164.8 244 22 10.6h-24.5l5.5 24-15.3-19.3-15.3 19.2 5.5-23.9H118l22.1-10.7-15.3-19.1 22.1 10.6 5.5-23.9 5.5 24 22-10.7z"/>
-    </g>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 0.0585938 0 L 511.960938 0 L 511.960938 171 L 0.0585938 171 Z M 0.0585938 0 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 0.0585938 170 L 511.960938 170 L 511.960938 342 L 0.0585938 342 Z M 0.0585938 170 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="nonzero" d="M 0.0585938 341 L 511.960938 341 L 511.960938 512 L 0.0585938 512 Z M 0.0585938 341 "/>
+</clipPath>
+<clipPath id="clip-3">
+<path clip-rule="nonzero" d="M 0.0585938 0 L 395 0 L 395 512 L 0.0585938 512 Z M 0.0585938 0 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<path fill-rule="evenodd" fill="#000001" fill-opacity="1" d="M -117.800781 0 L 906.210938 0 L 906.210938 170.667969 L -117.800781 170.667969 Z M -117.800781 0 "/>
+</g>
+<g clip-path="url(#clip-1)">
+<path fill-rule="evenodd" fill="#ffffff" fill-opacity="1" d="M -117.800781 170.667969 L 906.210938 170.667969 L 906.210938 341.335938 L -117.800781 341.335938 Z M -117.800781 170.667969 "/>
+</g>
+<g clip-path="url(#clip-2)">
+<path fill-rule="evenodd" fill="#009900" fill-opacity="1" d="M -117.800781 341.335938 L 906.210938 341.335938 L 906.210938 512.007812 L -117.800781 512.007812 Z M -117.800781 341.335938 "/>
+</g>
+<g clip-path="url(#clip-3)">
+<path fill-rule="evenodd" fill="#ff0000" fill-opacity="1" d="M -117.800781 512.007812 L 394.207031 255.953125 L -117.800781 0 Z M -117.800781 512.007812 "/>
+</g>
+<path fill-rule="evenodd" fill="#ffffff" fill-opacity="1" d="M 53.179688 253.148438 L 76.003906 264.148438 L 50.585938 264.148438 L 56.292969 289.046875 L 40.417969 269.023438 L 24.546875 288.945312 L 30.25 264.148438 L 4.625 264.148438 L 27.554688 253.046875 L 11.679688 233.230469 L 34.609375 244.226562 L 40.316406 219.429688 L 46.019531 244.332031 L 68.847656 233.230469 Z M 53.179688 253.148438 "/>
 </svg>

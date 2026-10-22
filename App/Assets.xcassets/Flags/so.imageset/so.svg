@@ -1,11 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-so" viewBox="0 0 512 512">
-  <defs>
-    <clipPath id="so-a">
-      <path fill-opacity=".7" d="M177.2 0h708.6v708.7H177.2z"/>
-    </clipPath>
-  </defs>
-  <g fill-rule="evenodd" clip-path="url(#so-a)" transform="translate(-128)scale(.72249)">
-    <path fill="#40a6ff" d="M0 0h1063v708.7H0z"/>
-    <path fill="#fff" d="m643 527.6-114.3-74-113.6 74.8 42.3-121.5-113.5-75 140.4-1 43.5-121.1 44.5 120.8 140.3.1-112.9 75.7z"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 0.0234375 0 L 511.980469 0 L 511.980469 512 L 0.0234375 512 Z M 0.0234375 0 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<rect x="-51.2" y="-51.2" width="614.4" height="614.4" fill="#40a6ff" fill-opacity="1"/>
+</g>
+<path fill-rule="evenodd" fill="#ffffff" fill-opacity="1" d="M 336.5625 381.1875 L 253.980469 327.722656 L 171.90625 381.765625 L 202.46875 293.980469 L 120.464844 239.792969 L 221.902344 239.070312 L 253.332031 151.578125 L 285.480469 238.855469 L 386.847656 238.925781 L 305.277344 293.621094 Z M 336.5625 381.1875 "/>
 </svg>

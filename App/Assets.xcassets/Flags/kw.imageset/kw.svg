@@ -1,13 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-kw" viewBox="0 0 512 512">
-  <defs>
-    <clipPath id="kw-a">
-      <path fill-opacity=".7" d="M0 0h496v496H0z"/>
-    </clipPath>
-  </defs>
-  <g fill-rule="evenodd" stroke-width="1pt" clip-path="url(#kw-a)" transform="scale(1.0321)">
-    <path fill="#fff" d="M0 165.3h992.1v165.4H0z"/>
-    <path fill="#f31830" d="M0 330.7h992.1v165.4H0z"/>
-    <path fill="#00d941" d="M0 0h992.1v165.4H0z"/>
-    <path fill="#000001" d="M0 0v496l247.5-165.3.5-165.5z"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 0 170 L 511.921875 170 L 511.921875 342 L 0 342 Z M 0 170 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 0 341 L 511.921875 341 L 511.921875 511.921875 L 0 511.921875 Z M 0 341 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="nonzero" d="M 0 0 L 511.921875 0 L 511.921875 171 L 0 171 Z M 0 0 "/>
+</clipPath>
+<clipPath id="clip-3">
+<path clip-rule="nonzero" d="M 0 0 L 256 0 L 256 511.921875 L 0 511.921875 Z M 0 0 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<path fill-rule="evenodd" fill="#ffffff" fill-opacity="1" d="M 0 170.605469 L 1023.945312 170.605469 L 1023.945312 341.316406 L 0 341.316406 Z M 0 170.605469 "/>
+</g>
+<g clip-path="url(#clip-1)">
+<path fill-rule="evenodd" fill="#f31830" fill-opacity="1" d="M 0 341.316406 L 1023.945312 341.316406 L 1023.945312 512.023438 L 0 512.023438 Z M 0 341.316406 "/>
+</g>
+<g clip-path="url(#clip-2)">
+<path fill-rule="evenodd" fill="#00d941" fill-opacity="1" d="M 0 0 L 1023.945312 0 L 1023.945312 170.710938 L 0 170.710938 Z M 0 0 "/>
+</g>
+<g clip-path="url(#clip-3)">
+<path fill-rule="evenodd" fill="#000001" fill-opacity="1" d="M 0 0 L 0 511.921875 L 255.445312 341.316406 L 255.960938 170.503906 Z M 0 0 "/>
+</g>
 </svg>

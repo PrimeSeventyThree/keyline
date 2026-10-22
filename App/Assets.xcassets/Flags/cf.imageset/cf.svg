@@ -1,15 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-cf" viewBox="0 0 512 512">
-  <defs>
-    <clipPath id="cf-a">
-      <path fill-opacity=".7" d="M0 0h512v512H0z"/>
-    </clipPath>
-  </defs>
-  <g fill-rule="evenodd" clip-path="url(#cf-a)">
-    <path fill="#00f" d="M-52-.5h768v127H-52z"/>
-    <path fill="#ff0" d="M-52 383.5h768V512H-52z"/>
-    <path fill="#009a00" d="M-52 255h768v128.5H-52z"/>
-    <path fill="#fff" d="M-52 126.5h768V255H-52z"/>
-    <path fill="red" d="M268 0h128v512H268z"/>
-    <path fill="#ff0" d="M109.5 112.3 75.9 89.1l-33.4 23.4 11.6-39.2-32.5-24.6 40.7-1L75.7 8.8l13.5 38.6 40.8.8L97.6 73"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+<path fill-rule="evenodd" fill="#0000ff" fill-opacity="1" d="M -52 -0.5 L 716 -0.5 L 716 126.5 L -52 126.5 Z M -52 -0.5 "/>
+<path fill-rule="evenodd" fill="#ffff00" fill-opacity="1" d="M -52 383.5 L 716 383.5 L 716 512 L -52 512 Z M -52 383.5 "/>
+<path fill-rule="evenodd" fill="#009a00" fill-opacity="1" d="M -52 255 L 716 255 L 716 383.5 L -52 383.5 Z M -52 255 "/>
+<path fill-rule="evenodd" fill="#ffffff" fill-opacity="1" d="M -52 126.5 L 716 126.5 L 716 255 L -52 255 Z M -52 126.5 "/>
+<path fill-rule="evenodd" fill="#ff0000" fill-opacity="1" d="M 268 0 L 396 0 L 396 512 L 268 512 Z M 268 0 "/>
+<path fill-rule="evenodd" fill="#ffff00" fill-opacity="1" d="M 109.5 112.300781 L 75.898438 89.101562 L 42.5 112.5 L 54.101562 73.300781 L 21.601562 48.699219 L 62.300781 47.699219 L 75.699219 8.800781 L 89.199219 47.398438 L 130 48.199219 L 97.601562 73 "/>
 </svg>

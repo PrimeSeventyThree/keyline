@@ -1,13 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-ly" viewBox="0 0 512 512">
-  <defs>
-    <clipPath id="ly-a">
-      <path d="M250 12h500v500H250z"/>
-    </clipPath>
-  </defs>
-  <g clip-path="url(#ly-a)" transform="translate(-256 -12.3)scale(1.024)">
-    <path fill="#239e46" d="M0 12h1000v500H0z"/>
-    <path fill="#000001" d="M0 12h1000v375H0z"/>
-    <path fill="#e70013" d="M0 12h1000v125H0z"/>
-    <path fill="#fff" d="M544.2 217.8a54.3 54.3 0 1 0 0 88.4 62.5 62.5 0 1 1 0-88.4M530.4 262l84.1-27.3-52 71.5v-88.4l52 71.5z"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 0 0 L 512 0 L 512 511.988281 L 0 511.988281 Z M 0 0 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<path fill-rule="nonzero" fill="#239e46" fill-opacity="1" d="M -256 -0.0117188 L 768 -0.0117188 L 768 511.988281 L -256 511.988281 Z M -256 -0.0117188 "/>
+</g>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M -256 -0.0117188 L 768 -0.0117188 L 768 383.988281 L -256 383.988281 Z M -256 -0.0117188 "/>
+<path fill-rule="nonzero" fill="#e70013" fill-opacity="1" d="M -256 -0.0117188 L 768 -0.0117188 L 768 127.988281 L -256 127.988281 Z M -256 -0.0117188 "/>
+<path fill-rule="nonzero" fill="#ffffff" fill-opacity="1" d="M 301.261719 210.726562 C 278.195312 194.265625 246.4375 197.785156 227.535156 218.898438 C 208.632812 240.011719 208.632812 271.964844 227.535156 293.078125 C 246.4375 314.1875 278.195312 317.710938 301.261719 301.25 C 276.265625 326.238281 235.746094 326.234375 210.753906 301.242188 C 185.765625 276.246094 185.765625 235.726562 210.753906 210.734375 C 235.746094 185.742188 276.265625 185.738281 301.261719 210.726562 M 287.128906 255.988281 L 373.246094 228.03125 L 320 301.25 L 320 210.726562 L 373.246094 283.941406 Z M 287.128906 255.988281 "/>
 </svg>

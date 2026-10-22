@@ -42,6 +42,48 @@ final class Snapshots: XCTestCase {
         try render(sheet, named: "flags")
     }
 
+    // MARK: - Screens
+
+    private static let windowSize = CGSize(width: 1120, height: 720)
+
+    private func window<Content: View>(_ section: MainSection, connected: Bool, @ViewBuilder _ content: () -> Content) -> some View {
+        MainWindow(section: .constant(section), isConnected: connected) { content() }
+            .frame(width: Self.windowSize.width, height: Self.windowSize.height)
+    }
+
+    func testConnectConnected() throws {
+        try render(window(.connect, connected: true) { ConnectScreen(state: SampleData.connected) }, named: "1-connect-connected")
+    }
+
+    func testConnectDisconnected() throws {
+        try render(window(.connect, connected: false) { ConnectScreen(state: SampleData.disconnected) }, named: "2-connect-disconnected")
+    }
+
+    func testConnectConnecting() throws {
+        try render(window(.connect, connected: false) { ConnectScreen(state: SampleData.connecting) }, named: "3-connect-connecting")
+    }
+
+    func testServers() throws {
+        let state = ServersScreenState(servers: SampleData.servers, activeServerID: SampleData.toronto.id, phase: .connected)
+        try render(window(.servers, connected: true) { ServersScreen(state: state) }, named: "4-servers")
+    }
+
+    func testServersEmpty() throws {
+        try render(window(.servers, connected: false) { ServersScreen(state: ServersScreenState()) }, named: "5-servers-empty")
+    }
+
+    func testSettings() throws {
+        var state = SettingsScreenState(launchAtLogin: true)
+        let binding = Binding(get: { state }, set: { state = $0 })
+        try render(window(.settings, connected: true) { SettingsScreen(state: binding) }, named: "6-settings")
+    }
+
+    func testAddServerSheet() throws {
+        let sheet = AddServerSheet(accessKey: .constant("ss://not-a-valid-key"),
+                                   errorMessage: UserFacingError.Message.invalidAccessKey)
+        try render(sheet, named: "7-add-server")
+    }
+
     // MARK: - Helpers
 
     /// Region codes macOS knows that have a flag in the compiled bundle. (The test process
@@ -54,7 +96,7 @@ final class Snapshots: XCTestCase {
     }
 
     func render<V: View>(_ view: V, named name: String, scale: CGFloat = 2) throws {
-        let renderer = ImageRenderer(content: view.environment(\.colorScheme, .dark))
+        let renderer = ImageRenderer(content: view.environment(\.colorScheme, .dark).environment(\.isSnapshotRendering, true))
         renderer.scale = scale
         let image = try XCTUnwrap(renderer.nsImage, "rendering \(name) failed")
         let tiff = try XCTUnwrap(image.tiffRepresentation)

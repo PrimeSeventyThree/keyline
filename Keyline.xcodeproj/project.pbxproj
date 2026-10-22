@@ -7,19 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07AE223C9D93162F199DCCC0 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9BE21CEFD8CEE63EE0799C /* MainWindow.swift */; };
+		0B685C0CAFBCD049431FD758 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E58A4A6119284739465B /* Components.swift */; };
 		0FAF9C974A5E10D4ED61B7AB /* TunnelNetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40F2AD463CAD40C1393EE7 /* TunnelNetworkSettings.swift */; };
 		13620B42A000AC0BB8722D6C /* GoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F137E2B0816EBD5E905312BF /* GoCore.swift */; };
 		13A9A1A6951840FEC1074457 /* CountryLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791B8C991818728A790FD72 /* CountryLookup.swift */; };
 		177EDD7CB2916E02C89F122D /* SOURCE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79375BDC91FAD3FE410673F4 /* SOURCE.txt */; };
 		1B7BDD90A617868C92375656 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACCD9D700A32D3462DAD9B6 /* UserFacingError.swift */; };
+		1DCE618C70C185D5A11A76A2 /* ServersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */; };
 		1FE74E4581604F810316E19E /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */; };
+		2421F72E74D78B9886AB22A3 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E58A4A6119284739465B /* Components.swift */; };
 		282CD860E62C5CDC0C3E32EA /* TunnelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */; };
+		2AE112D849FA832E067A2492 /* ConnectScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265F00859D779E565B96910E /* ConnectScreen.swift */; };
 		2B73A340504530BA327E4ACC /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
 		30E14C256D26742F70C4D0D2 /* ipv4-country.bin in Resources */ = {isa = PBXBuildFile; fileRef = 071AB99FAB2B1CC3FEDAD0BE /* ipv4-country.bin */; };
 		38D536778859A167B44D4AA1 /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */; };
 		3B1E1908A37A53AA561C0FC2 /* ipv4-country.bin in Resources */ = {isa = PBXBuildFile; fileRef = 071AB99FAB2B1CC3FEDAD0BE /* ipv4-country.bin */; };
 		3CE615F0E2C127D2756F8F4A /* SystemExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAD986A3CA4C3B3E57D4102 /* SystemExtensionManager.swift */; };
 		3E59C42BAE943ED1DB98816D /* TunnelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636E5D24AEC69105346213BF /* TunnelProtocol.swift */; };
+		3E99C022CAB403B4002A9E42 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9BE21CEFD8CEE63EE0799C /* MainWindow.swift */; };
 		40470F115C166A69774AC543 /* KeylineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86301E2269BF708FDB7F961A /* KeylineApp.swift */; };
 		42451D94BEE4AD3003B2C629 /* AccessKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91909B41BE445A4850BC805 /* AccessKey.swift */; };
 		4C6B0EC1EF500D6F2DF6A98B /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
@@ -28,8 +34,11 @@
 		5BD8AD2B26DCBCC503C7CEDE /* SOURCE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79375BDC91FAD3FE410673F4 /* SOURCE.txt */; };
 		5E086B82C4FFF4D4D72AE1C0 /* AccessKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD773ED1D7041B4557AF776 /* AccessKeyTests.swift */; };
 		604E2E3EF97522BB86C7518C /* TunnelNetworkSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4073B4B57614639ED81341 /* TunnelNetworkSettingsTests.swift */; };
+		6AE068A779FE15355014561A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE39212ADACEAE2605BAA89B /* Theme.swift */; };
+		70A6557F44E970FFEFE5132F /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0699D04238955FC7E259908F /* SettingsScreen.swift */; };
 		763463CD146B7B3BFE609B51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A887FC6C2A81F6761EACEE /* ContentView.swift */; };
 		78F901F4294DF1D3A9698DFD /* KeylineError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB074B771331C5DEA789C5 /* KeylineError.swift */; };
+		7A6473CC38F869ECAA32AB74 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE39212ADACEAE2605BAA89B /* Theme.swift */; };
 		7B2BB2D326E000C1805FFDA1 /* TunnelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636E5D24AEC69105346213BF /* TunnelProtocol.swift */; };
 		81DB0FAF636225E8CF7E65C3 /* SecretStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F02A84AC15E831EC4CCE9 /* SecretStore.swift */; };
 		8374A8C0A60A4E9246F7B848 /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
@@ -54,6 +63,9 @@
 		BDCBA87F16D12CD018F82D2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40066ABFB947222D684DD4BA /* Assets.xcassets */; };
 		C176B00EF5D319C2D2AE514C /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CFE108A620F3E25E31D1E2 /* Server.swift */; };
 		C7EFB8B85711F074D06796C0 /* TunnelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */; };
+		D2111E1400CA9A1A0396C5D9 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF965064A0F05AD0B61A96 /* SampleData.swift */; };
+		D22ACEA4DD177ED7E3D91B7B /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0699D04238955FC7E259908F /* SettingsScreen.swift */; };
+		D36C7B8A0EA289E630D255E9 /* ServersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */; };
 		D4C18638CA4FB0B9F5EC2D89 /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D6C3103625B6AC7A0C0D85 /* ConnectionModel.swift */; };
 		DBB0DF6C437AE3B037FA3D9B /* GoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F137E2B0816EBD5E905312BF /* GoCore.swift */; };
 		DD2772B4E5D9D2929208F2D0 /* SystemExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAD986A3CA4C3B3E57D4102 /* SystemExtensionManager.swift */; };
@@ -63,6 +75,7 @@
 		E87FF913F1C6C350CBD5223E /* ServerRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C9B26E43CCDAA766F02CED /* ServerRepositoryTests.swift */; };
 		EC83278C63F7644B71CFF4C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40066ABFB947222D684DD4BA /* Assets.xcassets */; };
 		F20774CB5F0867625C861D1E /* SecretStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763F02A84AC15E831EC4CCE9 /* SecretStore.swift */; };
+		F3220E0918F31209EF90E8A7 /* ConnectScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265F00859D779E565B96910E /* ConnectScreen.swift */; };
 		F52F2F31BA915A96C61DC861 /* Snapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76E79F9D2AF0758B50BBBC8 /* Snapshots.swift */; };
 		FDC2CE8A4ED0B0424CA6737A /* KeylineError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB074B771331C5DEA789C5 /* KeylineError.swift */; };
 /* End PBXBuildFile section */
@@ -92,13 +105,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0699D04238955FC7E259908F /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		071AB99FAB2B1CC3FEDAD0BE /* ipv4-country.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ipv4-country.bin"; sourceTree = "<group>"; };
 		07D69C1D05D707286AE3CA2A /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		08A887FC6C2A81F6761EACEE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersScreen.swift; sourceTree = "<group>"; };
 		1B4073B4B57614639ED81341 /* TunnelNetworkSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelNetworkSettingsTests.swift; sourceTree = "<group>"; };
 		1CD773ED1D7041B4557AF776 /* AccessKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessKeyTests.swift; sourceTree = "<group>"; };
 		1CFFCCBDD8AAEFDBBABC9988 /* CountryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTests.swift; sourceTree = "<group>"; };
 		20CFE108A620F3E25E31D1E2 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		265F00859D779E565B96910E /* ConnectScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectScreen.swift; sourceTree = "<group>"; };
 		2ACCD9D700A32D3462DAD9B6 /* UserFacingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFacingError.swift; sourceTree = "<group>"; };
 		3A5856D10F441C1EA3096E1F /* ConnectionModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionModelTests.swift; sourceTree = "<group>"; };
 		3CA4EA4DF178190787FC6A17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,9 +134,12 @@
 		86301E2269BF708FDB7F961A /* KeylineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeylineApp.swift; sourceTree = "<group>"; };
 		8791B8C991818728A790FD72 /* CountryLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryLookup.swift; sourceTree = "<group>"; };
 		89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeylineIdentifiers.swift; sourceTree = "<group>"; };
+		92CF965064A0F05AD0B61A96 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		A76E79F9D2AF0758B50BBBC8 /* Snapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshots.swift; sourceTree = "<group>"; };
 		A9B17B8C3AE376F80D78A116 /* ErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTests.swift; sourceTree = "<group>"; };
 		AC40F2AD463CAD40C1393EE7 /* TunnelNetworkSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelNetworkSettings.swift; sourceTree = "<group>"; };
+		AE9BE21CEFD8CEE63EE0799C /* MainWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindow.swift; sourceTree = "<group>"; };
+		C1B1E58A4A6119284739465B /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		CBCA31CED0F58A9BC0D5A76D /* TestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSupport.swift; sourceTree = "<group>"; };
 		D91909B41BE445A4850BC805 /* AccessKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessKey.swift; sourceTree = "<group>"; };
 		DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelController.swift; sourceTree = "<group>"; };
@@ -128,6 +147,7 @@
 		E4C9B26E43CCDAA766F02CED /* ServerRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRepositoryTests.swift; sourceTree = "<group>"; };
 		E7D6C3103625B6AC7A0C0D85 /* ConnectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionModel.swift; sourceTree = "<group>"; };
 		F137E2B0816EBD5E905312BF /* GoCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoCore.swift; sourceTree = "<group>"; };
+		FE39212ADACEAE2605BAA89B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +215,7 @@
 				08A887FC6C2A81F6761EACEE /* ContentView.swift */,
 				86301E2269BF708FDB7F961A /* KeylineApp.swift */,
 				5D0D40E6ED33C99D48769B0E /* Core */,
+				43EBC4A15AE87DBF204DE709 /* UI */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -207,6 +228,19 @@
 				636E5D24AEC69105346213BF /* TunnelProtocol.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		43EBC4A15AE87DBF204DE709 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C1B1E58A4A6119284739465B /* Components.swift */,
+				265F00859D779E565B96910E /* ConnectScreen.swift */,
+				AE9BE21CEFD8CEE63EE0799C /* MainWindow.swift */,
+				18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */,
+				0699D04238955FC7E259908F /* SettingsScreen.swift */,
+				FE39212ADACEAE2605BAA89B /* Theme.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		5D0D40E6ED33C99D48769B0E /* Core */ = {
@@ -234,6 +268,7 @@
 				3A5856D10F441C1EA3096E1F /* ConnectionModelTests.swift */,
 				1CFFCCBDD8AAEFDBBABC9988 /* CountryTests.swift */,
 				A9B17B8C3AE376F80D78A116 /* ErrorTests.swift */,
+				92CF965064A0F05AD0B61A96 /* SampleData.swift */,
 				E4C9B26E43CCDAA766F02CED /* ServerRepositoryTests.swift */,
 				A76E79F9D2AF0758B50BBBC8 /* Snapshots.swift */,
 				CBCA31CED0F58A9BC0D5A76D /* TestSupport.swift */,
@@ -417,6 +452,8 @@
 			files = (
 				BBA62022AAE1AA9F7A08FCDE /* AccessKey.swift in Sources */,
 				5E086B82C4FFF4D4D72AE1C0 /* AccessKeyTests.swift in Sources */,
+				0B685C0CAFBCD049431FD758 /* Components.swift in Sources */,
+				F3220E0918F31209EF90E8A7 /* ConnectScreen.swift in Sources */,
 				D4C18638CA4FB0B9F5EC2D89 /* ConnectionModel.swift in Sources */,
 				98A0262CB6374677D4EA0B1D /* ConnectionModelTests.swift in Sources */,
 				9FC44D10386406E06FE6A43D /* CountryLookup.swift in Sources */,
@@ -425,14 +462,19 @@
 				13620B42A000AC0BB8722D6C /* GoCore.swift in Sources */,
 				E67AE48E1A14F8898C6B02A1 /* KeylineError.swift in Sources */,
 				4C6B0EC1EF500D6F2DF6A98B /* KeylineIdentifiers.swift in Sources */,
+				3E99C022CAB403B4002A9E42 /* MainWindow.swift in Sources */,
+				D2111E1400CA9A1A0396C5D9 /* SampleData.swift in Sources */,
 				F20774CB5F0867625C861D1E /* SecretStore.swift in Sources */,
 				C176B00EF5D319C2D2AE514C /* Server.swift in Sources */,
 				B8298E478C8C8C4ED4B6E177 /* ServerError.swift in Sources */,
 				B621121473A57B83DB0071AA /* ServerRepository.swift in Sources */,
 				E87FF913F1C6C350CBD5223E /* ServerRepositoryTests.swift in Sources */,
+				D36C7B8A0EA289E630D255E9 /* ServersScreen.swift in Sources */,
+				70A6557F44E970FFEFE5132F /* SettingsScreen.swift in Sources */,
 				F52F2F31BA915A96C61DC861 /* Snapshots.swift in Sources */,
 				DD2772B4E5D9D2929208F2D0 /* SystemExtensionManager.swift in Sources */,
 				4FF49B424052D23DC4E6D847 /* TestSupport.swift in Sources */,
+				6AE068A779FE15355014561A /* Theme.swift in Sources */,
 				C7EFB8B85711F074D06796C0 /* TunnelController.swift in Sources */,
 				AA61B91A737192D200B8C15E /* TunnelNetworkSettings.swift in Sources */,
 				604E2E3EF97522BB86C7518C /* TunnelNetworkSettingsTests.swift in Sources */,
@@ -460,6 +502,8 @@
 			files = (
 				42451D94BEE4AD3003B2C629 /* AccessKey.swift in Sources */,
 				83AEB62235D9346B8F2EF2B3 /* AppDelegate.swift in Sources */,
+				2421F72E74D78B9886AB22A3 /* Components.swift in Sources */,
+				2AE112D849FA832E067A2492 /* ConnectScreen.swift in Sources */,
 				841A5439C7FFFFBEA68FCF3B /* ConnectionModel.swift in Sources */,
 				763463CD146B7B3BFE609B51 /* ContentView.swift in Sources */,
 				13A9A1A6951840FEC1074457 /* CountryLookup.swift in Sources */,
@@ -467,11 +511,15 @@
 				40470F115C166A69774AC543 /* KeylineApp.swift in Sources */,
 				FDC2CE8A4ED0B0424CA6737A /* KeylineError.swift in Sources */,
 				8374A8C0A60A4E9246F7B848 /* KeylineIdentifiers.swift in Sources */,
+				07AE223C9D93162F199DCCC0 /* MainWindow.swift in Sources */,
 				81DB0FAF636225E8CF7E65C3 /* SecretStore.swift in Sources */,
 				945412FAF6A6421266E432F4 /* Server.swift in Sources */,
 				59E11E0701618C57C99E1218 /* ServerError.swift in Sources */,
 				B6DBD7FD39C9AC1DE3F9F880 /* ServerRepository.swift in Sources */,
+				1DCE618C70C185D5A11A76A2 /* ServersScreen.swift in Sources */,
+				D22ACEA4DD177ED7E3D91B7B /* SettingsScreen.swift in Sources */,
 				3CE615F0E2C127D2756F8F4A /* SystemExtensionManager.swift in Sources */,
+				7A6473CC38F869ECAA32AB74 /* Theme.swift in Sources */,
 				282CD860E62C5CDC0C3E32EA /* TunnelController.swift in Sources */,
 				97B9E4A12D12310E8D26D163 /* TunnelProtocol.swift in Sources */,
 				ACC1235B0AFE766DAE413153 /* UserFacingError.swift in Sources */,

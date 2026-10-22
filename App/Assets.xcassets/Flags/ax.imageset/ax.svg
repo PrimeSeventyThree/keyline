@@ -1,18 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-ax" viewBox="0 0 512 512">
-  <defs>
-    <clipPath id="ax-a">
-      <path fill-opacity=".7" d="M166 0h850v850H166z"/>
-    </clipPath>
-  </defs>
-  <g clip-path="url(#ax-a)" transform="translate(-100)scale(.6024)">
-    <path fill="#0053a5" d="M0 0h1300v850H0z"/>
-    <g fill="#ffce00">
-      <path d="M400 0h250v850H400z"/>
-      <path d="M0 300h1300v250H0z"/>
-    </g>
-    <g fill="#d21034">
-      <path d="M475 0h100v850H475z"/>
-      <path d="M0 375h1300v100H0z"/>
-    </g>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+<rect x="-51.2" y="-51.2" width="614.4" height="614.4" fill="#0053a5" fill-opacity="1"/>
+<path fill-rule="nonzero" fill="#ffce00" fill-opacity="1" d="M 140.960938 0 L 291.558594 0 L 291.558594 512.039062 L 140.960938 512.039062 Z M 140.960938 0 "/>
+<path fill-rule="nonzero" fill="#ffce00" fill-opacity="1" d="M -100 180.71875 L 683.121094 180.71875 L 683.121094 331.320312 L -100 331.320312 Z M -100 180.71875 "/>
+<path fill-rule="nonzero" fill="#d21034" fill-opacity="1" d="M 186.140625 0 L 246.378906 0 L 246.378906 512.039062 L 186.140625 512.039062 Z M 186.140625 0 "/>
+<path fill-rule="nonzero" fill="#d21034" fill-opacity="1" d="M -100 225.898438 L 683.121094 225.898438 L 683.121094 286.140625 L -100 286.140625 Z M -100 225.898438 "/>
 </svg>

@@ -1,12 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-nr" viewBox="0 0 512 512">
-  <defs>
-    <clipPath id="nr-a">
-      <path fill-opacity=".7" d="M135.6 0h496.1v496h-496z"/>
-    </clipPath>
-  </defs>
-  <g fill-rule="evenodd" stroke-width="1pt" clip-path="url(#nr-a)" transform="translate(-140)scale(1.0321)">
-    <path fill="#002170" d="M0 0h992.1v496H0z"/>
-    <path fill="#ffb20d" d="M0 226.8h992.1v42.4H0z"/>
-    <path fill="#fff" d="m292.4 424.4-31.9-32-10.2 44-11.7-43.7-30.9 33 11.8-43.6-43.2 13 32-31.8-44-10.3 43.6-11.6-33-31 43.6 11.8-13-43.2 31.8 32 10.3-44 11.7 43.6 30.8-32.9-11.7 43.6 43.2-13-32 31.8 44 10.3L290 362l33 30.9-43.7-11.7z"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M -0.046875 0 L 511.976562 0 L 511.976562 511.921875 L 0.0546875 511.921875 Z M -0.046875 0 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 0 234 L 512 234 L 512 278 L 0 278 Z M 0 234 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="nonzero" d="M -0.046875 0 L 511.976562 0 L 511.976562 511.921875 L 0.0546875 511.921875 Z M -0.046875 0 "/>
+</clipPath>
+<clipPath id="clip-3">
+<path clip-rule="nonzero" d="M 29 275 L 205 275 L 205 451 L 29 451 Z M 29 275 "/>
+</clipPath>
+<clipPath id="clip-4">
+<path clip-rule="nonzero" d="M -0.046875 0 L 511.976562 0 L 511.976562 511.921875 L 0.0546875 511.921875 Z M -0.046875 0 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<path fill-rule="evenodd" fill="#002170" fill-opacity="1" d="M -140 0 L 883.945312 0 L 883.945312 511.921875 L -140 511.921875 Z M -140 0 "/>
+</g>
+<g clip-path="url(#clip-1)">
+<g clip-path="url(#clip-2)">
+<path fill-rule="evenodd" fill="#ffb20d" fill-opacity="1" d="M -140 234.082031 L 883.945312 234.082031 L 883.945312 277.839844 L -140 277.839844 Z M -140 234.082031 "/>
+</g>
+</g>
+<g clip-path="url(#clip-3)">
+<g clip-path="url(#clip-4)">
+<path fill-rule="evenodd" fill="#ffffff" fill-opacity="1" d="M 161.785156 438.023438 L 128.863281 404.996094 L 118.335938 450.410156 L 106.257812 405.304688 L 74.367188 439.363281 L 86.546875 394.367188 L 41.960938 407.78125 L 74.988281 374.960938 L 29.574219 364.332031 L 74.574219 352.359375 L 40.515625 320.363281 L 85.515625 332.542969 L 72.097656 287.957031 L 104.917969 320.984375 L 115.546875 275.570312 L 127.625 320.570312 L 159.414062 286.613281 L 147.335938 331.613281 L 191.921875 318.195312 L 158.894531 351.015625 L 204.308594 361.648438 L 159.308594 373.621094 L 193.367188 405.511719 L 148.265625 393.4375 Z M 161.785156 438.023438 "/>
+</g>
+</g>
 </svg>

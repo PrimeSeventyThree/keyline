@@ -25,10 +25,11 @@ printf '{\n  "info" : { "author" : "xcode", "version" : 1 },\n  "properties" : {
 
 command -v rsvg-convert >/dev/null || { echo "error: rsvg-convert missing; run: brew install librsvg" >&2; exit 1; }
 
-# Xcode's SVG renderer skips <use> references and mishandles some clip paths (bi, pw), which
-# leaves those flags blank or incomplete. librsvg rewrites such files as plain-path SVGs.
+# Xcode's SVG renderer skips <use> references and mishandles clip paths whose shapes carry
+# paint attributes (bi, jp, pw), leaving flags blank or cut in half. librsvg rewrites such
+# files as plain-path SVGs with clean clips.
 needs_flattening() {
-  grep -q '<use' "$1" || [[ "$(basename "$1")" == bi.svg || "$(basename "$1")" == pw.svg ]]
+  grep -qE '<use|<clipPath' "$1"
 }
 
 count=0
