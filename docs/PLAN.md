@@ -90,6 +90,57 @@ ca.pulsbeat.keyline.tunnel.systemextension (runs as root)
 - The rules travel to the extension in `providerConfiguration` and are re-applied on network changes.
 - **Per-app routing** needs a transparent proxy provider. It's out of scope for v1.
 
+## Phase 3 UI
+
+Visual direction: a dark, calm window with a green accent, based on a reference VPN dashboard but not a copy of it.
+
+### Screens
+1. **Connect (home):**
+   - the selected server's flag, country, name and connection timer
+   - a large power button: idle, connecting (pulse), connected (glow), error
+   - a status line and a Change server button
+   - a strip with the 5 most recent servers
+   - stats cards on the right:
+     - Download and Upload: speed graphs over the last 60 s, polled every second
+     - Latency: the extension's health check through the proxy, every 30 s
+     - Protection: tunnel on, DNS through the tunnel, IPv6 blocked
+   - a subtle dotted world map behind it all, one SVG generated from Natural Earth (public domain)
+2. **Servers:**
+   - a list showing each server's flag, name, country and address, with a badge for dynamic keys
+   - a context menu: Rename, Country (Auto or a chosen country), and Forget with an Undo toast
+   - an Add server sheet with paste and clipboard detection; `ss://`/`ssconf://` links open it too
+3. **Settings:**
+   - Launch at login
+   - Stop VPN on quit (off by default, with a warning on quit)
+   - Appearance and language
+   - VPN component status and install/uninstall
+   - Split tunneling (Phase 4)
+   - About: licenses, the DB-IP credit, Send report (Phase 5)
+4. **Onboarding:** privacy note, the VPN component install guide for each macOS version, then the VPN permission prompt.
+5. **Menu bar:** status icon, connect/disconnect, a server submenu with flags, Open, Quit.
+
+Left out of the reference design: Pricing, user accounts and a "security score".
+
+### Server countries
+- **Country of the first hop:** for `ss://` keys it's known when the key is added; for dynamic keys, after a connect. Hostnames are resolved locally.
+- **Lookup:** a bundled **DB-IP IP-to-Country Lite** table (CC BY 4.0, credit in About), IPv4 only for now. Nothing is looked up online: that would tell a third party which servers a user connects to, and online services are often blocked where VPNs matter most.
+- **Data:** `scripts/update-geoip.sh` converts the monthly CSV into a compact binary table (start address + country code, 6 bytes per range).
+- **Override:** each server can override the country by hand.
+- **Names:** country names come from macOS in the user's language.
+
+### Assets
+- **Flags:** all 271 square flags from [flag-icons](https://github.com/lipis/flag-icons) (MIT), as SVGs in the asset catalog with vector data preserved.
+- **UI icons:** SF Symbols.
+
+### IPv6
+- **The problem:** the tunnel only claims IPv4 routes (as upstream does), so on IPv6 networks IPv6 traffic bypasses the VPN.
+- **The fix:** route all IPv6 (`::/0`) into the tunnel and drop it there, so apps fall back to IPv4.
+- **Later:** full IPv6 through the proxy can come later.
+
+### Process
+1. A static SwiftUI mock with sample data, rendered to screenshots for approval.
+2. Then each screen wired up in its own PR, with tests for the country lookup, speed calculation, timer formatting and onboarding states.
+
 ## Data and privacy
 - **Access keys** are secrets. Each one is a generic-password item in the user's Keychain, keyed by server UUID.
 - **Server metadata** goes in `~/Library/Application Support/ca.pulsbeat.keyline/servers.json`. **Settings** go in `UserDefaults`.
@@ -139,7 +190,7 @@ ca.pulsbeat.keyline.tunnel.systemextension (runs as root)
 | 0. Setup | Repo, submodule, license/notice, Go core build, Xcode project with app + system extension | 2–3 days | Done |
 | 1. Tunnel spike | Extension activation flow, PacketTunnelProvider port, connect with a hard-coded `ss://` key | 4–6 days | Done: connects with a real key |
 | 2. AppCore | Parsing, dynamic keys, Keychain, TunnelController, errors, extension messages, tests | 5–7 days | Done: 38 unit tests, CI on every PR |
-| 3. UI | Window, menu bar, onboarding/approval, dialogs, settings, URL scheme, clipboard, launch at login, quit warning | 7–9 days | |
+| 3. UI | Window, menu bar, onboarding/approval, dialogs, settings, URL scheme, clipboard, launch at login, quit warning, server countries and flags, stats cards, IPv6 blocking | 9–12 days | In progress |
 | 4. Split tunneling | Rules model, settings UI, route building, domain re-resolution | 3–4 days | |
 | 5. Localization, licenses, diagnostics | English + Russian, license list, MetricKit + GitHub issue reports | 2–3 days | |
 | 6. Packaging and CI | DMG, notarization, Sparkle, GitHub Actions | 3–5 days | |

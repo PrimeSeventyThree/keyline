@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="512" height="512" viewBox="0 0 512 512">
+<rect x="-51.2" y="-51.2" width="614.4" height="614.4" fill="#fecb00" fill-opacity="1"/>
+<path fill-rule="nonzero" fill="#34b233" fill-opacity="1" d="M 0 170.699219 L 512 170.699219 L 512 512 L 0 512 Z M 0 170.699219 "/>
+<path fill-rule="nonzero" fill="#ea2839" fill-opacity="1" d="M 0 341.300781 L 512 341.300781 L 512 512 L 0 512 Z M 0 341.300781 "/>
+<path fill-rule="nonzero" fill="#ffffff" fill-opacity="1" d="M 312.601562 274 L 199.398438 274 L 256 85.300781 Z M 312.601562 274 "/>
+<path fill-rule="nonzero" fill="#ffffff" fill-opacity="1" d="M 210.210938 240.730469 L 301.789062 307.269531 L 145.085938 426.660156 Z M 210.210938 240.730469 "/>
+<path fill-rule="nonzero" fill="#ffffff" fill-opacity="1" d="M 273.492188 220.171875 L 238.507812 327.828125 L 76.535156 215.6875 Z M 273.492188 220.171875 "/>
+<path fill-rule="nonzero" fill="#ffffff" fill-opacity="1" d="M 273.492188 327.828125 L 238.507812 220.171875 L 435.464844 215.6875 Z M 273.492188 327.828125 "/>
+<path fill-rule="nonzero" fill="#ffffff" fill-opacity="1" d="M 210.210938 307.269531 L 301.789062 240.730469 L 366.914062 426.660156 Z M 210.210938 307.269531 "/>
+</svg>
