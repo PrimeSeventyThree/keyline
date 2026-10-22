@@ -172,13 +172,23 @@ final class TunnelController: ObservableObject {
         [.connected, .connecting, .reasserting].contains(status)
     }
 
+    /// Errors from the extension come back as `KeylineError`s. Anything else comes from
+    /// macOS itself, for example when the extension is not approved yet, so it is a system
+    /// VPN setup failure rather than an internal error.
+    private nonisolated static func keylineError(fromDisconnectError error: Error) -> KeylineError {
+        guard (error as NSError).domain == KeylineError.errorDomain else {
+            return .setupSystemVPNFailed(cause: error)
+        }
+        return KeylineError(error)
+    }
+
     /// The error that made the extension stop. Uses `fetchLastDisconnectError` on macOS 13+
     /// and asks the extension on macOS 12, which is best-effort: once the extension is
     /// unloaded, the message may go unanswered.
     private static func lastDisconnectError(of session: NETunnelProviderSession) async -> KeylineError? {
         if #available(macOS 13, *) {
             return await withCheckedContinuation { continuation in
-                session.fetchLastDisconnectError { error in continuation.resume(returning: error.map(KeylineError.init)) }
+                session.fetchLastDisconnectError { error in continuation.resume(returning: error.map(keylineError(fromDisconnectError:))) }
             }
         }
         return await withCheckedContinuation { continuation in
