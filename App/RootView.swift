@@ -12,6 +12,7 @@ struct RootView: View {
     @ObservedObject var selection: ServerSelection
     @ObservedObject var settings: AppSettings
     @ObservedObject var crashReports: CrashReportStore
+    let updater: Updater
 
     @State private var section: MainSection = .connect
     @State private var launchAtLogin = LoginItem().isEnabled
@@ -118,6 +119,7 @@ struct RootView: View {
                                onUninstallExtension: { systemExtension.deactivate() },
                                onShowLicenses: { showingLicenses = true },
                                onRestart: relaunch,
+                               onCheckForUpdates: { updater.checkForUpdates() },
                                onEditSplitTunnel: { showingSplitTunnel = true },
                                onSendReport: { showingReport = true })
             }

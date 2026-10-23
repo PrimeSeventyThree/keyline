@@ -19,6 +19,7 @@ struct SettingsScreen: View {
     var onUninstallExtension: () -> Void = {}
     var onShowLicenses: () -> Void = {}
     var onRestart: () -> Void = {}
+    var onCheckForUpdates: () -> Void = {}
     var onEditSplitTunnel: () -> Void = {}
     var onSendReport: () -> Void = {}
 
@@ -85,6 +86,9 @@ struct SettingsScreen: View {
                             Spacer()
                         }
                         HStack(spacing: 8) {
+                            Button(String(localized: "menu-check-updates", defaultValue: "Check for Updates…"),
+                                   action: onCheckForUpdates)
+                                .buttonStyle(KeylineButtonStyle())
                             Button(String(localized: "licenses", defaultValue: "Licenses"), action: onShowLicenses)
                                 .buttonStyle(KeylineButtonStyle())
                             Button(String(localized: "send-report", defaultValue: "Send report…"), action: onSendReport)

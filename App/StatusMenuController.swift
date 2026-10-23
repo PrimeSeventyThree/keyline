@@ -16,13 +16,16 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
     private let servers: ServerRepository
     private let connection: ConnectionModel
     private let selection: ServerSelection
+    private let updater: Updater
     private var statusSubscription: AnyCancellable?
 
-    init(tunnel: TunnelController, servers: ServerRepository, connection: ConnectionModel, selection: ServerSelection) {
+    init(tunnel: TunnelController, servers: ServerRepository, connection: ConnectionModel, selection: ServerSelection,
+         updater: Updater) {
         self.tunnel = tunnel
         self.servers = servers
         self.connection = connection
         self.selection = selection
+        self.updater = updater
         item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         super.init()
 
@@ -78,6 +81,9 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         menu.addItem(.separator())
         menu.addItem(actionItem(String(localized: "menu-open", defaultValue: "Open Keyline"), #selector(openConnect)))
         menu.addItem(actionItem(String(localized: "menu-settings", defaultValue: "Settings…"), #selector(openSettings), key: ","))
+        let updates = actionItem(String(localized: "menu-check-updates", defaultValue: "Check for Updates…"), #selector(checkForUpdates))
+        updates.isEnabled = updater.canCheckForUpdates
+        menu.addItem(updates)
         menu.addItem(.separator())
         let quit = NSMenuItem(title: String(localized: "menu-quit", defaultValue: "Quit Keyline"),
                               action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
@@ -149,6 +155,11 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
                 alert.runModal()
             }
         }
+    }
+
+    @objc private func checkForUpdates() {
+        NSApp.activate(ignoringOtherApps: true)
+        updater.checkForUpdates()
     }
 
     @objc private func openConnect() { show(.connect) }

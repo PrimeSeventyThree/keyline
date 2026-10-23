@@ -12,6 +12,7 @@ struct KeylineApp: App {
     @StateObject private var selection = ServerSelection()
     @StateObject private var settings: AppSettings
     @StateObject private var crashReports: CrashReportStore
+    @StateObject private var updater = Updater()
 
     init() {
         let systemExtension = SystemExtensionManager()
@@ -43,10 +44,10 @@ struct KeylineApp: App {
         WindowGroup {
             RootView(systemExtension: systemExtension, tunnel: tunnel, servers: servers,
                      connection: connection, stats: stats, selection: selection, settings: settings,
-                     crashReports: crashReports)
+                     crashReports: crashReports, updater: updater)
                 .onAppear {
                     appDelegate.configure(tunnel: tunnel, settings: settings, servers: servers,
-                                          connection: connection, selection: selection)
+                                          connection: connection, selection: selection, updater: updater)
                     systemExtension.activate()
                 }
         }
