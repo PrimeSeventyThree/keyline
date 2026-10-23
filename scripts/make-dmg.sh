@@ -4,7 +4,8 @@
 #   scripts/make-dmg.sh            Test build: Release configuration, signed for development
 #                                  (only runs on Macs in the development profile), not
 #                                  notarized. Uses the development Network Extension
-#                                  entitlement value.
+#                                  entitlement value (the Release configuration is otherwise
+#                                  signed with Developer ID, see scripts/release.sh).
 #
 # Developer ID signing and notarization for public releases come with the release pipeline
 # (docs/PLAN.md, phase 6).
@@ -31,6 +32,7 @@ xcodebuild build \
   -allowProvisioningUpdates \
   CURRENT_PROJECT_VERSION="$build_number" \
   KEYLINE_NE_PROVIDER=packet-tunnel-provider \
+  CODE_SIGN_STYLE=Automatic CODE_SIGN_IDENTITY="Apple Development" PROVISIONING_PROFILE_SPECIFIER= \
   | grep -E 'error:|warning:|BUILD (SUCCEEDED|FAILED)' | grep -v appintents || true
 
 app="$derived_data/Build/Products/Release/Keyline.app"
