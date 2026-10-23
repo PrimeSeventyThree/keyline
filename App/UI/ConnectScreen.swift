@@ -53,6 +53,10 @@ struct ConnectScreen: View {
         }
         .padding(.vertical, 24)
         .padding(.horizontal, 28)
+        .background(
+            WorldMapView()
+                .padding(.horizontal, 20)
+                .padding(.vertical, 60))
         .overlay(alignment: .top) {
             // Over the layout rather than in it, so the main column never moves.
             if let notice = state.setupNotice {
@@ -148,31 +152,39 @@ struct ConnectScreen: View {
 struct PowerButton: View {
     let phase: ConnectScreenState.Phase
     let action: () -> Void
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var isOn: Bool { phase == .connected }
     private var isBusy: Bool { [.connecting, .reconnecting, .disconnecting].contains(phase) }
+    /// While busy the ring spins; while connected the glow breathes. Reduce Motion stops both.
+    private var animates: Bool { (isBusy || isOn) && !reduceMotion }
 
     var body: some View {
         Button(action: action) {
-            ZStack {
-                Circle()
-                    .fill(isOn ? Theme.accent.opacity(0.10) : Color.white.opacity(0.03))
-                    .frame(width: 196, height: 196)
-                Circle()
-                    .trim(from: 0, to: isBusy ? 0.72 : 1)
-                    .stroke(isOn || isBusy ? Theme.accent : Color.white.opacity(0.14),
-                            style: StrokeStyle(lineWidth: 5, lineCap: .round))
-                    .rotationEffect(.degrees(-90))
-                    .frame(width: 176, height: 176)
-                    .shadow(color: isOn ? Theme.accent.opacity(0.8) : .clear, radius: 16)
-                Circle()
-                    .fill(RadialGradient(
-                        colors: isOn ? [Theme.accent.opacity(0.95), Theme.accentDeep] : [Color.white.opacity(0.10), Color.white.opacity(0.03)],
-                        center: .center, startRadius: 4, endRadius: 82))
-                    .frame(width: 150, height: 150)
-                Image(systemName: "power")
-                    .font(.system(size: 50, weight: .medium))
-                    .foregroundColor(isOn ? .white : Theme.textSecondary)
+            TimelineView(.animation(minimumInterval: 1 / 30, paused: !animates)) { context in
+                let time = animates ? context.date.timeIntervalSinceReferenceDate : 0
+                let spin = isBusy ? (time.truncatingRemainder(dividingBy: 1.2) / 1.2) * 360 : 0
+                let breath = isOn ? 0.5 + 0.5 * sin(time * 2 * .pi / 3) : 0 // 0…1 every 3 s
+                ZStack {
+                    Circle()
+                        .fill(isOn ? Theme.accent.opacity(0.08 + 0.06 * breath) : Color.white.opacity(0.03))
+                        .frame(width: 196, height: 196)
+                    Circle()
+                        .trim(from: 0, to: isBusy ? 0.72 : 1)
+                        .stroke(isOn || isBusy ? Theme.accent : Color.white.opacity(0.14),
+                                style: StrokeStyle(lineWidth: 5, lineCap: .round))
+                        .rotationEffect(.degrees(-90 + spin))
+                        .frame(width: 176, height: 176)
+                        .shadow(color: isOn ? Theme.accent.opacity(0.6 + 0.3 * breath) : .clear, radius: 12 + 8 * breath)
+                    Circle()
+                        .fill(RadialGradient(
+                            colors: isOn ? [Theme.accent.opacity(0.95), Theme.accentDeep] : [Color.white.opacity(0.10), Color.white.opacity(0.03)],
+                            center: .center, startRadius: 4, endRadius: 82))
+                        .frame(width: 150, height: 150)
+                    Image(systemName: "power")
+                        .font(.system(size: 50, weight: .medium))
+                        .foregroundColor(isOn ? .white : Theme.textSecondary)
+                }
             }
             .contentShape(Circle())
         }
