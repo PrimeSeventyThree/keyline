@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>Keyline — concept C: key line</title>
+  <!-- A key whose shaft carries on as a line to a node: the key that opens your connection.
+       Colours live in the palette below. -->
+  <style>
+    svg {
+      --tile-top: #12382d;
+      --tile-bottom: #06130f;
+      --tile-edge: rgba(255, 255, 255, 0.07);
+      --glow: rgba(61, 219, 143, 0.26);
+      --mark: #3ddb8f;
+      --mark-highlight: #8af0bd;
+      --node: #ffffff;
+    }
+    .tile-top { stop-color: var(--tile-top); }
+    .tile-bottom { stop-color: var(--tile-bottom); }
+    .tile-edge { fill: none; stroke: var(--tile-edge); stroke-width: 3; }
+    .glow-stop { stop-color: var(--glow); }
+    .glow-clear { stop-color: var(--glow); stop-opacity: 0; }
+    .mark-left { stop-color: var(--mark-highlight); }
+    .mark-right { stop-color: var(--mark); }
+    .stroke { fill: none; stroke: url(#mark-gradient); stroke-width: 54; stroke-linecap: round; stroke-linejoin: round; }
+    .node { fill: var(--node); }
+  </style>
+  <defs>
+    <linearGradient id="tile-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop class="tile-top" offset="0"/>
+      <stop class="tile-bottom" offset="1"/>
+    </linearGradient>
+    <radialGradient id="glow-gradient" cx="470" cy="512" r="340" gradientUnits="userSpaceOnUse">
+      <stop class="glow-stop" offset="0"/>
+      <stop class="glow-clear" offset="1"/>
+    </radialGradient>
+    <linearGradient id="mark-gradient" x1="220" y1="0" x2="800" y2="0" gradientUnits="userSpaceOnUse">
+      <stop class="mark-left" offset="0"/>
+      <stop class="mark-right" offset="1"/>
+    </linearGradient>
+  </defs>
+
+  <g id="tile">
+    <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#tile-gradient)"/>
+    <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#glow-gradient)"/>
+    <rect class="tile-edge" x="101.5" y="101.5" width="821" height="821" rx="184"/>
+  </g>
+
+  <g id="mark">
+    <!-- Bow: a ring on the left. -->
+    <circle id="bow" class="stroke" cx="340" cy="512" r="112"/>
+    <!-- Shaft with two teeth, then the line continues to a node. -->
+    <path id="shaft" class="stroke" d="M 452 512 L 760 512 M 610 512 L 610 590 M 690 512 L 690 566"/>
+    <circle id="node" class="node" cx="790" cy="512" r="34"/>
+  </g>
+</svg>

@@ -19,7 +19,8 @@ struct KeylineApp: App {
             Logger.keyline("app").fault("No Application Support folder, servers won't be saved: \(error.localizedDescription, privacy: .public)")
             storage = InMemoryServerListStorage()
         }
-        let servers = ServerRepository(storage: storage, secrets: KeychainSecretStore(), configService: GoCore())
+        let servers = ServerRepository(storage: storage, secrets: KeychainSecretStore(), configService: GoCore(),
+                                       countryResolver: CountryLookup())
         _systemExtension = StateObject(wrappedValue: systemExtension)
         _tunnel = StateObject(wrappedValue: tunnel)
         _servers = StateObject(wrappedValue: servers)

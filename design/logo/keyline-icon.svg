@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>Keyline app icon</title>
+  <!-- The power symbol from Keyline's connect button, read as a key: the ring is the bow,
+       the stroke is the shaft, two teeth near the tip. Colours live in the palette below. -->
+  <style>
+    svg {
+      --tile-top: #12382d;
+      --tile-bottom: #06130f;
+      --tile-edge: rgba(255, 255, 255, 0.07);
+      --glow: rgba(61, 219, 143, 0.30);
+      --mark: #3ddb8f;
+      --mark-highlight: #8af0bd;
+    }
+    .tile-top { stop-color: var(--tile-top); }
+    .tile-bottom { stop-color: var(--tile-bottom); }
+    .tile-edge { fill: none; stroke: var(--tile-edge); stroke-width: 3; }
+    .glow-stop { stop-color: var(--glow); }
+    .glow-clear { stop-color: var(--glow); stop-opacity: 0; }
+    .mark-top { stop-color: var(--mark-highlight); }
+    .mark-bottom { stop-color: var(--mark); }
+    .stroke { fill: none; stroke: url(#mark-gradient); stroke-width: 58; stroke-linecap: round; }
+    .teeth { fill: url(#mark-gradient); }
+  </style>
+  <defs>
+    <linearGradient id="tile-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop class="tile-top" offset="0"/>
+      <stop class="tile-bottom" offset="1"/>
+    </linearGradient>
+    <radialGradient id="glow-gradient" cx="512" cy="560" r="330" gradientUnits="userSpaceOnUse">
+      <stop class="glow-stop" offset="0"/>
+      <stop class="glow-clear" offset="1"/>
+    </radialGradient>
+    <linearGradient id="mark-gradient" x1="0" y1="220" x2="0" y2="770" gradientUnits="userSpaceOnUse">
+      <stop class="mark-top" offset="0"/>
+      <stop class="mark-bottom" offset="1"/>
+    </linearGradient>
+  </defs>
+
+  <g id="tile">
+    <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#tile-gradient)"/>
+    <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#glow-gradient)"/>
+    <rect class="tile-edge" x="101.5" y="101.5" width="821" height="821" rx="184"/>
+  </g>
+
+  <g id="mark">
+    <!-- Bow: a ring open at the top, centred at (512, 600), radius 150. -->
+    <path id="bow" class="stroke" d="M 591.5 472.8 A 150 150 0 1 1 432.5 472.8"/>
+    <!-- Shaft: from the tip down into the ring. -->
+    <path id="shaft" class="stroke" d="M 512 258 L 512 570"/>
+    <!-- Teeth on the right of the shaft, near the tip. -->
+    <g id="teeth" class="teeth">
+      <rect x="512" y="292" width="98" height="44" rx="12"/>
+      <rect x="512" y="366" width="66" height="40" rx="12"/>
+    </g>
+  </g>
+</svg>

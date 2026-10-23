@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96" height="96" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
+<path fill-rule="nonzero" fill="#ce1126" fill-opacity="1" d="M 0 0 L 160 0 L 160 512 L 0 512 Z M 0 0 "/>
+<path fill-rule="nonzero" fill="#fcd116" fill-opacity="1" d="M 160 0 L 512 0 L 512 256 L 160 256 Z M 160 0 "/>
+<path fill-rule="nonzero" fill="#009e49" fill-opacity="1" d="M 160 256 L 512 256 L 512 512 L 160 512 Z M 160 256 "/>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M 79.976562 198.976562 L 60.480469 258.976562 L 90.480469 268.722656 "/>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M 79.976562 198.976562 L 99.472656 258.976562 L 69.472656 268.722656 "/>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M 139.976562 242.570312 L 76.886719 242.570312 L 76.886719 274.113281 "/>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M 139.976562 242.570312 L 88.9375 279.652344 L 70.394531 254.132812 "/>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M 117.058594 313.101562 L 97.5625 253.101562 L 67.5625 262.851562 "/>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M 117.058594 313.101562 L 66.019531 276.019531 L 84.558594 250.5 "/>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M 42.894531 313.101562 L 93.933594 276.019531 L 75.390625 250.5 "/>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M 42.894531 313.101562 L 62.390625 253.101562 L 92.390625 262.851562 "/>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M 19.976562 242.570312 L 71.015625 279.652344 L 89.554688 254.132812 "/>
+<path fill-rule="nonzero" fill="#000001" fill-opacity="1" d="M 19.976562 242.570312 L 83.0625 242.570312 L 83.0625 274.113281 "/>
+</svg>

@@ -15,14 +15,17 @@ final class ServerRepository: ObservableObject {
     private let storage: ServerListStorage
     private let secrets: SecretStore
     private let configService: TunnelConfigService
+    private let countryResolver: CountryResolving?
     private let log = Logger.keyline("servers")
     /// The last forgotten server, its position and access key, kept for undo.
     private var lastForgotten: (server: Server, index: Int, accessKey: String)?
 
-    init(storage: ServerListStorage, secrets: SecretStore, configService: TunnelConfigService) {
+    init(storage: ServerListStorage, secrets: SecretStore, configService: TunnelConfigService,
+         countryResolver: CountryResolving? = nil) {
         self.storage = storage
         self.secrets = secrets
         self.configService = configService
+        self.countryResolver = countryResolver
         do {
             // A server without its key in the Keychain can't connect; drop it.
             servers = try storage.load().filter { server in
@@ -70,6 +73,7 @@ final class ServerRepository: ObservableObject {
             try? secrets.deleteSecret(for: server.id)
             throw error
         }
+        Task { await refreshCountry(forServer: server.id) }
         return server
     }
 
@@ -128,8 +132,30 @@ final class ServerRepository: ObservableObject {
         if let index = servers.firstIndex(where: { $0.id == id }), servers[index].address != config.firstHop {
             servers[index].address = config.firstHop
             persist()
+            Task { await refreshCountry(forServer: id) }
         }
         return config
+    }
+
+    /// Sets the country to show for server `id`, or nil to go back to the detected one.
+    func setCountryOverride(id: String, countryCode: String?) {
+        guard let index = servers.firstIndex(where: { $0.id == id }) else { return }
+        servers[index].countryOverride = countryCode.flatMap(Country.init(code:))?.code
+        persist()
+    }
+
+    /// Detects the country of server `id` from its address, offline.
+    func refreshCountry(forServer id: String) async {
+        guard let resolver = countryResolver,
+              let address = server(withID: id)?.address,
+              let host = CountryLookup.host(ofFirstHop: address)
+        else { return }
+        let code = await Task.detached { resolver.countryCode(forHost: host) }.value
+        guard let index = servers.firstIndex(where: { $0.id == id }),
+              servers[index].address == address, servers[index].detectedCountryCode != code
+        else { return }
+        servers[index].detectedCountryCode = code
+        persist()
     }
 
     private func persist() {

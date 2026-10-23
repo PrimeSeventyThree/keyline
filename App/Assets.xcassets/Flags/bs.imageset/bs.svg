@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96" height="96" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 0 0.0703125 L 368 0.0703125 L 368 512 L 0 512 Z M 0 0.0703125 "/>
+</clipPath>
+</defs>
+<path fill-rule="evenodd" fill="#ffffff" fill-opacity="1" d="M 994.941406 512.015625 L -50.378906 512.015625 L -50.378906 1.347656 L 994.941406 1.347656 Z M 994.941406 512.015625 "/>
+<path fill-rule="evenodd" fill="#ffe900" fill-opacity="1" d="M 994.941406 367.332031 L -50.378906 367.332031 L -50.378906 152.4375 L 994.941406 152.4375 Z M 994.941406 367.332031 "/>
+<path fill-rule="evenodd" fill="#08ced6" fill-opacity="1" d="M 994.941406 512.015625 L -50.378906 512.015625 L -50.378906 341.828125 L 994.941406 341.828125 Z M 994.941406 171.640625 L -50.378906 171.640625 L -50.378906 1.667969 L 994.941406 1.667969 Z M 994.941406 171.640625 "/>
+<g clip-path="url(#clip-0)">
+<path fill-rule="evenodd" fill="#000001" fill-opacity="1" d="M -50.804688 -0.464844 C -48.566406 -0.464844 367.386719 252.414062 367.386719 252.414062 L -52.085938 511.054688 Z M -50.804688 -0.464844 "/>
+</g>
+</svg>

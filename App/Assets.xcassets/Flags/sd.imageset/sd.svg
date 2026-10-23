@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96" height="96" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
+<defs>
+<clipPath id="clip-0">
+<path clip-rule="nonzero" d="M 0 341 L 511.921875 341 L 511.921875 511.921875 L 0 511.921875 Z M 0 341 "/>
+</clipPath>
+<clipPath id="clip-1">
+<path clip-rule="nonzero" d="M 0 170 L 511.921875 170 L 511.921875 342 L 0 342 Z M 0 170 "/>
+</clipPath>
+<clipPath id="clip-2">
+<path clip-rule="nonzero" d="M 0 0 L 511.921875 0 L 511.921875 171 L 0 171 Z M 0 0 "/>
+</clipPath>
+<clipPath id="clip-3">
+<path clip-rule="nonzero" d="M 0 0 L 342 0 L 342 511.921875 L 0 511.921875 Z M 0 0 "/>
+</clipPath>
+</defs>
+<g clip-path="url(#clip-0)">
+<path fill-rule="evenodd" fill="#000001" fill-opacity="1" d="M 0 341.316406 L 1023.945312 341.316406 L 1023.945312 512.023438 L 0 512.023438 Z M 0 341.316406 "/>
+</g>
+<g clip-path="url(#clip-1)">
+<path fill-rule="evenodd" fill="#ffffff" fill-opacity="1" d="M 0 170.605469 L 1023.945312 170.605469 L 1023.945312 341.316406 L 0 341.316406 Z M 0 170.605469 "/>
+</g>
+<g clip-path="url(#clip-2)">
+<path fill-rule="evenodd" fill="#ff0000" fill-opacity="1" d="M 0 0 L 1024.773438 0 L 1024.773438 170.710938 L 0 170.710938 Z M 0 0 "/>
+</g>
+<g clip-path="url(#clip-3)">
+<path fill-rule="evenodd" fill="#009a00" fill-opacity="1" d="M 0 0 L 0 511.921875 L 341.316406 255.960938 Z M 0 0 "/>
+</g>
+</svg>

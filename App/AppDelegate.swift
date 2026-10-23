@@ -7,8 +7,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        item.button?.image = NSImage(systemSymbolName: "key", accessibilityDescription: "Keyline")
-        item.button?.image?.isTemplate = true
+        let mark = NSImage(named: "KeylineMark")
+        mark?.size = NSSize(width: 18, height: 18)
+        mark?.isTemplate = true
+        mark?.accessibilityDescription = "Keyline"
+        item.button?.image = mark
 
         let menu = NSMenu()
         menu.addItem(withTitle: String(localized: "Open Keyline"), action: #selector(openMainWindow), keyEquivalent: "")
