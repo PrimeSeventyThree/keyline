@@ -35,6 +35,14 @@ xcodebuild -project Keyline.xcodeproj -scheme Keyline -derivedDataPath build/Der
 Running the tunnel needs a signed build installed in `/Applications`, because macOS
 only activates system extensions from there.
 
+### The Xcode project
+
+`Keyline.xcodeproj` is generated from [`project.yml`](project.yml) with
+[XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`) and checked in, so
+building needs only Xcode. When you add, move or remove files, or change targets or build
+settings, edit `project.yml`, run `xcodegen generate`, and commit both. If branches conflict in
+`project.pbxproj`, regenerate it rather than merging it by hand.
+
 ## Testing
 
 ```sh
@@ -55,6 +63,7 @@ the system extension or the VPN. CI runs them on every pull request.
 | `Shared/` | Code compiled into both targets |
 | `Tests/` | Unit tests |
 | `scripts/` | Build, test and release scripts |
+| `project.yml` | XcodeGen spec that generates `Keyline.xcodeproj` |
 | `core/` | Script that builds the Go core into an xcframework |
 | `third_party/outline-apps/` | Upstream Outline, pinned as a git submodule |
 
