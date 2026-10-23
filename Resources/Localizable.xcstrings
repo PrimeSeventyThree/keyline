@@ -74,7 +74,6 @@
       }
     },
     "about-compatible": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -91,7 +90,6 @@
       }
     },
     "add": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -108,7 +106,6 @@
       }
     },
     "add-server": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -125,7 +122,6 @@
       }
     },
     "add-server-body": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -142,7 +138,6 @@
       }
     },
     "add-server-from-clipboard": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -159,7 +154,6 @@
       }
     },
     "add-server-from-link": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -175,8 +169,58 @@
         }
       }
     },
-    "back": {
+    "auto-connect-body": {
       "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While you’re connected, Keyline turns the VPN back on after your Mac restarts or switches networks, even if Keyline isn’t open. To stop it, disconnect in Keyline."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пока вы подключены, Keyline снова включает VPN после перезагрузки Mac или смены сети, даже если Keyline не открыт. Чтобы это прекратить, отключитесь в Keyline."
+          }
+        }
+      }
+    },
+    "auto-connect-ok": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Got it"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Понятно"
+          }
+        }
+      }
+    },
+    "auto-connect-title": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyline reconnects automatically"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyline подключается автоматически"
+          }
+        }
+      }
+    },
+    "back": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -193,7 +237,6 @@
       }
     },
     "cancel": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -210,7 +253,6 @@
       }
     },
     "change-server": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -227,7 +269,6 @@
       }
     },
     "connect": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -244,7 +285,6 @@
       }
     },
     "connected-for": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -261,7 +301,6 @@
       }
     },
     "continue": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -278,7 +317,6 @@
       }
     },
     "copy-details": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -294,8 +332,24 @@
         }
       }
     },
-    "disconnect": {
+    "crash-reports-saved": {
       "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyline quit unexpectedly. Crash details are saved for a report."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyline неожиданно завершился. Сведения о сбое сохранены для отчёта."
+          }
+        }
+      }
+    },
+    "disconnect": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -312,7 +366,6 @@
       }
     },
     "done": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -328,8 +381,24 @@
         }
       }
     },
-    "error-connection-configuration": {
+    "edit": {
       "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit…"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Изменить…"
+          }
+        }
+      }
+    },
+    "error-connection-configuration": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -346,7 +415,6 @@
       }
     },
     "error-connection-configuration-fetch": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -363,7 +431,6 @@
       }
     },
     "error-connection-proxy": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -380,7 +447,6 @@
       }
     },
     "error-invalid-access-key": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -397,7 +463,6 @@
       }
     },
     "error-server-already-added": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -414,7 +479,6 @@
       }
     },
     "error-tunnel-extension-not-ready": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -431,7 +495,6 @@
       }
     },
     "error-unexpected": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -448,7 +511,6 @@
       }
     },
     "language-restart": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -465,7 +527,6 @@
       }
     },
     "language-system": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -482,7 +543,6 @@
       }
     },
     "launch-at-login-failed": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -499,7 +559,6 @@
       }
     },
     "licenses": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -515,8 +574,24 @@
         }
       }
     },
-    "menu-connect-to": {
+    "menu-check-updates": {
       "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check for Updates…"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проверить обновления…"
+          }
+        }
+      }
+    },
+    "menu-connect-to": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -533,7 +608,6 @@
       }
     },
     "menu-connected-to": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -550,7 +624,6 @@
       }
     },
     "menu-connected-to-place": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -567,7 +640,6 @@
       }
     },
     "menu-disconnect": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -584,7 +656,6 @@
       }
     },
     "menu-not-connected": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -601,7 +672,6 @@
       }
     },
     "menu-open": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -618,7 +688,6 @@
       }
     },
     "menu-quit": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -635,7 +704,6 @@
       }
     },
     "menu-settings": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -652,7 +720,6 @@
       }
     },
     "no-server": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -669,7 +736,6 @@
       }
     },
     "not-connected": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -686,7 +752,6 @@
       }
     },
     "ok": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -703,7 +768,6 @@
       }
     },
     "onboarding-approve-step-1": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -720,7 +784,6 @@
       }
     },
     "onboarding-approve-step-2": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -737,7 +800,6 @@
       }
     },
     "onboarding-approve-step-3": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -754,7 +816,6 @@
       }
     },
     "onboarding-component-body": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -771,7 +832,6 @@
       }
     },
     "onboarding-component-installing": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -788,7 +848,6 @@
       }
     },
     "onboarding-component-title": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -805,7 +864,6 @@
       }
     },
     "onboarding-component-vpn-prompt": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -822,7 +880,6 @@
       }
     },
     "onboarding-install": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -839,7 +896,6 @@
       }
     },
     "onboarding-privacy-countries": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -856,7 +912,6 @@
       }
     },
     "onboarding-privacy-keys": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -873,7 +928,6 @@
       }
     },
     "onboarding-privacy-no-tracking": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -890,7 +944,6 @@
       }
     },
     "onboarding-privacy-provider": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -907,7 +960,6 @@
       }
     },
     "onboarding-progress": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -924,7 +976,6 @@
       }
     },
     "onboarding-server-title": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -941,7 +992,6 @@
       }
     },
     "onboarding-skip": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -958,7 +1008,6 @@
       }
     },
     "onboarding-understand": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -975,7 +1024,6 @@
       }
     },
     "onboarding-welcome-body": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -992,7 +1040,6 @@
       }
     },
     "onboarding-welcome-title": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1009,7 +1056,6 @@
       }
     },
     "open-system-settings": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1026,7 +1072,6 @@
       }
     },
     "outline-plugin-error-invalid-server-credentials": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1043,7 +1088,6 @@
       }
     },
     "outline-plugin-error-server-unreachable": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1060,7 +1104,6 @@
       }
     },
     "outline-plugin-error-system-configuration": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1077,7 +1120,6 @@
       }
     },
     "outline-plugin-error-udp-forwarding-not-enabled": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1094,7 +1136,6 @@
       }
     },
     "outline-plugin-error-vpn-permission-not-granted": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1111,7 +1152,6 @@
       }
     },
     "protection-dns": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1128,7 +1168,6 @@
       }
     },
     "protection-ipv6": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1145,7 +1184,6 @@
       }
     },
     "protection-off": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1162,7 +1200,6 @@
       }
     },
     "protection-on": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1179,7 +1216,6 @@
       }
     },
     "protection-title": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1196,7 +1232,6 @@
       }
     },
     "protection-traffic": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1213,7 +1248,6 @@
       }
     },
     "quit-disconnect": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1230,7 +1264,6 @@
       }
     },
     "quit-dont-ask": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1247,7 +1280,6 @@
       }
     },
     "quit-leave-on": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1264,7 +1296,6 @@
       }
     },
     "quit-vpn-stays-on-body": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1281,7 +1312,6 @@
       }
     },
     "quit-vpn-stays-on-title": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1297,8 +1327,92 @@
         }
       }
     },
-    "restart": {
+    "report-body": {
       "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Describe what happened. Keyline opens a new issue on GitHub with your description, the Keyline and macOS versions and, if you choose, crash details. You review it there before sending. Reports never include access keys or server addresses."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Опишите, что произошло. Keyline откроет новую задачу на GitHub с вашим описанием, версиями Keyline и macOS и, если хотите, сведениями о сбое. Вы проверите её там перед отправкой. В отчётах никогда нет ключей доступа и адресов серверов."
+          }
+        }
+      }
+    },
+    "report-delete-crashes": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete crash details"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Удалить сведения о сбоях"
+          }
+        }
+      }
+    },
+    "report-include-crashes": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Include crash details (%lld saved)"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Приложить сведения о сбоях (сохранено: %lld)"
+          }
+        }
+      }
+    },
+    "report-open-github": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open on GitHub"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Открыть на GitHub"
+          }
+        }
+      }
+    },
+    "report-title": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send a report"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отправить отчёт"
+          }
+        }
+      }
+    },
+    "restart": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1315,7 +1429,6 @@
       }
     },
     "save": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1332,7 +1445,6 @@
       }
     },
     "section-connect": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1349,7 +1461,6 @@
       }
     },
     "section-servers": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1366,7 +1477,6 @@
       }
     },
     "section-settings": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1382,8 +1492,24 @@
         }
       }
     },
-    "server-country": {
+    "send-report": {
       "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send report…"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отправить отчёт…"
+          }
+        }
+      }
+    },
+    "server-country": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1400,7 +1526,6 @@
       }
     },
     "server-country-automatic": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1417,7 +1542,6 @@
       }
     },
     "server-default-name": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1434,7 +1558,6 @@
       }
     },
     "server-default-name-outline": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1451,7 +1574,6 @@
       }
     },
     "server-dynamic-badge": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1468,7 +1590,6 @@
       }
     },
     "server-forget": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1485,7 +1606,6 @@
       }
     },
     "server-forgotten": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1502,7 +1622,6 @@
       }
     },
     "server-location-unknown": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1519,7 +1638,6 @@
       }
     },
     "server-name": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1536,7 +1654,6 @@
       }
     },
     "server-options": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1553,7 +1670,6 @@
       }
     },
     "server-rename": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1570,7 +1686,6 @@
       }
     },
     "server-rename-title": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1587,7 +1702,6 @@
       }
     },
     "servers-empty-body": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1604,7 +1718,6 @@
       }
     },
     "servers-empty-title": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1621,7 +1734,6 @@
       }
     },
     "servers-title": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1638,7 +1750,6 @@
       }
     },
     "settings-about": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1655,7 +1766,6 @@
       }
     },
     "settings-general": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1672,7 +1782,6 @@
       }
     },
     "settings-language": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1689,7 +1798,6 @@
       }
     },
     "settings-launch-at-login": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1706,7 +1814,6 @@
       }
     },
     "settings-stop-on-quit": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1723,7 +1830,6 @@
       }
     },
     "settings-stop-on-quit-detail": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1740,7 +1846,6 @@
       }
     },
     "settings-title": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1757,7 +1862,6 @@
       }
     },
     "settings-vpn": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1774,7 +1878,6 @@
       }
     },
     "setup-add-server": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1791,7 +1894,6 @@
       }
     },
     "setup-approve": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1808,7 +1910,6 @@
       }
     },
     "setup-failed": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1825,7 +1926,6 @@
       }
     },
     "setup-move-to-applications": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1841,8 +1941,262 @@
         }
       }
     },
-    "split-tunneling": {
+    "split-domains-note": {
       "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Domains are looked up when you connect and every 10 minutes. Add each host name you need, such as www.example.com. Sites that change addresses often, like large CDNs, may not always match."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Домены определяются при подключении и каждые 10 минут. Добавьте каждое нужное имя хоста, например www.example.com. Сайты, которые часто меняют адреса (например, крупные CDN), могут учитываться не всегда."
+          }
+        }
+      }
+    },
+    "split-empty": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing listed yet."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Список пуст."
+          }
+        }
+      }
+    },
+    "split-entry-invalid": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enter an IPv4 address, a subnet like 10.0.0.0/8, or a domain like example.com."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Введите IPv4-адрес, подсеть вида 10.0.0.0/8 или домен вида example.com."
+          }
+        }
+      }
+    },
+    "split-entry-placeholder": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "203.0.113.7, 10.0.0.0/8 or example.com"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "203.0.113.7, 10.0.0.0/8 или example.com"
+          }
+        }
+      }
+    },
+    "split-local-network": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bypass local network"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Локальная сеть в обход VPN"
+          }
+        }
+      }
+    },
+    "split-local-network-detail": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reach printers, your router and other devices at home or work directly."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Принтеры, роутер и другие устройства дома или на работе доступны напрямую."
+          }
+        }
+      }
+    },
+    "split-mode-exclude": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exclude listed"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кроме списка"
+          }
+        }
+      }
+    },
+    "split-mode-exclude-detail": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything goes through the VPN except the addresses and sites you list."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Через VPN идёт всё, кроме указанных адресов и сайтов."
+          }
+        }
+      }
+    },
+    "split-mode-include": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only listed"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Только список"
+          }
+        }
+      }
+    },
+    "split-mode-include-detail": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only the addresses and sites you list go through the VPN. Everything else connects directly."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Через VPN идут только указанные адреса и сайты. Остальное подключается напрямую."
+          }
+        }
+      }
+    },
+    "split-mode-off": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Выкл."
+          }
+        }
+      }
+    },
+    "split-mode-off-detail": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All traffic goes through the VPN."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Весь трафик идёт через VPN."
+          }
+        }
+      }
+    },
+    "split-remove": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Удалить %@"
+          }
+        }
+      }
+    },
+    "split-summary": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$lld entries"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · записей: %2$lld"
+          }
+        }
+      }
+    },
+    "split-summary-one": {
+      "extractionState": "extracted_with_value",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · 1 entry"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · записей: 1"
+          }
+        }
+      }
+    },
+    "split-tunneling": {
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1859,7 +2213,7 @@
       }
     },
     "split-tunneling-soon": {
-      "extractionState": "extracted_with_value",
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1876,6 +2230,7 @@
       }
     },
     "ss://… or ssconf://…": {
+      "extractionState": "stale",
       "localizations": {
         "ru": {
           "stringUnit": {
@@ -1886,7 +2241,6 @@
       }
     },
     "stats-download": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1903,7 +2257,6 @@
       }
     },
     "stats-latency": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1920,7 +2273,6 @@
       }
     },
     "stats-latency-average": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1937,7 +2289,6 @@
       }
     },
     "stats-not-connected": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1954,7 +2305,6 @@
       }
     },
     "stats-session-total": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1971,7 +2321,6 @@
       }
     },
     "stats-upload": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1988,7 +2337,6 @@
       }
     },
     "status-connected": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2005,7 +2353,6 @@
       }
     },
     "status-connecting": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2022,7 +2369,6 @@
       }
     },
     "status-disconnected": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2039,7 +2385,6 @@
       }
     },
     "status-disconnecting": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2056,7 +2401,6 @@
       }
     },
     "status-failed": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2073,7 +2417,6 @@
       }
     },
     "status-label": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2090,7 +2433,6 @@
       }
     },
     "status-reconnecting": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2107,7 +2449,6 @@
       }
     },
     "try-again": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2124,7 +2465,6 @@
       }
     },
     "undo": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2141,7 +2481,6 @@
       }
     },
     "uninstall": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2158,7 +2497,6 @@
       }
     },
     "vpn-component": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2175,7 +2513,6 @@
       }
     },
     "vpn-component-checking": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2192,7 +2529,6 @@
       }
     },
     "vpn-component-installed": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2209,7 +2545,6 @@
       }
     },
     "vpn-component-move-app": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -2226,7 +2561,6 @@
       }
     },
     "vpn-component-needs-approval": {
-      "extractionState": "extracted_with_value",
       "localizations": {
         "en": {
           "stringUnit": {

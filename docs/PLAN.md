@@ -190,11 +190,11 @@ Left out of the reference design: Pricing, user accounts and a "security score".
 | 0. Setup | Repo, submodule, license/notice, Go core build, Xcode project with app + system extension | 2–3 days | Done |
 | 1. Tunnel spike | Extension activation flow, PacketTunnelProvider port, connect with a hard-coded `ss://` key | 4–6 days | Done: connects with a real key |
 | 2. AppCore | Parsing, dynamic keys, Keychain, TunnelController, errors, extension messages, tests | 5–7 days | Done: 38 unit tests, CI on every PR |
-| 3. UI | Window, menu bar, onboarding/approval, dialogs, settings, URL scheme, clipboard, launch at login, quit warning, server countries and flags, stats cards, IPv6 blocking | 9–12 days | In progress |
-| 4. Split tunneling | Rules model, settings UI, route building, domain re-resolution | 3–4 days | |
-| 5. Localization, licenses, diagnostics | English + Russian, license list, MetricKit + GitHub issue reports | 2–3 days | |
-| 6. Packaging and CI | DMG, notarization, Sparkle, GitHub Actions | 3–5 days | |
-| 7. Hardening and QA | OS and hardware matrix, sleep/wake, update path, beta | 5–8 days | |
+| 3. UI | Window, menu bar, onboarding/approval, dialogs, settings, URL scheme, clipboard, launch at login, quit warning, server countries and flags, stats cards, IPv6 blocking | 9–12 days | Done (#4–#8, #10, #11) |
+| 4. Split tunneling | Rules model, settings UI, route building, domain re-resolution | 3–4 days | Done (#12) |
+| 5. Localization, licenses, diagnostics | English + Russian, license list, MetricKit + GitHub issue reports | 2–3 days | Done (#10, #13, #14) |
+| 6. Packaging and CI | DMG, notarization, Sparkle, GitHub Actions | 3–5 days | Done (#9, #15); release workflow on CI still to do |
+| 7. Hardening and QA | OS and hardware matrix, sleep/wake, update path, beta | 5–8 days | Next: hands-on test of the first beta |
 
 ## Needed from the account holder
 - **A Developer ID Application certificate.** Only Apple Distribution and Apple Development exist on this Mac.
