@@ -62,5 +62,5 @@ EOF
 done
 
 mkdir -p "$repo_root/Resources/Licenses"
-cp "$work/pkg/package/LICENSE" "$repo_root/Resources/Licenses/flag-icons.txt"
+cp "$work/pkg/package/LICENSE" "$repo_root/Resources/Licenses/license-3-flag-icons.txt"
 echo "imported $count flags from flag-icons $version ($flattened flattened with librsvg)"

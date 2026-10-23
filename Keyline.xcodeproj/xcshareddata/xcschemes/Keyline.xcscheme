@@ -29,6 +29,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3CD76BB338F26BD794509BCD"
+               BuildableName = "KeylineLoginHelper.app"
+               BlueprintName = "KeylineLoginHelper"
+               ReferencedContainer = "container:Keyline.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "68A2A0A94C601CAF0C64544C"
                BuildableName = "KeylineTunnel.systemextension"
                BlueprintName = "KeylineTunnel"

@@ -86,6 +86,15 @@ final class TunnelController: ObservableObject, TunnelControlling {
         await stopSession(manager)
     }
 
+    /// Stops whichever tunnel is active, for example when quitting.
+    func stopActive() async {
+        guard let manager = await Self.loadManager(), Self.isActive(manager.connection.status) else { return }
+        await stopSession(manager)
+    }
+
+    /// Whether a tunnel is connected or on its way, as far as the last status update knows.
+    var isActive: Bool { Self.isActive(status) }
+
     /// Bytes through the running tunnel, or nil when it is not connected.
     func trafficStats() async -> TrafficStats? {
         await ask(TunnelAppMessage.trafficStats, as: TrafficStats.self)

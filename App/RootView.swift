@@ -10,9 +10,11 @@ struct RootView: View {
     @ObservedObject var connection: ConnectionModel
     @ObservedObject var stats: StatsSampler
     @ObservedObject var selection: ServerSelection
+    @ObservedObject var settings: AppSettings
 
     @State private var section: MainSection = .connect
-    @State private var settings = SettingsScreenState()
+    @State private var launchAtLogin = LoginItem().isEnabled
+    @State private var showingLicenses = false
 
     @State private var isAddingServer = false
     @State private var newAccessKey = ""
@@ -46,8 +48,10 @@ struct RootView: View {
                                 setCountry: { server, code in servers.setCountryOverride(id: server.id, countryCode: code) },
                                 forget: forget))
             case .settings:
-                SettingsScreen(state: $settings,
-                               onUninstallExtension: { systemExtension.deactivate() })
+                SettingsScreen(state: settingsBinding,
+                               onUninstallExtension: { systemExtension.deactivate() },
+                               onShowLicenses: { showingLicenses = true },
+                               onRestart: relaunch)
             }
         }
         .frame(minWidth: 1120, minHeight: 720)
@@ -56,6 +60,7 @@ struct RootView: View {
             AddServerSheet(accessKey: $newAccessKey, errorMessage: addServerError,
                            onCancel: { isAddingServer = false }, onAdd: addServer)
         }
+        .sheet(isPresented: $showingLicenses) { LicensesSheet(onDone: { showingLicenses = false }) }
         .sheet(item: $renamingServer) { server in
             RenameServerSheet(name: $newName,
                               onCancel: { renamingServer = nil },
@@ -120,6 +125,66 @@ struct RootView: View {
         ServersScreenState(servers: servers.servers.map(ServerSummary.init),
                            activeServerID: connection.activeServerID ?? connection.busyServerID,
                            phase: phase)
+    }
+
+    /// Settings as the screen shows them; changes go straight to the models.
+    private var settingsBinding: Binding<SettingsScreenState> {
+        Binding(
+            get: {
+                SettingsScreenState(
+                    launchAtLogin: launchAtLogin,
+                    stopVPNOnQuit: settings.stopVPNOnQuit,
+                    language: settings.language,
+                    languageNeedsRestart: settings.needsRestartForLanguage,
+                    extensionStatus: extensionStatusText,
+                    extensionReady: systemExtension.state == .activated,
+                    version: Self.versionText)
+            },
+            set: { new in
+                if new.launchAtLogin != launchAtLogin { setLaunchAtLogin(new.launchAtLogin) }
+                settings.stopVPNOnQuit = new.stopVPNOnQuit
+                if new.language != settings.language { settings.language = new.language }
+            })
+    }
+
+    private var extensionStatusText: String {
+        switch systemExtension.state {
+        case .activated: return String(localized: "vpn-component-installed", defaultValue: "Installed and allowed")
+        case .activating, .unknown: return String(localized: "vpn-component-checking", defaultValue: "Checking…")
+        case .needsApproval: return String(localized: "vpn-component-needs-approval", defaultValue: "Waiting for your approval in System Settings")
+        case .notInApplications: return String(localized: "vpn-component-move-app", defaultValue: "Move Keyline to Applications to install it")
+        case .failed(let reason): return reason
+        }
+    }
+
+    private static var versionText: String {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "?"
+        let build = info?["CFBundleVersion"] as? String ?? "?"
+        return "\(version) (\(build))"
+    }
+
+    private func setLaunchAtLogin(_ enabled: Bool) {
+        do {
+            try LoginItem().setEnabled(enabled)
+        } catch {
+            shownError = UserFacingError(
+                message: String(localized: "launch-at-login-failed", defaultValue: "Keyline couldn’t change whether it opens at login."),
+                details: String(describing: error))
+        }
+        launchAtLogin = LoginItem().isEnabled
+    }
+
+    /// Opens a new copy of Keyline and quits this one, to apply a language change.
+    private func relaunch() {
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.createsNewApplicationInstance = true
+        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: configuration) { _, _ in
+            DispatchQueue.main.async {
+                AppDelegate.isRelaunching = true
+                NSApp.terminate(nil)
+            }
+        }
     }
 
     private var setupNotice: SetupNotice? {

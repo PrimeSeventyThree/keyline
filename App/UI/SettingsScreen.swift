@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct SettingsScreenState {
-    enum Language: String, CaseIterable, Identifiable { case system, english, russian; var id: String { rawValue } }
-
     var launchAtLogin = false
     var stopVPNOnQuit = false
-    var language: Language = .system
+    var language: AppSettings.Language = .system
+    /// The language changed and takes effect after a restart.
+    var languageNeedsRestart = false
     var extensionStatus = String(localized: "vpn-component-installed", defaultValue: "Installed and allowed")
     var extensionReady = true
     var version = "0.1.0 (2)"
@@ -15,7 +15,7 @@ struct SettingsScreen: View {
     @Binding var state: SettingsScreenState
     var onUninstallExtension: () -> Void = {}
     var onShowLicenses: () -> Void = {}
-    var onSendReport: () -> Void = {}
+    var onRestart: () -> Void = {}
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -36,11 +36,21 @@ struct SettingsScreen: View {
                         }
                     }
                     section(String(localized: "settings-language", defaultValue: "Language")) {
-                        SegmentedChoice(options: SettingsScreenState.Language.allCases, selection: $state.language) {
+                        SegmentedChoice(options: AppSettings.Language.allCases, selection: $state.language) {
                             switch $0 {
                             case .system: return String(localized: "language-system", defaultValue: "System language")
                             case .english: return "English"
                             case .russian: return "Русский"
+                            }
+                        }
+                        if state.languageNeedsRestart {
+                            HStack {
+                                Text(String(localized: "language-restart", defaultValue: "Restart Keyline to switch the language."))
+                                    .font(.system(size: 12))
+                                    .foregroundColor(Theme.textSecondary)
+                                Spacer()
+                                Button(String(localized: "restart", defaultValue: "Restart"), action: onRestart)
+                                    .buttonStyle(KeylineButtonStyle(kind: .primary))
                             }
                         }
                     }
@@ -69,12 +79,8 @@ struct SettingsScreen: View {
                                                         defaultValue: "Works with Outline access keys. Not affiliated with the Outline Foundation."))
                             Spacer()
                         }
-                        HStack(spacing: 8) {
-                            Button(String(localized: "licenses", defaultValue: "Licenses"), action: onShowLicenses)
-                                .buttonStyle(KeylineButtonStyle())
-                            Button(String(localized: "send-report", defaultValue: "Send report…"), action: onSendReport)
-                                .buttonStyle(KeylineButtonStyle())
-                        }
+                        Button(String(localized: "licenses", defaultValue: "Licenses"), action: onShowLicenses)
+                            .buttonStyle(KeylineButtonStyle())
                         Text("IP geolocation by DB-IP (db-ip.com)")
                             .font(.system(size: 11))
                             .foregroundColor(Theme.textTertiary)
