@@ -40,8 +40,8 @@ step() { printf '\n==> %s\n' "$*"; }
 
 [[ -z "$(git -C "$repo_root" status --porcelain --untracked-files=no)" ]] \
   || { echo "error: commit your changes first; releases are built from committed code" >&2; exit 1; }
-security find-identity -v -p codesigning | grep -q "$identity" \
-  || { echo "error: \"$identity\" is not in the keychain" >&2; exit 1; }
+identities="$(security find-identity -v -p codesigning)"
+[[ "$identities" == *"$identity"* ]] || { echo "error: \"$identity\" is not in the keychain" >&2; exit 1; }
 [[ -d "$repo_root/build/core/Tun2socks.xcframework" ]] || "$repo_root/core/build-xcframework.sh"
 if [[ ! -x "$sparkle/bin/generate_appcast" ]]; then
   mkdir -p "$sparkle"
@@ -90,12 +90,15 @@ app="$out/export/Keyline.app"
 step "Checking signatures and entitlements"
 codesign --verify --deep --strict "$app"
 tunnel="$app/Contents/Library/SystemExtensions/ca.pulsbeat.keyline.tunnel.systemextension"
+# (Output captured first: with pipefail, grep -q closing the pipe early would fail codesign.)
 for bundle in "$app" "$tunnel" "$app/Contents/Library/LoginItems/KeylineLoginHelper.app"; do
-  codesign -dvv "$bundle" 2>&1 | grep -q "Authority=$identity" \
+  details="$(codesign -dvv "$bundle" 2>&1)"
+  [[ "$details" == *"Authority=$identity"* ]] \
     || { echo "error: $(basename "$bundle") is not signed with $identity" >&2; exit 1; }
 done
 for bundle in "$app" "$tunnel"; do
-  codesign -d --entitlements :- "$bundle" 2>/dev/null | grep -q "packet-tunnel-provider-systemextension" \
+  entitlements="$(codesign -d --entitlements :- "$bundle" 2>/dev/null)"
+  [[ "$entitlements" == *"packet-tunnel-provider-systemextension"* ]] \
     || { echo "error: $(basename "$bundle") lacks the Developer ID Network Extension entitlement" >&2; exit 1; }
 done
 
