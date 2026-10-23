@@ -15,6 +15,14 @@ enum TunnelAppMessage {
     static let fetchLastError = "fetchLastDisconnectDetailedJsonError"
     /// Returns the JSON-encoded `TrafficStats` of the running tunnel.
     static let trafficStats = "getTrafficStats"
+    /// Times a health check through the proxy and returns a JSON-encoded `LatencySample`,
+    /// or nothing when the check fails.
+    static let measureLatency = "measureLatency"
+}
+
+/// One round trip through the proxy.
+struct LatencySample: Codable, Equatable {
+    var milliseconds: Double
 }
 
 /// Bytes through the tunnel since it started, counted at the packet level.

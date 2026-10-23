@@ -20,6 +20,8 @@ struct ConnectScreenState {
     var latency: [Double] = []
     var totals = TrafficStats()
     var errorMessage: String?
+    /// Shown above everything when the VPN component needs installing or approving.
+    var setupNotice: SetupNotice?
 
     var isActive: Bool { phase != .disconnected }
 }
@@ -29,6 +31,7 @@ struct ConnectScreen: View {
     var onToggleConnection: () -> Void = {}
     var onSelectServer: (ServerSummary) -> Void = { _ in }
     var onChangeServer: () -> Void = {}
+    var onSetupAction: () -> Void = {}
 
     /// Width of each side's pair of cards.
     static let wingWidth: CGFloat = 250
@@ -50,6 +53,12 @@ struct ConnectScreen: View {
         }
         .padding(.vertical, 24)
         .padding(.horizontal, 28)
+        .overlay(alignment: .top) {
+            // Over the layout rather than in it, so the main column never moves.
+            if let notice = state.setupNotice {
+                SetupBanner(notice: notice, action: onSetupAction).padding(.top, 12)
+            }
+        }
     }
 
     /// Flags, country, timer, power button and status, centred on one axis.
@@ -322,5 +331,36 @@ struct TrailingIconLabelStyle: LabelStyle {
             configuration.title
             configuration.icon.font(.system(size: 10, weight: .bold))
         }
+    }
+}
+
+/// Why the VPN can't connect yet, and what the user can do about it.
+struct SetupNotice: Equatable {
+    var message: String
+    var actionTitle: String?
+}
+
+struct SetupBanner: View {
+    let notice: SetupNotice
+    let action: () -> Void
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .foregroundColor(Theme.warning)
+            Text(notice.message)
+                .font(.system(size: 13))
+                .foregroundColor(Theme.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+            if let title = notice.actionTitle {
+                Button(title, action: action)
+                    .buttonStyle(KeylineButtonStyle(kind: .primary))
+            }
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(RoundedRectangle(cornerRadius: 12).fill(Theme.warning.opacity(0.10)))
+        .overlay(RoundedRectangle(cornerRadius: 12).stroke(Theme.warning.opacity(0.35)))
+        .frame(maxWidth: 680)
     }
 }
