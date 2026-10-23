@@ -51,8 +51,8 @@ rm -rf "$out"
 mkdir -p "$out"
 
 step "Archiving Keyline $version ($build_number)"
-# The Release configuration signs with Developer ID and the Developer ID ("Mac Team Direct")
-# provisioning profiles, which grant the -systemextension Network Extension values.
+# The Release configuration signs automatically with the Developer ID certificate, so Xcode uses
+# its Developer ID ("Mac Team Direct") profiles, which grant the -systemextension NE values.
 xcodebuild archive \
   -project "$repo_root/Keyline.xcodeproj" -scheme Keyline -configuration Release \
   -destination 'generic/platform=macOS' -derivedDataPath "$derived_data" \
@@ -68,14 +68,8 @@ cat > "$out/ExportOptions.plist" <<EOF
 <plist version="1.0">
 <dict>
 	<key>method</key><string>developer-id</string>
-	<key>signingStyle</key><string>manual</string>
-	<key>signingCertificate</key><string>Developer ID Application</string>
+	<key>signingStyle</key><string>automatic</string>
 	<key>teamID</key><string>$team</string>
-	<key>provisioningProfiles</key>
-	<dict>
-		<key>ca.pulsbeat.keyline</key><string>Mac Team Direct Provisioning Profile: ca.pulsbeat.keyline</string>
-		<key>ca.pulsbeat.keyline.tunnel</key><string>Mac Team Direct Provisioning Profile: ca.pulsbeat.keyline.tunnel</string>
-	</dict>
 </dict>
 </plist>
 EOF
