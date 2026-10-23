@@ -9,6 +9,7 @@ struct SettingsScreenState {
     var extensionStatus = String(localized: "vpn-component-installed", defaultValue: "Installed and allowed")
     var extensionReady = true
     var version = "0.1.0 (2)"
+    var splitTunnelSummary = String(localized: "split-mode-off-detail", defaultValue: "All traffic goes through the VPN.")
 }
 
 struct SettingsScreen: View {
@@ -16,6 +17,7 @@ struct SettingsScreen: View {
     var onUninstallExtension: () -> Void = {}
     var onShowLicenses: () -> Void = {}
     var onRestart: () -> Void = {}
+    var onEditSplitTunnel: () -> Void = {}
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -66,11 +68,11 @@ struct SettingsScreen: View {
                         }
                         HStack {
                             settingLabel(String(localized: "split-tunneling", defaultValue: "Split tunneling"),
-                                         detail: String(localized: "split-tunneling-soon",
-                                                        defaultValue: "Choose which sites skip or use the VPN. Coming soon."))
+                                         detail: state.splitTunnelSummary)
                             Spacer()
+                            Button(String(localized: "edit", defaultValue: "Edit…"), action: onEditSplitTunnel)
+                                .buttonStyle(KeylineButtonStyle())
                         }
-                        .opacity(0.6)
                     }
                     section(String(localized: "settings-about", defaultValue: "About")) {
                         HStack {

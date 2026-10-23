@@ -6,6 +6,8 @@ import os
 enum TunnelConfigKey {
     static let tunnelID = "id"
     static let transport = "transport"
+    /// JSON-encoded `SplitTunnelSettings`.
+    static let splitTunnel = "splitTunnel"
 }
 
 /// Messages the app sends to the extension with `NETunnelProviderSession.sendProviderMessage`.
@@ -18,6 +20,8 @@ enum TunnelAppMessage {
     /// Times a health check through the proxy and returns a JSON-encoded `LatencySample`,
     /// or nothing when the check fails.
     static let measureLatency = "measureLatency"
+    /// Followed by a newline and JSON-encoded `SplitTunnelSettings`: apply them now.
+    static let updateSplitTunnel = "updateSplitTunnel"
 }
 
 /// One round trip through the proxy.

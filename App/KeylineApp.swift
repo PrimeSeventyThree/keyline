@@ -10,11 +10,14 @@ struct KeylineApp: App {
     @StateObject private var connection: ConnectionModel
     @StateObject private var stats = StatsSampler()
     @StateObject private var selection = ServerSelection()
-    @StateObject private var settings = AppSettings()
+    @StateObject private var settings: AppSettings
 
     init() {
         let systemExtension = SystemExtensionManager()
+        let settings = AppSettings()
         let tunnel = TunnelController()
+        tunnel.splitTunnel = settings.splitTunnel
+        _settings = StateObject(wrappedValue: settings)
         let storage: ServerListStorage
         do {
             storage = try FileServerListStorage.standard()

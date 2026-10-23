@@ -19,6 +19,9 @@ final class TunnelController: ObservableObject, TunnelControlling {
     private let log = Logger.keyline("vpn")
     private var statusObserver: NSObjectProtocol?
     private var session: NETunnelProviderSession?
+    /// Split tunneling for new connections. Set at launch; changed with `applySplitTunnel`.
+    var splitTunnel = SplitTunnelSettings()
+    private var splitTunnelNeedsSaving = false
 
     init() {
         statusObserver = NotificationCenter.default.addObserver(
@@ -134,6 +137,7 @@ final class TunnelController: ObservableObject, TunnelControlling {
         config.providerConfiguration = [
             TunnelConfigKey.tunnelID: id,
             TunnelConfigKey.transport: transport,
+            TunnelConfigKey.splitTunnel: splitTunnel.encoded(),
         ]
         manager.protocolConfiguration = config
         manager.isEnabled = true
@@ -193,6 +197,48 @@ final class TunnelController: ObservableObject, TunnelControlling {
         status = session.status
         connectedDate = session.connectedDate
         tunnelID = id
+        if status == .disconnected, splitTunnelNeedsSaving {
+            Task { await saveSplitTunnelToPreferences() }
+        }
+    }
+
+    // MARK: - Split tunneling
+
+    /// Applies split tunneling: to the running tunnel right away, and to the saved VPN
+    /// configuration (which on-demand starts use). Saving the configuration of a running
+    /// tunnel can drop it, so while connected that waits until the tunnel stops.
+    func applySplitTunnel(_ settings: SplitTunnelSettings) async {
+        splitTunnel = settings
+        guard Self.isActive(status), let session else {
+            await saveSplitTunnelToPreferences()
+            return
+        }
+        splitTunnelNeedsSaving = true
+        let message = TunnelAppMessage.updateSplitTunnel + "\n" + String(decoding: settings.encoded(), as: UTF8.self)
+        let applied: Bool = await withCheckedContinuation { continuation in
+            do {
+                try session.sendProviderMessage(Data(message.utf8)) { reply in continuation.resume(returning: reply != nil) }
+            } catch {
+                continuation.resume(returning: false)
+            }
+        }
+        if !applied { log.error("The running tunnel didn't apply the new split tunneling") }
+    }
+
+    private func saveSplitTunnelToPreferences() async {
+        splitTunnelNeedsSaving = false
+        guard let manager = await Self.loadManager(),
+              let config = manager.protocolConfiguration as? NETunnelProviderProtocol
+        else { return }
+        var providerConfiguration = config.providerConfiguration ?? [:]
+        providerConfiguration[TunnelConfigKey.splitTunnel] = splitTunnel.encoded()
+        config.providerConfiguration = providerConfiguration
+        manager.protocolConfiguration = config
+        do {
+            try await manager.saveToPreferences()
+        } catch {
+            log.error("Failed to save split tunneling: \(error.localizedDescription)")
+        }
     }
 
     private static func loadManager() async -> NETunnelProviderManager? {

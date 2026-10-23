@@ -15,6 +15,7 @@ struct RootView: View {
     @State private var section: MainSection = .connect
     @State private var launchAtLogin = LoginItem().isEnabled
     @State private var showingLicenses = false
+    @State private var showingSplitTunnel = false
 
     @State private var isAddingServer = false
     @State private var newAccessKey = ""
@@ -111,7 +112,8 @@ struct RootView: View {
                 SettingsScreen(state: settingsBinding,
                                onUninstallExtension: { systemExtension.deactivate() },
                                onShowLicenses: { showingLicenses = true },
-                               onRestart: relaunch)
+                               onRestart: relaunch,
+                               onEditSplitTunnel: { showingSplitTunnel = true })
             }
         }
         .frame(minWidth: 1120, minHeight: 720)
@@ -121,6 +123,9 @@ struct RootView: View {
                            onCancel: { isAddingServer = false }, onAdd: addServer)
         }
         .sheet(isPresented: $showingLicenses) { LicensesSheet(onDone: { showingLicenses = false }) }
+        .sheet(isPresented: $showingSplitTunnel) {
+            SplitTunnelSheet(settings: splitTunnelBinding, onDone: { showingSplitTunnel = false })
+        }
         .sheet(item: $renamingServer) { server in
             RenameServerSheet(name: $newName,
                               onCancel: { renamingServer = nil },
@@ -196,6 +201,17 @@ struct RootView: View {
                            phase: phase)
     }
 
+    /// Split tunneling as the sheet edits it; every change is saved and applied right away.
+    private var splitTunnelBinding: Binding<SplitTunnelSettings> {
+        Binding(
+            get: { settings.splitTunnel },
+            set: { new in
+                guard new != settings.splitTunnel else { return }
+                settings.splitTunnel = new
+                Task { await tunnel.applySplitTunnel(new) }
+            })
+    }
+
     /// Settings as the screen shows them; changes go straight to the models.
     private var settingsBinding: Binding<SettingsScreenState> {
         Binding(
@@ -207,7 +223,8 @@ struct RootView: View {
                     languageNeedsRestart: settings.needsRestartForLanguage,
                     extensionStatus: extensionStatusText,
                     extensionReady: systemExtension.state == .activated,
-                    version: Self.versionText)
+                    version: Self.versionText,
+                    splitTunnelSummary: SplitTunnelSheet.summary(settings.splitTunnel))
             },
             set: { new in
                 if new.launchAtLogin != launchAtLogin { setLaunchAtLogin(new.launchAtLogin) }

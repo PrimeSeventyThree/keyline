@@ -99,6 +99,11 @@ final class Snapshots: XCTestCase {
                    named: "8d-onboarding-add-server")
     }
 
+    func testSplitTunnelSheet() throws {
+        let settings = SplitTunnelSettings(mode: .exclude, entries: ["192.168.50.0/24", "203.0.113.7", "bank.example.com"])
+        try render(SplitTunnelSheet(settings: .constant(settings)), named: "9-split-tunneling")
+    }
+
     func testAddServerSheet() throws {
         let sheet = AddServerSheet(accessKey: .constant("ss://not-a-valid-key"),
                                    errorMessage: UserFacingError.Message.invalidAccessKey)

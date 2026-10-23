@@ -15,6 +15,13 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
     private let traffic = TrafficCounter()
     private var defaultPathObservation: NSKeyValueObservation?
 
+    /// Split tunneling, from the VPN configuration or the app; the listed domains' current
+    /// addresses; and the timer that looks them up again.
+    private var splitTunnel = SplitTunnelSettings()
+    private var resolvedAddresses: [String] = []
+    private var resolveTimer: DispatchSourceTimer?
+    private static let resolveInterval: DispatchTimeInterval = .seconds(10 * 60)
+
     // MARK: - Lifecycle
 
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
@@ -47,7 +54,12 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
             return finish(KeylineError.platformError(error))
         }
 
-        applyNetworkSettings(TunnelNetworkSettings.make()) { [weak self] error in
+        // Look the domains up before the tunnel's own DNS takes over.
+        splitTunnel = SplitTunnelSettings.decoded(from: configuration[TunnelConfigKey.splitTunnel] as? Data) ?? SplitTunnelSettings()
+        resolvedAddresses = SplitTunnelSettings.resolveIPv4(splitTunnel.domains)
+        log.info("Split tunneling: \(self.splitTunnel.mode.rawValue), \(self.splitTunnel.entries.count) entries")
+
+        applyNetworkSettings(currentNetworkSettings()) { [weak self] error in
             guard let self else { return }
             if let error {
                 return finish(KeylineError(error))
@@ -56,6 +68,7 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
                 return finish(KeylineError.platformError(relayError))
             }
             self.listenForNetworkChanges()
+            self.startResolvingDomains()
             finish(nil)
         }
     }
@@ -63,6 +76,8 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
         log.info("Stopping tunnel, reason: \(reason.rawValue)")
         defaultPathObservation = nil
+        resolveTimer?.cancel()
+        resolveTimer = nil
         if let error = remoteDevice?.close() {
             log.warning("Failed to close remote device: \(error.error())")
         }
@@ -78,6 +93,14 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
     // MARK: - App messages
 
     override func handleAppMessage(_ messageData: Data, completionHandler: ((Data?) -> Void)?) {
+        // "updateSplitTunnel\n<settings JSON>": apply new split tunneling while connected.
+        if let text = String(data: messageData, encoding: .utf8),
+           text.hasPrefix(TunnelAppMessage.updateSplitTunnel + "\n") {
+            let json = Data(text.dropFirst(TunnelAppMessage.updateSplitTunnel.count + 1).utf8)
+            guard let settings = SplitTunnelSettings.decoded(from: json) else { completionHandler?(nil); return }
+            updateSplitTunnel(settings) { error in completionHandler?(error == nil ? Data("ok".utf8) : nil) }
+            return
+        }
         switch String(data: messageData, encoding: .utf8) {
         case TunnelAppMessage.fetchLastError:
             completionHandler?(UserDefaults.standard.data(forKey: Self.lastErrorKey))
@@ -137,9 +160,54 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
         }
         log.info("Network changed, reconnecting")
         remoteDevice.notifyNetworkChanged()
-        applyNetworkSettings(TunnelNetworkSettings.make()) { [weak self] error in
+        applyNetworkSettings(currentNetworkSettings()) { [weak self] error in
             if let error {
                 self?.cancelTunnelWithError(KeylineError(error))
+            }
+        }
+        refreshResolvedDomains()
+    }
+
+    // MARK: - Split tunneling
+
+    private func currentNetworkSettings() -> NEPacketTunnelNetworkSettings {
+        TunnelNetworkSettings.make(splitTunnel: splitTunnel, resolvedAddresses: resolvedAddresses)
+    }
+
+    private func updateSplitTunnel(_ settings: SplitTunnelSettings, completion: @escaping (Error?) -> Void) {
+        log.info("Updating split tunneling: \(settings.mode.rawValue), \(settings.entries.count) entries")
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            let addresses = SplitTunnelSettings.resolveIPv4(settings.domains)
+            DispatchQueue.main.async {
+                guard let self else { return }
+                self.splitTunnel = settings
+                self.resolvedAddresses = addresses
+                self.applyNetworkSettings(self.currentNetworkSettings(), completion: completion)
+            }
+        }
+    }
+
+    /// Looks the listed domains up every 10 minutes, since their addresses can change.
+    private func startResolvingDomains() {
+        resolveTimer?.cancel()
+        let timer = DispatchSource.makeTimerSource(queue: .main)
+        timer.schedule(deadline: .now() + Self.resolveInterval, repeating: Self.resolveInterval)
+        timer.setEventHandler { [weak self] in self?.refreshResolvedDomains() }
+        timer.resume()
+        resolveTimer = timer
+    }
+
+    /// Looks the domains up again and reapplies the routes if any address changed.
+    private func refreshResolvedDomains() {
+        let domains = splitTunnel.domains
+        guard splitTunnel.mode != .off, !domains.isEmpty else { return }
+        DispatchQueue.global(qos: .utility).async { [weak self] in
+            let addresses = SplitTunnelSettings.resolveIPv4(domains)
+            DispatchQueue.main.async {
+                guard let self, Set(addresses) != Set(self.resolvedAddresses), !addresses.isEmpty else { return }
+                self.log.info("Split tunneling: domain addresses changed, updating routes")
+                self.resolvedAddresses = addresses
+                self.applyNetworkSettings(self.currentNetworkSettings()) { _ in }
             }
         }
     }
