@@ -148,6 +148,9 @@ struct SplitTunnelSheet: View {
     /// One line for the Settings screen, such as "Exclude listed · 3 entries".
     static func summary(_ settings: SplitTunnelSettings) -> String {
         guard settings.mode != .off else { return explanation(.off) }
+        if settings.entries.count == 1 {
+            return String(localized: "split-summary-one", defaultValue: "\(title(settings.mode)) · 1 entry")
+        }
         return String(localized: "split-summary", defaultValue: "\(title(settings.mode)) · \(settings.entries.count) entries")
     }
 }

@@ -91,5 +91,7 @@ final class SplitTunnelSettingsStorageTests: XCTestCase {
         XCTAssertEqual(SplitTunnelSheet.summary(SplitTunnelSettings()), "All traffic goes through the VPN.")
         XCTAssertEqual(SplitTunnelSheet.summary(SplitTunnelSettings(mode: .include, entries: ["a.example", "b.example"])),
                        "Only listed · 2 entries")
+        XCTAssertEqual(SplitTunnelSheet.summary(SplitTunnelSettings(mode: .exclude, entries: ["a.example"])),
+                       "Exclude listed · 1 entry")
     }
 }
