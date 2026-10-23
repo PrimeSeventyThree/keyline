@@ -51,11 +51,14 @@ rm -rf "$out"
 mkdir -p "$out"
 
 step "Archiving Keyline $version ($build_number)"
+# The archive is signed for development first, and development profiles only grant the plain
+# Network Extension value; the Developer ID export re-signs it (checked below).
 xcodebuild archive \
   -project "$repo_root/Keyline.xcodeproj" -scheme Keyline -configuration Release \
   -destination 'generic/platform=macOS' -derivedDataPath "$derived_data" \
   -archivePath "$out/Keyline.xcarchive" -allowProvisioningUpdates \
   MARKETING_VERSION="$version" CURRENT_PROJECT_VERSION="$build_number" \
+  KEYLINE_NE_PROVIDER=packet-tunnel-provider \
   | grep -E 'error:|warning: .*(sign|profile|entitle)|ARCHIVE (SUCCEEDED|FAILED)' || true
 [[ -d "$out/Keyline.xcarchive" ]] || { echo "error: archive failed" >&2; exit 1; }
 
