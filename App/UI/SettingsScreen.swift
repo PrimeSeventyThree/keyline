@@ -10,6 +10,8 @@ struct SettingsScreenState {
     var extensionReady = true
     var version = "0.1.0 (2)"
     var splitTunnelSummary = String(localized: "split-mode-off-detail", defaultValue: "All traffic goes through the VPN.")
+    /// Crash reports saved since the last report was sent or deleted.
+    var crashReportCount = 0
 }
 
 struct SettingsScreen: View {
@@ -18,6 +20,7 @@ struct SettingsScreen: View {
     var onShowLicenses: () -> Void = {}
     var onRestart: () -> Void = {}
     var onEditSplitTunnel: () -> Void = {}
+    var onSendReport: () -> Void = {}
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -81,8 +84,19 @@ struct SettingsScreen: View {
                                                         defaultValue: "Works with Outline access keys. Not affiliated with the Outline Foundation."))
                             Spacer()
                         }
-                        Button(String(localized: "licenses", defaultValue: "Licenses"), action: onShowLicenses)
-                            .buttonStyle(KeylineButtonStyle())
+                        HStack(spacing: 8) {
+                            Button(String(localized: "licenses", defaultValue: "Licenses"), action: onShowLicenses)
+                                .buttonStyle(KeylineButtonStyle())
+                            Button(String(localized: "send-report", defaultValue: "Send report…"), action: onSendReport)
+                                .buttonStyle(KeylineButtonStyle())
+                        }
+                        if state.crashReportCount > 0 {
+                            Label(String(localized: "crash-reports-saved",
+                                         defaultValue: "Keyline quit unexpectedly. Crash details are saved for a report."),
+                                  systemImage: "exclamationmark.bubble")
+                                .font(.system(size: 12))
+                                .foregroundColor(Theme.warning)
+                        }
                         Text("IP geolocation by DB-IP (db-ip.com)")
                             .font(.system(size: 11))
                             .foregroundColor(Theme.textTertiary)
