@@ -51,6 +51,7 @@
 		604E2E3EF97522BB86C7518C /* TunnelNetworkSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4073B4B57614639ED81341 /* TunnelNetworkSettingsTests.swift */; };
 		64F0C26AE3B4A7A9929E2E1E /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87966EB241FF827053EF96FB /* AppSettings.swift */; };
 		6622664A59C47129E014A51A /* license-1-keyline-notice.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8DF4B6CBBD82CBFDBA82AB44 /* license-1-keyline-notice.txt */; };
+		672D64BE091CC9D9A6906BDF /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9A7BD61B6C9015FD31A00382 /* Localizable.xcstrings */; };
 		6AE068A779FE15355014561A /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE39212ADACEAE2605BAA89B /* Theme.swift */; };
 		70A6557F44E970FFEFE5132F /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0699D04238955FC7E259908F /* SettingsScreen.swift */; };
 		78F901F4294DF1D3A9698DFD /* KeylineError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB074B771331C5DEA789C5 /* KeylineError.swift */; };
@@ -74,6 +75,7 @@
 		9EBC5D5664712489689D61E4 /* KeylineLoginHelper.app in Embed Dependencies */ = {isa = PBXBuildFile; fileRef = 8D819F33FBC959658FF15F06 /* KeylineLoginHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9FC44D10386406E06FE6A43D /* CountryLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791B8C991818728A790FD72 /* CountryLookup.swift */; };
 		A90E656EF8F4724228965F93 /* SplitTunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9BF311AA59F095992055F4 /* SplitTunnel.swift */; };
+		A994A290B2BA836652DE632D /* LocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A68A9FAFDD0EA11F8F541E9 /* LocalizationTests.swift */; };
 		AA61B91A737192D200B8C15E /* TunnelNetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40F2AD463CAD40C1393EE7 /* TunnelNetworkSettings.swift */; };
 		ABD917DE522E73A0C2933817 /* license-3-flag-icons.txt in Resources */ = {isa = PBXBuildFile; fileRef = B36E3FF485D9545364C7BCCA /* license-3-flag-icons.txt */; };
 		ACC1235B0AFE766DAE413153 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACCD9D700A32D3462DAD9B6 /* UserFacingError.swift */; };
@@ -97,6 +99,7 @@
 		D2111E1400CA9A1A0396C5D9 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF965064A0F05AD0B61A96 /* SampleData.swift */; };
 		D22ACEA4DD177ED7E3D91B7B /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0699D04238955FC7E259908F /* SettingsScreen.swift */; };
 		D36C7B8A0EA289E630D255E9 /* ServersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */; };
+		D47F29F007A6D48D8029D3A7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9A7BD61B6C9015FD31A00382 /* Localizable.xcstrings */; };
 		D4C18638CA4FB0B9F5EC2D89 /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D6C3103625B6AC7A0C0D85 /* ConnectionModel.swift */; };
 		DA1DC41322667CB73505B65E /* license-2-apache-2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 905426DBE25E2DB522982769 /* license-2-apache-2.0.txt */; };
 		DBB0DF6C437AE3B037FA3D9B /* GoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F137E2B0816EBD5E905312BF /* GoCore.swift */; };
@@ -163,6 +166,7 @@
 		0699D04238955FC7E259908F /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		071AB99FAB2B1CC3FEDAD0BE /* ipv4-country.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ipv4-country.bin"; sourceTree = "<group>"; };
 		07D69C1D05D707286AE3CA2A /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
+		0A68A9FAFDD0EA11F8F541E9 /* LocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationTests.swift; sourceTree = "<group>"; };
 		18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersScreen.swift; sourceTree = "<group>"; };
 		1B4073B4B57614639ED81341 /* TunnelNetworkSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelNetworkSettingsTests.swift; sourceTree = "<group>"; };
 		1CD773ED1D7041B4557AF776 /* AccessKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessKeyTests.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 		90ED15F2BFD1655CB4131D1F /* license-4-db-ip.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "license-4-db-ip.txt"; sourceTree = "<group>"; };
 		910F8EA5C220F8E6D56A2E29 /* SplitTunnelSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTunnelSheet.swift; sourceTree = "<group>"; };
 		92CF965064A0F05AD0B61A96 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
+		9A7BD61B6C9015FD31A00382 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		A76E79F9D2AF0758B50BBBC8 /* Snapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshots.swift; sourceTree = "<group>"; };
 		A9B17B8C3AE376F80D78A116 /* ErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTests.swift; sourceTree = "<group>"; };
 		A9BC2D293B325F2F9E072B32 /* AccessKeyDetectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessKeyDetectionTests.swift; sourceTree = "<group>"; };
@@ -280,6 +285,7 @@
 		2B14808FF69745FD7A69012D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9A7BD61B6C9015FD31A00382 /* Localizable.xcstrings */,
 				794F288F11AD208D14FFE310 /* GeoIP */,
 				EADF4B6D51D986A6D6495F6E /* Licenses */,
 			);
@@ -360,6 +366,7 @@
 				3A5856D10F441C1EA3096E1F /* ConnectionModelTests.swift */,
 				1CFFCCBDD8AAEFDBBABC9988 /* CountryTests.swift */,
 				A9B17B8C3AE376F80D78A116 /* ErrorTests.swift */,
+				0A68A9FAFDD0EA11F8F541E9 /* LocalizationTests.swift */,
 				92CF965064A0F05AD0B61A96 /* SampleData.swift */,
 				E4C9B26E43CCDAA766F02CED /* ServerRepositoryTests.swift */,
 				A76E79F9D2AF0758B50BBBC8 /* Snapshots.swift */,
@@ -534,6 +541,7 @@
 			knownRegions = (
 				Base,
 				en,
+				ru,
 			);
 			mainGroup = DE26D8EE3B28632FDDC4A6A6;
 			minimizedProjectReferenceProxies = 1;
@@ -559,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDCBA87F16D12CD018F82D2E /* Assets.xcassets in Resources */,
+				672D64BE091CC9D9A6906BDF /* Localizable.xcstrings in Resources */,
 				177EDD7CB2916E02C89F122D /* SOURCE.txt in Resources */,
 				3B1E1908A37A53AA561C0FC2 /* ipv4-country.bin in Resources */,
 				6622664A59C47129E014A51A /* license-1-keyline-notice.txt in Resources */,
@@ -574,6 +583,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC83278C63F7644B71CFF4C5 /* Assets.xcassets in Resources */,
+				D47F29F007A6D48D8029D3A7 /* Localizable.xcstrings in Resources */,
 				5BD8AD2B26DCBCC503C7CEDE /* SOURCE.txt in Resources */,
 				30E14C256D26742F70C4D0D2 /* ipv4-country.bin in Resources */,
 				EFD5D60ACA91F2DF760FAB08 /* license-1-keyline-notice.txt in Resources */,
@@ -616,6 +626,7 @@
 				E67AE48E1A14F8898C6B02A1 /* KeylineError.swift in Sources */,
 				4C6B0EC1EF500D6F2DF6A98B /* KeylineIdentifiers.swift in Sources */,
 				D1A0A6AEB2B0AAC060503F16 /* LicensesSheet.swift in Sources */,
+				A994A290B2BA836652DE632D /* LocalizationTests.swift in Sources */,
 				3E99C022CAB403B4002A9E42 /* MainWindow.swift in Sources */,
 				223722CFCFBAEC5511CF67E6 /* OnboardingScreen.swift in Sources */,
 				D2111E1400CA9A1A0396C5D9 /* SampleData.swift in Sources */,
