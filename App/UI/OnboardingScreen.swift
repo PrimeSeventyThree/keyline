@@ -218,23 +218,8 @@ struct OnboardingScreen: View {
 struct AccessKeyField: View {
     @Binding var accessKey: String
     var isInvalid = false
-    @Environment(\.isSnapshotRendering) private var isSnapshotRendering
 
     var body: some View {
-        Group {
-            if isSnapshotRendering {
-                Text(accessKey.isEmpty ? "ss://… or ssconf://…" : accessKey)
-                    .foregroundColor(accessKey.isEmpty ? Theme.textTertiary : Theme.textPrimary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            } else {
-                TextField("ss://… or ssconf://…", text: $accessKey)
-                    .textFieldStyle(.plain)
-            }
-        }
-        .font(.system(size: 13, design: .monospaced))
-        .foregroundColor(Theme.textPrimary)
-        .padding(10)
-        .background(RoundedRectangle(cornerRadius: 9).fill(Color.black.opacity(0.25)))
-        .overlay(RoundedRectangle(cornerRadius: 9).stroke(isInvalid ? Theme.danger : Theme.surfaceStroke))
+        ThemedTextField(placeholder: "ss://… or ssconf://…", text: $accessKey, isInvalid: isInvalid, monospaced: true)
     }
 }

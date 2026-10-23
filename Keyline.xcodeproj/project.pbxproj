@@ -24,7 +24,9 @@
 		2AE112D849FA832E067A2492 /* ConnectScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265F00859D779E565B96910E /* ConnectScreen.swift */; };
 		2B73A340504530BA327E4ACC /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
 		2C7137D7194BE91674D29A21 /* WorldMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEEA3E323EFB3003F714001 /* WorldMapView.swift */; };
+		30B49430FFCEB5861F724B8B /* SplitTunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9BF311AA59F095992055F4 /* SplitTunnel.swift */; };
 		30E14C256D26742F70C4D0D2 /* ipv4-country.bin in Resources */ = {isa = PBXBuildFile; fileRef = 071AB99FAB2B1CC3FEDAD0BE /* ipv4-country.bin */; };
+		32BDDE2073DF0431E00C7DB3 /* SplitTunnelSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910F8EA5C220F8E6D56A2E29 /* SplitTunnelSheet.swift */; };
 		341218597D9DDCEA4E25EF89 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87966EB241FF827053EF96FB /* AppSettings.swift */; };
 		38D536778859A167B44D4AA1 /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */; };
 		3B1E1908A37A53AA561C0FC2 /* ipv4-country.bin in Resources */ = {isa = PBXBuildFile; fileRef = 071AB99FAB2B1CC3FEDAD0BE /* ipv4-country.bin */; };
@@ -71,6 +73,7 @@
 		9D707DB1C3974EE7856AF1F4 /* KeylineTunnel.systemextension in Embed System Extensions */ = {isa = PBXBuildFile; fileRef = 3EAE25B7426CB8646B230209 /* KeylineTunnel.systemextension */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9EBC5D5664712489689D61E4 /* KeylineLoginHelper.app in Embed Dependencies */ = {isa = PBXBuildFile; fileRef = 8D819F33FBC959658FF15F06 /* KeylineLoginHelper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9FC44D10386406E06FE6A43D /* CountryLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791B8C991818728A790FD72 /* CountryLookup.swift */; };
+		A90E656EF8F4724228965F93 /* SplitTunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9BF311AA59F095992055F4 /* SplitTunnel.swift */; };
 		AA61B91A737192D200B8C15E /* TunnelNetworkSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40F2AD463CAD40C1393EE7 /* TunnelNetworkSettings.swift */; };
 		ABD917DE522E73A0C2933817 /* license-3-flag-icons.txt in Resources */ = {isa = PBXBuildFile; fileRef = B36E3FF485D9545364C7BCCA /* license-3-flag-icons.txt */; };
 		ACC1235B0AFE766DAE413153 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACCD9D700A32D3462DAD9B6 /* UserFacingError.swift */; };
@@ -87,7 +90,9 @@
 		CA4A5922E477DDD416BCA8EE /* StatsSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A4013E0E62E1B843BD3CF /* StatsSampler.swift */; };
 		CA82C3B32346505FB36AEDDC /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A6A75EECFEF8AEA509DE7 /* StatusMenuController.swift */; };
 		CB6546DD7A74BC078CEDC3DF /* license-4-db-ip.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90ED15F2BFD1655CB4131D1F /* license-4-db-ip.txt */; };
+		CD2C5AD3679A132BB692547A /* SplitTunnelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83855B7A1AC3F202D4DF926 /* SplitTunnelTests.swift */; };
 		CD9FF312E053F98A807DEE63 /* StatsFormatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A21C483929E897D69B86A39 /* StatsFormatTests.swift */; };
+		CFBF1521306BE2F4933588EE /* SplitTunnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9BF311AA59F095992055F4 /* SplitTunnel.swift */; };
 		D1A0A6AEB2B0AAC060503F16 /* LicensesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D618F571C241EF9F66BE1A4F /* LicensesSheet.swift */; };
 		D2111E1400CA9A1A0396C5D9 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF965064A0F05AD0B61A96 /* SampleData.swift */; };
 		D22ACEA4DD177ED7E3D91B7B /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0699D04238955FC7E259908F /* SettingsScreen.swift */; };
@@ -108,6 +113,7 @@
 		F3220E0918F31209EF90E8A7 /* ConnectScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265F00859D779E565B96910E /* ConnectScreen.swift */; };
 		F52F2F31BA915A96C61DC861 /* Snapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76E79F9D2AF0758B50BBBC8 /* Snapshots.swift */; };
 		F9C0FBD7E0502464C2E257F5 /* StatsSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A4013E0E62E1B843BD3CF /* StatsSampler.swift */; };
+		FAF0F9B4E8610C8A53772D1B /* SplitTunnelSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 910F8EA5C220F8E6D56A2E29 /* SplitTunnelSheet.swift */; };
 		FDC2CE8A4ED0B0424CA6737A /* KeylineError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB074B771331C5DEA789C5 /* KeylineError.swift */; };
 /* End PBXBuildFile section */
 
@@ -172,6 +178,7 @@
 		3EAE25B7426CB8646B230209 /* KeylineTunnel.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = KeylineTunnel.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		40066ABFB947222D684DD4BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		417F0DFC8DDE061CF4A5959C /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		4C9BF311AA59F095992055F4 /* SplitTunnel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTunnel.swift; sourceTree = "<group>"; };
 		4F2C950336B74F1460D611C3 /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		56CB2C9AFE0B093B9D0B7298 /* LoginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItem.swift; sourceTree = "<group>"; };
 		5A9A0C3B050B9716FCC5CDAF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -195,6 +202,7 @@
 		8DF4B6CBBD82CBFDBA82AB44 /* license-1-keyline-notice.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "license-1-keyline-notice.txt"; sourceTree = "<group>"; };
 		905426DBE25E2DB522982769 /* license-2-apache-2.0.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "license-2-apache-2.0.txt"; sourceTree = "<group>"; };
 		90ED15F2BFD1655CB4131D1F /* license-4-db-ip.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "license-4-db-ip.txt"; sourceTree = "<group>"; };
+		910F8EA5C220F8E6D56A2E29 /* SplitTunnelSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTunnelSheet.swift; sourceTree = "<group>"; };
 		92CF965064A0F05AD0B61A96 /* SampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		A76E79F9D2AF0758B50BBBC8 /* Snapshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshots.swift; sourceTree = "<group>"; };
 		A9B17B8C3AE376F80D78A116 /* ErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTests.swift; sourceTree = "<group>"; };
@@ -215,6 +223,7 @@
 		EA8A4013E0E62E1B843BD3CF /* StatsSampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsSampler.swift; sourceTree = "<group>"; };
 		F137E2B0816EBD5E905312BF /* GoCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoCore.swift; sourceTree = "<group>"; };
 		F5CEF530ABA9BE37AA3D4F72 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		F83855B7A1AC3F202D4DF926 /* SplitTunnelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitTunnelTests.swift; sourceTree = "<group>"; };
 		FE39212ADACEAE2605BAA89B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -297,6 +306,7 @@
 			children = (
 				77DB074B771331C5DEA789C5 /* KeylineError.swift */,
 				89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */,
+				4C9BF311AA59F095992055F4 /* SplitTunnel.swift */,
 				636E5D24AEC69105346213BF /* TunnelProtocol.swift */,
 			);
 			path = Shared;
@@ -312,6 +322,7 @@
 				4F2C950336B74F1460D611C3 /* OnboardingScreen.swift */,
 				18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */,
 				0699D04238955FC7E259908F /* SettingsScreen.swift */,
+				910F8EA5C220F8E6D56A2E29 /* SplitTunnelSheet.swift */,
 				FE39212ADACEAE2605BAA89B /* Theme.swift */,
 				5AEEA3E323EFB3003F714001 /* WorldMapView.swift */,
 			);
@@ -352,6 +363,7 @@
 				92CF965064A0F05AD0B61A96 /* SampleData.swift */,
 				E4C9B26E43CCDAA766F02CED /* ServerRepositoryTests.swift */,
 				A76E79F9D2AF0758B50BBBC8 /* Snapshots.swift */,
+				F83855B7A1AC3F202D4DF926 /* SplitTunnelTests.swift */,
 				3A21C483929E897D69B86A39 /* StatsFormatTests.swift */,
 				7770496910F77BE7A389DCC9 /* StatsSamplerTests.swift */,
 				CBCA31CED0F58A9BC0D5A76D /* TestSupport.swift */,
@@ -616,6 +628,9 @@
 				D36C7B8A0EA289E630D255E9 /* ServersScreen.swift in Sources */,
 				70A6557F44E970FFEFE5132F /* SettingsScreen.swift in Sources */,
 				F52F2F31BA915A96C61DC861 /* Snapshots.swift in Sources */,
+				CFBF1521306BE2F4933588EE /* SplitTunnel.swift in Sources */,
+				32BDDE2073DF0431E00C7DB3 /* SplitTunnelSheet.swift in Sources */,
+				CD2C5AD3679A132BB692547A /* SplitTunnelTests.swift in Sources */,
 				CD9FF312E053F98A807DEE63 /* StatsFormatTests.swift in Sources */,
 				F9C0FBD7E0502464C2E257F5 /* StatsSampler.swift in Sources */,
 				DDB0BA1455F12C5351B4E64E /* StatsSamplerTests.swift in Sources */,
@@ -638,6 +653,7 @@
 				78F901F4294DF1D3A9698DFD /* KeylineError.swift in Sources */,
 				2B73A340504530BA327E4ACC /* KeylineIdentifiers.swift in Sources */,
 				E6049793A02A43CA3B61AB8F /* PacketTunnelProvider.swift in Sources */,
+				30B49430FFCEB5861F724B8B /* SplitTunnel.swift in Sources */,
 				0FAF9C974A5E10D4ED61B7AB /* TunnelNetworkSettings.swift in Sources */,
 				3E59C42BAE943ED1DB98816D /* TunnelProtocol.swift in Sources */,
 				9D46FEE1BEFA7E3236EE659A /* main.swift in Sources */,
@@ -672,6 +688,8 @@
 				1ED762BBA239BD9AE7F85DEC /* ServerSelection.swift in Sources */,
 				1DCE618C70C185D5A11A76A2 /* ServersScreen.swift in Sources */,
 				D22ACEA4DD177ED7E3D91B7B /* SettingsScreen.swift in Sources */,
+				A90E656EF8F4724228965F93 /* SplitTunnel.swift in Sources */,
+				FAF0F9B4E8610C8A53772D1B /* SplitTunnelSheet.swift in Sources */,
 				CA4A5922E477DDD416BCA8EE /* StatsSampler.swift in Sources */,
 				CA82C3B32346505FB36AEDDC /* StatusMenuController.swift in Sources */,
 				3CE615F0E2C127D2756F8F4A /* SystemExtensionManager.swift in Sources */,

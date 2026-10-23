@@ -96,3 +96,33 @@ extension EnvironmentValues {
         set { self[SnapshotRenderingKey.self] = newValue }
     }
 }
+
+/// A text field in the theme's style. Snapshots draw a look-alike, since AppKit text fields
+/// can't be rendered there.
+struct ThemedTextField: View {
+    let placeholder: String
+    @Binding var text: String
+    var isInvalid = false
+    var monospaced = false
+    var onSubmit: () -> Void = {}
+    @Environment(\.isSnapshotRendering) private var isSnapshotRendering
+
+    var body: some View {
+        Group {
+            if isSnapshotRendering {
+                Text(text.isEmpty ? placeholder : text)
+                    .foregroundColor(text.isEmpty ? Theme.textTertiary : Theme.textPrimary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            } else {
+                TextField(placeholder, text: $text)
+                    .textFieldStyle(.plain)
+                    .onSubmit(onSubmit)
+            }
+        }
+        .font(.system(size: 13, design: monospaced ? .monospaced : .default))
+        .foregroundColor(Theme.textPrimary)
+        .padding(10)
+        .background(RoundedRectangle(cornerRadius: 9).fill(Color.black.opacity(0.25)))
+        .overlay(RoundedRectangle(cornerRadius: 9).stroke(isInvalid ? Theme.danger : Theme.surfaceStroke))
+    }
+}

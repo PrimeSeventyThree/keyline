@@ -47,25 +47,55 @@ enum TunnelNetworkSettings {
     /// The tunnel's own IPv6 address, from a unique local range, needed to claim IPv6 routes.
     static let vpnIPv6Address = "fd6b:6579:6c69::1"
 
-    static func make() -> NEPacketTunnelNetworkSettings {
+    /// The tunnel's network settings for `splitTunnel`. `resolvedAddresses` are the IPv4
+    /// addresses the listed domains resolved to.
+    static func make(splitTunnel: SplitTunnelSettings = SplitTunnelSettings(),
+                     resolvedAddresses: [String] = []) -> NEPacketTunnelNetworkSettings {
         // The remote address is not used, but must be valid, or the system rejects the
         // settings with "Invalid NETunnelNetworkSettings tunnelRemoteAddress".
         let settings = NEPacketTunnelNetworkSettings(tunnelRemoteAddress: "::")
 
         let vpnAddress = selectVpnAddress(interfaceAddresses: interfaceIPv4Addresses())
         let ipv4Settings = NEIPv4Settings(addresses: [vpnAddress], subnetMasks: ["255.255.255.0"])
-        ipv4Settings.includedRoutes = [NEIPv4Route.default()]
-        ipv4Settings.excludedRoutes = excludedSubnets.compactMap(IPv4Subnet.init(cidr:)).map(\.route)
+        let routes = ipv4Routes(splitTunnel: splitTunnel, resolvedAddresses: resolvedAddresses)
+        ipv4Settings.includedRoutes = routes.included.map(\.route)
+        ipv4Settings.excludedRoutes = routes.excluded.map(\.route)
         settings.ipv4Settings = ipv4Settings
 
-        let ipv6Settings = NEIPv6Settings(addresses: [vpnIPv6Address], networkPrefixLengths: [64])
-        ipv6Settings.includedRoutes = blockedIPv6Subnets.map {
-            NEIPv6Route(destinationAddress: $0.address, networkPrefixLength: NSNumber(value: $0.prefixLength))
+        // Block IPv6 whenever the VPN carries everything by default. When only listed
+        // destinations use the VPN, everything else (IPv6 included) goes direct anyway.
+        if splitTunnel.mode != .include {
+            let ipv6Settings = NEIPv6Settings(addresses: [vpnIPv6Address], networkPrefixLengths: [64])
+            ipv6Settings.includedRoutes = blockedIPv6Subnets.map {
+                NEIPv6Route(destinationAddress: $0.address, networkPrefixLength: NSNumber(value: $0.prefixLength))
+            }
+            settings.ipv6Settings = ipv6Settings
         }
-        settings.ipv6Settings = ipv6Settings
 
         settings.dnsSettings = NEDNSSettings(servers: [dnsResolver])
         return settings
+    }
+
+    /// The IPv4 routes into (`included`) and around (`excluded`) the tunnel.
+    static func ipv4Routes(splitTunnel: SplitTunnelSettings,
+                           resolvedAddresses: [String]) -> (included: [IPv4Subnet], excluded: [IPv4Subnet]) {
+        let everything = IPv4Subnet(cidr: "0.0.0.0/0")!
+        let local = splitTunnel.bypassLocalNetwork ? excludedSubnets.compactMap(IPv4Subnet.init(cidr:)) : []
+        let listed = unique(splitTunnel.subnets + resolvedAddresses.compactMap { IPv4Subnet(cidr: "\($0)/32") })
+        switch splitTunnel.mode {
+        case .off:
+            return ([everything], local)
+        case .exclude:
+            return ([everything], unique(local + listed))
+        case .include:
+            // DNS always goes to the resolver inside the tunnel.
+            return (unique(listed + [IPv4Subnet(cidr: "\(dnsResolver)/32")!]), local)
+        }
+    }
+
+    private static func unique(_ subnets: [IPv4Subnet]) -> [IPv4Subnet] {
+        var seen = Set<IPv4Subnet>()
+        return subnets.filter { seen.insert($0).inserted }
     }
 
     /// The packets to pass to the Go core: IPv4 only. IPv6 packets are dropped (blocked).
@@ -104,24 +134,3 @@ enum TunnelNetworkSettings {
     }
 }
 
-/// An IPv4 subnet in CIDR notation, such as "10.0.0.0/8".
-struct IPv4Subnet: Equatable {
-    let address: String
-    let prefix: UInt8
-
-    init?(cidr: String) {
-        let parts = cidr.split(separator: "/")
-        guard parts.count == 2, let prefix = UInt8(parts[1]), prefix <= 32 else { return nil }
-        self.address = String(parts[0])
-        self.prefix = prefix
-    }
-
-    var mask: String {
-        let bits: UInt32 = prefix == 0 ? 0 : 0xffff_ffff << (32 - UInt32(prefix))
-        return [24, 16, 8, 0].map { String((bits >> $0) & 0xff) }.joined(separator: ".")
-    }
-
-    var route: NEIPv4Route {
-        NEIPv4Route(destinationAddress: address, subnetMask: mask)
-    }
-}

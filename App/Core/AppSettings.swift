@@ -25,6 +25,10 @@ final class AppSettings: ObservableObject {
     @Published var hasSeenAutoConnectExplainer: Bool {
         didSet { defaults.set(hasSeenAutoConnectExplainer, forKey: Key.autoConnectExplainer) }
     }
+    /// Which traffic goes through the VPN.
+    @Published var splitTunnel: SplitTunnelSettings {
+        didSet { defaults.set(splitTunnel.encoded(), forKey: Key.splitTunnel) }
+    }
     /// The app's language. Takes effect after a restart.
     @Published var language: Language {
         didSet { applyLanguage() }
@@ -36,6 +40,7 @@ final class AppSettings: ObservableObject {
     private enum Key {
         static let stopVPNOnQuit = "stopVPNOnQuit"
         static let warnOnQuit = "warnOnQuitWhileConnected"
+        static let splitTunnel = "splitTunnel"
         static let onboarding = "hasCompletedOnboarding"
         static let autoConnectExplainer = "hasSeenAutoConnectExplainer"
         /// The standard per-app language override.
@@ -50,6 +55,7 @@ final class AppSettings: ObservableObject {
         self.defaults = defaults
         stopVPNOnQuit = defaults.object(forKey: Key.stopVPNOnQuit) as? Bool ?? false
         warnOnQuitWhileConnected = defaults.object(forKey: Key.warnOnQuit) as? Bool ?? true
+        splitTunnel = SplitTunnelSettings.decoded(from: defaults.data(forKey: Key.splitTunnel)) ?? SplitTunnelSettings()
         hasCompletedOnboarding = defaults.bool(forKey: Key.onboarding)
         hasSeenAutoConnectExplainer = defaults.bool(forKey: Key.autoConnectExplainer)
         let chosen = (defaults.persistentDomain(forName: domain)?[Key.appleLanguages] as? [String])?.first
