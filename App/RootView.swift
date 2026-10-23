@@ -11,6 +11,7 @@ struct RootView: View {
     @ObservedObject var stats: StatsSampler
     @ObservedObject var selection: ServerSelection
     @ObservedObject var settings: AppSettings
+    let updater: Updater
 
     @State private var section: MainSection = .connect
     @State private var launchAtLogin = LoginItem().isEnabled
@@ -111,7 +112,8 @@ struct RootView: View {
                 SettingsScreen(state: settingsBinding,
                                onUninstallExtension: { systemExtension.deactivate() },
                                onShowLicenses: { showingLicenses = true },
-                               onRestart: relaunch)
+                               onRestart: relaunch,
+                               onCheckForUpdates: { updater.checkForUpdates() })
             }
         }
         .frame(minWidth: 1120, minHeight: 720)

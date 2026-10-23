@@ -16,6 +16,7 @@ struct SettingsScreen: View {
     var onUninstallExtension: () -> Void = {}
     var onShowLicenses: () -> Void = {}
     var onRestart: () -> Void = {}
+    var onCheckForUpdates: () -> Void = {}
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -79,8 +80,13 @@ struct SettingsScreen: View {
                                                         defaultValue: "Works with Outline access keys. Not affiliated with the Outline Foundation."))
                             Spacer()
                         }
-                        Button(String(localized: "licenses", defaultValue: "Licenses"), action: onShowLicenses)
-                            .buttonStyle(KeylineButtonStyle())
+                        HStack(spacing: 8) {
+                            Button(String(localized: "menu-check-updates", defaultValue: "Check for Updates…"),
+                                   action: onCheckForUpdates)
+                                .buttonStyle(KeylineButtonStyle())
+                            Button(String(localized: "licenses", defaultValue: "Licenses"), action: onShowLicenses)
+                                .buttonStyle(KeylineButtonStyle())
+                        }
                         Text("IP geolocation by DB-IP (db-ip.com)")
                             .font(.system(size: 11))
                             .foregroundColor(Theme.textTertiary)

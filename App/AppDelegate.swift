@@ -13,11 +13,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// Called once the app's models exist.
     @MainActor
     func configure(tunnel: TunnelController, settings: AppSettings, servers: ServerRepository,
-                   connection: ConnectionModel, selection: ServerSelection) {
+                   connection: ConnectionModel, selection: ServerSelection, updater: Updater) {
         guard statusMenu == nil else { return } // Once, even if a second window opens.
         self.tunnel = tunnel
         self.settings = settings
-        statusMenu = StatusMenuController(tunnel: tunnel, servers: servers, connection: connection, selection: selection)
+        statusMenu = StatusMenuController(tunnel: tunnel, servers: servers, connection: connection, selection: selection,
+                                          updater: updater)
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

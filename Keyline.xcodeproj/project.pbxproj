@@ -56,6 +56,7 @@
 		841A5439C7FFFFBEA68FCF3B /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D6C3103625B6AC7A0C0D85 /* ConnectionModel.swift */; };
 		8A4A0888B0BCCC903389796B /* AccessKeyDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F74B416F7911F2A956D6F /* AccessKeyDetection.swift */; };
 		8F008112A37A2437A2EADC75 /* AccessKeyDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8F74B416F7911F2A956D6F /* AccessKeyDetection.swift */; };
+		8F7B35B8D1D34AED3CA5B238 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = B050579121536240586A34F0 /* Sparkle */; };
 		911E533A00B631A16F1B282B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F4CCB2A0F8D56A8A7911F5 /* main.swift */; };
 		9392354EE4FA8D7068449224 /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */; };
 		945412FAF6A6421266E432F4 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CFE108A620F3E25E31D1E2 /* Server.swift */; };
@@ -89,6 +90,7 @@
 		D36C7B8A0EA289E630D255E9 /* ServersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */; };
 		D4C18638CA4FB0B9F5EC2D89 /* ConnectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D6C3103625B6AC7A0C0D85 /* ConnectionModel.swift */; };
 		DA1DC41322667CB73505B65E /* license-2-apache-2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 905426DBE25E2DB522982769 /* license-2-apache-2.0.txt */; };
+		DADC6996C0DBED452475B5EB /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D57E564E138622FE26E4DF /* Updater.swift */; };
 		DBB0DF6C437AE3B037FA3D9B /* GoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F137E2B0816EBD5E905312BF /* GoCore.swift */; };
 		DD2772B4E5D9D2929208F2D0 /* SystemExtensionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAD986A3CA4C3B3E57D4102 /* SystemExtensionManager.swift */; };
 		DDB0BA1455F12C5351B4E64E /* StatsSamplerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770496910F77BE7A389DCC9 /* StatsSamplerTests.swift */; };
@@ -152,6 +154,7 @@
 		0699D04238955FC7E259908F /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		071AB99FAB2B1CC3FEDAD0BE /* ipv4-country.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ipv4-country.bin"; sourceTree = "<group>"; };
 		07D69C1D05D707286AE3CA2A /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
+		12D57E564E138622FE26E4DF /* Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
 		18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersScreen.swift; sourceTree = "<group>"; };
 		1B4073B4B57614639ED81341 /* TunnelNetworkSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelNetworkSettingsTests.swift; sourceTree = "<group>"; };
 		1CD773ED1D7041B4557AF776 /* AccessKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessKeyTests.swift; sourceTree = "<group>"; };
@@ -224,6 +227,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F7B35B8D1D34AED3CA5B238 /* Sparkle in Frameworks */,
 				38D536778859A167B44D4AA1 /* Tun2socks.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +282,7 @@
 				56CB2C9AFE0B093B9D0B7298 /* LoginItem.swift */,
 				F5CEF530ABA9BE37AA3D4F72 /* RootView.swift */,
 				294A6A75EECFEF8AEA509DE7 /* StatusMenuController.swift */,
+				12D57E564E138622FE26E4DF /* Updater.swift */,
 				5D0D40E6ED33C99D48769B0E /* Core */,
 				43EBC4A15AE87DBF204DE709 /* UI */,
 			);
@@ -476,6 +481,7 @@
 			);
 			name = Keyline;
 			packageProductDependencies = (
+				B050579121536240586A34F0 /* Sparkle */,
 			);
 			productName = Keyline;
 			productReference = 75DF0886ADECFBFEC621F2CF /* Keyline.app */;
@@ -517,6 +523,9 @@
 			);
 			mainGroup = DE26D8EE3B28632FDDC4A6A6;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				4F40821033D9D6831884B931 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 03D5BE274730AA393A54869C /* Products */;
 			projectDirPath = "";
@@ -664,6 +673,7 @@
 				7A6473CC38F869ECAA32AB74 /* Theme.swift in Sources */,
 				282CD860E62C5CDC0C3E32EA /* TunnelController.swift in Sources */,
 				97B9E4A12D12310E8D26D163 /* TunnelProtocol.swift in Sources */,
+				DADC6996C0DBED452475B5EB /* Updater.swift in Sources */,
 				ACC1235B0AFE766DAE413153 /* UserFacingError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1036,6 +1046,25 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4F40821033D9D6831884B931 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = exactVersion;
+				version = 2.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B050579121536240586A34F0 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4F40821033D9D6831884B931 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1430E7B4D26F6D7692BFF1E4 /* Project object */;
 }

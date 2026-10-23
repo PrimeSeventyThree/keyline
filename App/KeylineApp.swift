@@ -11,6 +11,7 @@ struct KeylineApp: App {
     @StateObject private var stats = StatsSampler()
     @StateObject private var selection = ServerSelection()
     @StateObject private var settings = AppSettings()
+    @StateObject private var updater = Updater()
 
     init() {
         let systemExtension = SystemExtensionManager()
@@ -35,10 +36,11 @@ struct KeylineApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(systemExtension: systemExtension, tunnel: tunnel, servers: servers,
-                     connection: connection, stats: stats, selection: selection, settings: settings)
+                     connection: connection, stats: stats, selection: selection, settings: settings,
+                     updater: updater)
                 .onAppear {
                     appDelegate.configure(tunnel: tunnel, settings: settings, servers: servers,
-                                          connection: connection, selection: selection)
+                                          connection: connection, selection: selection, updater: updater)
                     systemExtension.activate()
                 }
         }

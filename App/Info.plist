@@ -18,15 +18,13 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
-	<key>CFBundleVersion</key>
-	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleURLName</key>
-			<string>ca.pulsbeat.keyline.access-key</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>ca.pulsbeat.keyline.access-key</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>ss</string>
@@ -34,11 +32,19 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2026 Pulsbeat Media Inc. Licensed under the Apache License 2.0.</string>
+	<key>SUEnableInstallerLauncherService</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://github.com/PrimeSeventyThree/keyline/releases/latest/download/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>CZhTb2+DP8OWBeOMaf9c6rs3CjciQnZIHzqYx7s6J0w=</string>
 </dict>
 </plist>
