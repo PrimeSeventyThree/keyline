@@ -15,6 +15,7 @@ struct LicensesSheet: View {
         "apache-2.0": "Apache License 2.0 (Keyline, Outline)",
         "flag-icons": "flag-icons (MIT)",
         "db-ip": "DB-IP IP to Country Lite (CC BY 4.0)",
+        "go-modules": "Network core: Go modules and lwIP",
     ]
 
     /// Files named license-<order>-<name>.txt, in order.
