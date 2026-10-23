@@ -30,7 +30,65 @@ struct RootView: View {
     /// The last connect failure, shown in the status line until the next attempt.
     @State private var lastConnectError: UserFacingError?
 
+    @State private var onboardingStep: OnboardingScreen.Step = .welcome
+
     var body: some View {
+        if settings.hasCompletedOnboarding {
+            mainWindow
+        } else {
+            onboarding
+        }
+    }
+
+    // MARK: - Onboarding
+
+    private var onboarding: some View {
+        OnboardingScreen(
+            step: onboardingStep,
+            extensionState: systemExtension.state,
+            accessKey: $newAccessKey,
+            addServerError: addServerError,
+            onContinue: {
+                if let next = OnboardingScreen.Step(rawValue: onboardingStep.rawValue + 1) { onboardingStep = next }
+            },
+            onBack: {
+                if let previous = OnboardingScreen.Step(rawValue: onboardingStep.rawValue - 1) { onboardingStep = previous }
+            },
+            onInstall: { systemExtension.activate() },
+            onOpenSettings: { systemExtension.openApprovalSettings() },
+            onAddServer: {
+                Task {
+                    do {
+                        let server = try await servers.add(accessKey: newAccessKey)
+                        selection.select(server.id)
+                        finishOnboarding()
+                    } catch {
+                        addServerError = UserFacingError(error).message
+                    }
+                }
+            },
+            onSkip: finishOnboarding)
+        .frame(minWidth: 1120, minHeight: 720)
+        .preferredColorScheme(.dark)
+        .onOpenURL { url in
+            // A link during setup fills in the first server.
+            guard let key = AccessKeyDetection.candidate(in: url.absoluteString) else { return }
+            newAccessKey = key
+            onboardingStep = .addServer
+        }
+        .handlesExternalEvents(preferring: ["*"], allowing: ["*"])
+    }
+
+    private func finishOnboarding() {
+        newAccessKey = ""
+        addServerError = nil
+        section = .connect
+        settings.hasCompletedOnboarding = true
+    }
+
+    // MARK: - Main window
+
+    private var mainWindow: some View {
         MainWindow(section: $section, isConnected: tunnel.status == .connected) {
             switch section {
             case .connect:

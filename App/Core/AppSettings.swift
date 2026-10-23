@@ -17,6 +17,10 @@ final class AppSettings: ObservableObject {
     @Published var warnOnQuitWhileConnected: Bool {
         didSet { defaults.set(warnOnQuitWhileConnected, forKey: Key.warnOnQuit) }
     }
+    /// The first-run screens (privacy note, VPN component, first server) are done.
+    @Published var hasCompletedOnboarding: Bool {
+        didSet { defaults.set(hasCompletedOnboarding, forKey: Key.onboarding) }
+    }
     /// The app's language. Takes effect after a restart.
     @Published var language: Language {
         didSet { applyLanguage() }
@@ -28,6 +32,7 @@ final class AppSettings: ObservableObject {
     private enum Key {
         static let stopVPNOnQuit = "stopVPNOnQuit"
         static let warnOnQuit = "warnOnQuitWhileConnected"
+        static let onboarding = "hasCompletedOnboarding"
         /// The standard per-app language override.
         static let appleLanguages = "AppleLanguages"
     }
@@ -40,6 +45,7 @@ final class AppSettings: ObservableObject {
         self.defaults = defaults
         stopVPNOnQuit = defaults.object(forKey: Key.stopVPNOnQuit) as? Bool ?? false
         warnOnQuitWhileConnected = defaults.object(forKey: Key.warnOnQuit) as? Bool ?? true
+        hasCompletedOnboarding = defaults.bool(forKey: Key.onboarding)
         let chosen = (defaults.persistentDomain(forName: domain)?[Key.appleLanguages] as? [String])?.first
         let language = chosen.flatMap { code in Language.allCases.first { $0 != .system && code.hasPrefix($0.rawValue) } } ?? .system
         self.language = language
