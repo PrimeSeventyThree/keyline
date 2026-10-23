@@ -57,6 +57,13 @@ final class AppSettingsTests: XCTestCase {
         XCTAssertTrue(makeSettings().hasCompletedOnboarding)
     }
 
+    func testAutoConnectIsExplainedOnce() {
+        let settings = makeSettings()
+        XCTAssertFalse(settings.hasSeenAutoConnectExplainer)
+        settings.hasSeenAutoConnectExplainer = true
+        XCTAssertTrue(makeSettings().hasSeenAutoConnectExplainer)
+    }
+
     func testRegionalLanguageCodesMatch() {
         defaults.set(["en-CA"], forKey: "AppleLanguages")
         XCTAssertEqual(makeSettings().language, .english)

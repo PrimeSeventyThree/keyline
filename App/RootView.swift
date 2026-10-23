@@ -15,6 +15,7 @@ struct RootView: View {
     @State private var section: MainSection = .connect
     @State private var launchAtLogin = LoginItem().isEnabled
     @State private var showingLicenses = false
+    @State private var showingAutoConnectExplainer = false
 
     @State private var isAddingServer = false
     @State private var newAccessKey = ""
@@ -126,6 +127,16 @@ struct RootView: View {
                               onCancel: { renamingServer = nil },
                               onSave: { servers.rename(id: server.id, to: newName); renamingServer = nil })
         }
+        // Shown once, after the first connection, as upstream does.
+        .alert(String(localized: "auto-connect-title", defaultValue: "Keyline reconnects automatically"),
+               isPresented: $showingAutoConnectExplainer) {
+            Button(String(localized: "auto-connect-ok", defaultValue: "Got it")) {
+                settings.hasSeenAutoConnectExplainer = true
+            }
+        } message: {
+            Text(String(localized: "auto-connect-body",
+                        defaultValue: "While you’re connected, Keyline turns the VPN back on after your Mac restarts or switches networks, even if Keyline isn’t open. To stop it, disconnect in Keyline."))
+        }
         .alert(shownError?.message ?? "", isPresented: Binding(get: { shownError != nil }, set: { if !$0 { shownError = nil } }),
                presenting: shownError) { error in
             if let details = error.details {
@@ -139,6 +150,7 @@ struct RootView: View {
             if status == .connected {
                 stats.start(source: tunnel)
                 if let id = tunnel.tunnelID { selection.recordConnection(to: id) }
+                if !settings.hasSeenAutoConnectExplainer { showingAutoConnectExplainer = true }
             } else if status == .disconnected || status == .invalid {
                 stats.stop()
             }

@@ -31,7 +31,9 @@
 		3E59C42BAE943ED1DB98816D /* TunnelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636E5D24AEC69105346213BF /* TunnelProtocol.swift */; };
 		3E99C022CAB403B4002A9E42 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9BE21CEFD8CEE63EE0799C /* MainWindow.swift */; };
 		40470F115C166A69774AC543 /* KeylineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86301E2269BF708FDB7F961A /* KeylineApp.swift */; };
+		4109040C73C4516809037A02 /* license-5-go-modules.txt in Resources */ = {isa = PBXBuildFile; fileRef = 791F9ACD4E37F938816BF6AA /* license-5-go-modules.txt */; };
 		42451D94BEE4AD3003B2C629 /* AccessKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91909B41BE445A4850BC805 /* AccessKey.swift */; };
+		4783A5371813EAC071AB2115 /* license-5-go-modules.txt in Resources */ = {isa = PBXBuildFile; fileRef = 791F9ACD4E37F938816BF6AA /* license-5-go-modules.txt */; };
 		48E8F19C669D88B1DF32B891 /* AppSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6586464400EA787B68751072 /* AppSettingsTests.swift */; };
 		49F5EB949005FE0F8CE5A448 /* license-4-db-ip.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90ED15F2BFD1655CB4131D1F /* license-4-db-ip.txt */; };
 		4C6B0EC1EF500D6F2DF6A98B /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
@@ -177,6 +179,7 @@
 		763F02A84AC15E831EC4CCE9 /* SecretStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretStore.swift; sourceTree = "<group>"; };
 		7770496910F77BE7A389DCC9 /* StatsSamplerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsSamplerTests.swift; sourceTree = "<group>"; };
 		77DB074B771331C5DEA789C5 /* KeylineError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeylineError.swift; sourceTree = "<group>"; };
+		791F9ACD4E37F938816BF6AA /* license-5-go-modules.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "license-5-go-modules.txt"; sourceTree = "<group>"; };
 		79375BDC91FAD3FE410673F4 /* SOURCE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = SOURCE.txt; sourceTree = "<group>"; };
 		7CAD986A3CA4C3B3E57D4102 /* SystemExtensionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemExtensionManager.swift; sourceTree = "<group>"; };
 		83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Tun2socks.xcframework; path = build/core/Tun2socks.xcframework; sourceTree = "<group>"; };
@@ -389,6 +392,7 @@
 				905426DBE25E2DB522982769 /* license-2-apache-2.0.txt */,
 				B36E3FF485D9545364C7BCCA /* license-3-flag-icons.txt */,
 				90ED15F2BFD1655CB4131D1F /* license-4-db-ip.txt */,
+				791F9ACD4E37F938816BF6AA /* license-5-go-modules.txt */,
 			);
 			path = Licenses;
 			sourceTree = "<group>";
@@ -542,6 +546,7 @@
 				1544C5D49B9520439B4E7C5F /* license-2-apache-2.0.txt in Resources */,
 				ABD917DE522E73A0C2933817 /* license-3-flag-icons.txt in Resources */,
 				49F5EB949005FE0F8CE5A448 /* license-4-db-ip.txt in Resources */,
+				4109040C73C4516809037A02 /* license-5-go-modules.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +561,7 @@
 				DA1DC41322667CB73505B65E /* license-2-apache-2.0.txt in Resources */,
 				B1E149AD5B88D31FBE884FA9 /* license-3-flag-icons.txt in Resources */,
 				CB6546DD7A74BC078CEDC3DF /* license-4-db-ip.txt in Resources */,
+				4783A5371813EAC071AB2115 /* license-5-go-modules.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

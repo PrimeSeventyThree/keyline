@@ -21,6 +21,10 @@ final class AppSettings: ObservableObject {
     @Published var hasCompletedOnboarding: Bool {
         didSet { defaults.set(hasCompletedOnboarding, forKey: Key.onboarding) }
     }
+    /// The one-time explanation of auto-connect was shown, after the first connection.
+    @Published var hasSeenAutoConnectExplainer: Bool {
+        didSet { defaults.set(hasSeenAutoConnectExplainer, forKey: Key.autoConnectExplainer) }
+    }
     /// The app's language. Takes effect after a restart.
     @Published var language: Language {
         didSet { applyLanguage() }
@@ -33,6 +37,7 @@ final class AppSettings: ObservableObject {
         static let stopVPNOnQuit = "stopVPNOnQuit"
         static let warnOnQuit = "warnOnQuitWhileConnected"
         static let onboarding = "hasCompletedOnboarding"
+        static let autoConnectExplainer = "hasSeenAutoConnectExplainer"
         /// The standard per-app language override.
         static let appleLanguages = "AppleLanguages"
     }
@@ -46,6 +51,7 @@ final class AppSettings: ObservableObject {
         stopVPNOnQuit = defaults.object(forKey: Key.stopVPNOnQuit) as? Bool ?? false
         warnOnQuitWhileConnected = defaults.object(forKey: Key.warnOnQuit) as? Bool ?? true
         hasCompletedOnboarding = defaults.bool(forKey: Key.onboarding)
+        hasSeenAutoConnectExplainer = defaults.bool(forKey: Key.autoConnectExplainer)
         let chosen = (defaults.persistentDomain(forName: domain)?[Key.appleLanguages] as? [String])?.first
         let language = chosen.flatMap { code in Language.allCases.first { $0 != .system && code.hasPrefix($0.rawValue) } } ?? .system
         self.language = language
