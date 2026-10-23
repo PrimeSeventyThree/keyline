@@ -18,6 +18,7 @@
 		1DCE618C70C185D5A11A76A2 /* ServersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */; };
 		1ED762BBA239BD9AE7F85DEC /* ServerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E99212A5EB7E2E091075B9 /* ServerSelection.swift */; };
 		1FE74E4581604F810316E19E /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */; };
+		223722CFCFBAEC5511CF67E6 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C950336B74F1460D611C3 /* OnboardingScreen.swift */; };
 		2421F72E74D78B9886AB22A3 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B1E58A4A6119284739465B /* Components.swift */; };
 		282CD860E62C5CDC0C3E32EA /* TunnelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */; };
 		2AE112D849FA832E067A2492 /* ConnectScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265F00859D779E565B96910E /* ConnectScreen.swift */; };
@@ -76,6 +77,7 @@
 		BBA62022AAE1AA9F7A08FCDE /* AccessKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91909B41BE445A4850BC805 /* AccessKey.swift */; };
 		BDCBA87F16D12CD018F82D2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40066ABFB947222D684DD4BA /* Assets.xcassets */; };
 		C176B00EF5D319C2D2AE514C /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CFE108A620F3E25E31D1E2 /* Server.swift */; };
+		C271C1FAA56EF9D330C5B070 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C950336B74F1460D611C3 /* OnboardingScreen.swift */; };
 		C7EFB8B85711F074D06796C0 /* TunnelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */; };
 		CA4A5922E477DDD416BCA8EE /* StatsSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A4013E0E62E1B843BD3CF /* StatsSampler.swift */; };
 		CA82C3B32346505FB36AEDDC /* StatusMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 294A6A75EECFEF8AEA509DE7 /* StatusMenuController.swift */; };
@@ -165,6 +167,7 @@
 		3EAE25B7426CB8646B230209 /* KeylineTunnel.systemextension */ = {isa = PBXFileReference; explicitFileType = "wrapper.system-extension"; includeInIndex = 0; path = KeylineTunnel.systemextension; sourceTree = BUILT_PRODUCTS_DIR; };
 		40066ABFB947222D684DD4BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		417F0DFC8DDE061CF4A5959C /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		4F2C950336B74F1460D611C3 /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		56CB2C9AFE0B093B9D0B7298 /* LoginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItem.swift; sourceTree = "<group>"; };
 		5A9A0C3B050B9716FCC5CDAF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5FA1BD551838A0E42B9D9993 /* ServerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRepository.swift; sourceTree = "<group>"; };
@@ -298,6 +301,7 @@
 				265F00859D779E565B96910E /* ConnectScreen.swift */,
 				D618F571C241EF9F66BE1A4F /* LicensesSheet.swift */,
 				AE9BE21CEFD8CEE63EE0799C /* MainWindow.swift */,
+				4F2C950336B74F1460D611C3 /* OnboardingScreen.swift */,
 				18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */,
 				0699D04238955FC7E259908F /* SettingsScreen.swift */,
 				FE39212ADACEAE2605BAA89B /* Theme.swift */,
@@ -588,6 +592,7 @@
 				4C6B0EC1EF500D6F2DF6A98B /* KeylineIdentifiers.swift in Sources */,
 				D1A0A6AEB2B0AAC060503F16 /* LicensesSheet.swift in Sources */,
 				3E99C022CAB403B4002A9E42 /* MainWindow.swift in Sources */,
+				223722CFCFBAEC5511CF67E6 /* OnboardingScreen.swift in Sources */,
 				D2111E1400CA9A1A0396C5D9 /* SampleData.swift in Sources */,
 				F20774CB5F0867625C861D1E /* SecretStore.swift in Sources */,
 				C176B00EF5D319C2D2AE514C /* Server.swift in Sources */,
@@ -644,6 +649,7 @@
 				5615A3ADC240FD1CA586B54D /* LicensesSheet.swift in Sources */,
 				527F805969DD10E77F3B2E54 /* LoginItem.swift in Sources */,
 				07AE223C9D93162F199DCCC0 /* MainWindow.swift in Sources */,
+				C271C1FAA56EF9D330C5B070 /* OnboardingScreen.swift in Sources */,
 				F20798ECEF3164518F42E7B5 /* RootView.swift in Sources */,
 				81DB0FAF636225E8CF7E65C3 /* SecretStore.swift in Sources */,
 				945412FAF6A6421266E432F4 /* Server.swift in Sources */,

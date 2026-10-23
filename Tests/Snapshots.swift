@@ -86,6 +86,19 @@ final class Snapshots: XCTestCase {
         try render(window(.settings, connected: true) { SettingsScreen(state: binding) }, named: "6-settings")
     }
 
+    func testOnboarding() throws {
+        func screen(_ step: OnboardingScreen.Step, _ state: SystemExtensionManager.State,
+                    key: String = "", error: String? = nil) -> some View {
+            OnboardingScreen(step: step, extensionState: state, accessKey: .constant(key), addServerError: error)
+                .frame(width: Self.windowSize.width, height: Self.windowSize.height)
+        }
+        try render(screen(.welcome, .activating), named: "8a-onboarding-welcome")
+        try render(screen(.vpnComponent, .needsApproval), named: "8b-onboarding-approve")
+        try render(screen(.vpnComponent, .activated), named: "8c-onboarding-installed")
+        try render(screen(.addServer, .activated, key: "ss://not-a-valid-key", error: UserFacingError.Message.invalidAccessKey),
+                   named: "8d-onboarding-add-server")
+    }
+
     func testAddServerSheet() throws {
         let sheet = AddServerSheet(accessKey: .constant("ss://not-a-valid-key"),
                                    errorMessage: UserFacingError.Message.invalidAccessKey)

@@ -50,6 +50,13 @@ final class AppSettingsTests: XCTestCase {
         XCTAssertTrue(relaunched.needsRestartForLanguage)
     }
 
+    func testOnboardingRunsOnce() {
+        let settings = makeSettings()
+        XCTAssertFalse(settings.hasCompletedOnboarding, "a new install starts with onboarding")
+        settings.hasCompletedOnboarding = true
+        XCTAssertTrue(makeSettings().hasCompletedOnboarding)
+    }
+
     func testRegionalLanguageCodesMatch() {
         defaults.set(["en-CA"], forKey: "AppleLanguages")
         XCTAssertEqual(makeSettings().language, .english)

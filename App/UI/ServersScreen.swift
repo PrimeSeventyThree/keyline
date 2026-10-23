@@ -158,7 +158,6 @@ struct ServerRow: View {
 /// The sheet for pasting an access key.
 struct AddServerSheet: View {
     @Binding var accessKey: String
-    @Environment(\.isSnapshotRendering) private var isSnapshotRendering
     var errorMessage: String?
     /// Where a pre-filled key came from, such as the clipboard or a link.
     var note: String?
@@ -179,12 +178,7 @@ struct AddServerSheet: View {
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(Theme.accent)
             }
-            keyField
-                .font(.system(size: 13, design: .monospaced))
-                .foregroundColor(Theme.textPrimary)
-                .padding(10)
-                .background(RoundedRectangle(cornerRadius: 9).fill(Color.black.opacity(0.25)))
-                .overlay(RoundedRectangle(cornerRadius: 9).stroke(errorMessage == nil ? Theme.surfaceStroke : Theme.danger))
+            AccessKeyField(accessKey: $accessKey, isInvalid: errorMessage != nil)
             if let errorMessage {
                 Text(errorMessage).font(.system(size: 12)).foregroundColor(Theme.danger)
             }
@@ -202,16 +196,6 @@ struct AddServerSheet: View {
         .padding(24)
         .frame(width: 480)
         .background(Theme.background)
-    }
-
-    @ViewBuilder private var keyField: some View {
-        if isSnapshotRendering {
-            Text(accessKey.isEmpty ? "ss://… or ssconf://…" : accessKey)
-                .frame(maxWidth: .infinity, alignment: .leading)
-        } else {
-            TextField("ss://… or ssconf://…", text: $accessKey)
-                .textFieldStyle(.plain)
-        }
     }
 }
 
