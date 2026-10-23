@@ -11,10 +11,14 @@ struct RootView: View {
     @ObservedObject var stats: StatsSampler
     @ObservedObject var selection: ServerSelection
     @ObservedObject var settings: AppSettings
+    @ObservedObject var crashReports: CrashReportStore
 
     @State private var section: MainSection = .connect
     @State private var launchAtLogin = LoginItem().isEnabled
     @State private var showingLicenses = false
+    @State private var showingReport = false
+    @State private var reportDescription = ""
+    @State private var reportIncludesCrashes = true
 
     @State private var isAddingServer = false
     @State private var newAccessKey = ""
@@ -111,7 +115,8 @@ struct RootView: View {
                 SettingsScreen(state: settingsBinding,
                                onUninstallExtension: { systemExtension.deactivate() },
                                onShowLicenses: { showingLicenses = true },
-                               onRestart: relaunch)
+                               onRestart: relaunch,
+                               onSendReport: { showingReport = true })
             }
         }
         .frame(minWidth: 1120, minHeight: 720)
@@ -121,6 +126,13 @@ struct RootView: View {
                            onCancel: { isAddingServer = false }, onAdd: addServer)
         }
         .sheet(isPresented: $showingLicenses) { LicensesSheet(onDone: { showingLicenses = false }) }
+        .sheet(isPresented: $showingReport) {
+            ReportSheet(description: $reportDescription, includeCrashReports: $reportIncludesCrashes,
+                        crashReportCount: crashReports.reports.count,
+                        onCancel: { showingReport = false },
+                        onOpenIssue: openReport,
+                        onDeleteCrashReports: { crashReports.deleteAll() })
+        }
         .sheet(item: $renamingServer) { server in
             RenameServerSheet(name: $newName,
                               onCancel: { renamingServer = nil },
@@ -207,7 +219,8 @@ struct RootView: View {
                     languageNeedsRestart: settings.needsRestartForLanguage,
                     extensionStatus: extensionStatusText,
                     extensionReady: systemExtension.state == .activated,
-                    version: Self.versionText)
+                    version: Self.versionText,
+                    crashReportCount: crashReports.reports.count)
             },
             set: { new in
                 if new.launchAtLogin != launchAtLogin { setLaunchAtLogin(new.launchAtLogin) }
@@ -224,6 +237,19 @@ struct RootView: View {
         case .notInApplications: return String(localized: "vpn-component-move-app", defaultValue: "Move Keyline to Applications to install it")
         case .failed(let reason): return reason
         }
+    }
+
+    /// Opens the pre-filled GitHub issue in the browser, where the user reviews it.
+    private func openReport() {
+        let os = ProcessInfo.processInfo.operatingSystemVersion
+        let url = CrashReportStore.issueURL(
+            description: reportDescription,
+            reports: reportIncludesCrashes ? crashReports.reports : [],
+            appVersion: Self.versionText,
+            osVersion: "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)")
+        NSWorkspace.shared.open(url)
+        showingReport = false
+        reportDescription = ""
     }
 
     private static var versionText: String {

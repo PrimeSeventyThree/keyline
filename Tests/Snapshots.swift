@@ -99,6 +99,12 @@ final class Snapshots: XCTestCase {
                    named: "8d-onboarding-add-server")
     }
 
+    func testReportSheet() throws {
+        let sheet = ReportSheet(description: .constant("Keyline quit when I switched servers from the menu bar."),
+                                includeCrashReports: .constant(true), crashReportCount: 2)
+        try render(sheet, named: "10-report")
+    }
+
     func testAddServerSheet() throws {
         let sheet = AddServerSheet(accessKey: .constant("ss://not-a-valid-key"),
                                    errorMessage: UserFacingError.Message.invalidAccessKey)
