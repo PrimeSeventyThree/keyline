@@ -83,6 +83,16 @@ final class PacketTunnelProvider: NEPacketTunnelProvider {
             completionHandler?(UserDefaults.standard.data(forKey: Self.lastErrorKey))
         case TunnelAppMessage.trafficStats:
             completionHandler?(try? JSONEncoder().encode(traffic.stats))
+        case TunnelAppMessage.measureLatency:
+            // The health check makes a round trip through the proxy, so time it. It blocks,
+            // so run it off the provider's queue.
+            guard let device = remoteDevice else { completionHandler?(nil); return }
+            DispatchQueue.global(qos: .utility).async {
+                let start = DispatchTime.now()
+                let failed = device.getHealthStatus() != nil
+                let elapsed = Double(DispatchTime.now().uptimeNanoseconds - start.uptimeNanoseconds) / 1_000_000
+                completionHandler?(failed ? nil : try? JSONEncoder().encode(LatencySample(milliseconds: elapsed)))
+            }
         default:
             log.warning("Unknown app message")
             completionHandler?(nil)

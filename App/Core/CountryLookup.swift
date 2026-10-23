@@ -118,3 +118,13 @@ extension Bundle {
     static let keylineResources = Bundle(for: BundleToken.self)
     private final class BundleToken {}
 }
+
+extension Country {
+    /// Every country macOS knows that has a flag, sorted by name in `locale`'s language.
+    static func all(locale: Locale = .current, bundle: Bundle = .keylineResources) -> [Country] {
+        NSLocale.isoCountryCodes
+            .compactMap(Country.init(code:))
+            .filter { bundle.image(forResource: $0.flagAssetName) != nil }
+            .sorted { $0.name(locale: locale).localizedStandardCompare($1.name(locale: locale)) == .orderedAscending }
+    }
+}

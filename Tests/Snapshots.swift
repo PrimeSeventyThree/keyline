@@ -59,6 +59,14 @@ final class Snapshots: XCTestCase {
         try render(window(.connect, connected: false) { ConnectScreen(state: SampleData.disconnected) }, named: "2-connect-disconnected")
     }
 
+    func testConnectNeedsApproval() throws {
+        var state = SampleData.disconnected
+        state.setupNotice = SetupNotice(
+            message: "Allow Keyline Tunnel in System Settings › General › Login Items & Extensions › Network Extensions.",
+            actionTitle: "Open System Settings")
+        try render(window(.connect, connected: false) { ConnectScreen(state: state) }, named: "2c-connect-needs-approval")
+    }
+
     func testConnectConnecting() throws {
         try render(window(.connect, connected: false) { ConnectScreen(state: SampleData.connecting) }, named: "3-connect-connecting")
     }

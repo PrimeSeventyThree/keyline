@@ -88,11 +88,21 @@ final class TunnelController: ObservableObject, TunnelControlling {
 
     /// Bytes through the running tunnel, or nil when it is not connected.
     func trafficStats() async -> TrafficStats? {
+        await ask(TunnelAppMessage.trafficStats, as: TrafficStats.self)
+    }
+
+    /// One round trip through the proxy, or nil when not connected or the check fails.
+    func latency() async -> LatencySample? {
+        await ask(TunnelAppMessage.measureLatency, as: LatencySample.self)
+    }
+
+    /// Sends `message` to the running extension and decodes its JSON reply.
+    private func ask<Reply: Decodable>(_ message: String, as: Reply.Type) async -> Reply? {
         guard let session, session.status == .connected else { return nil }
         return await withCheckedContinuation { continuation in
             do {
-                try session.sendProviderMessage(Data(TunnelAppMessage.trafficStats.utf8)) { data in
-                    continuation.resume(returning: data.flatMap { try? JSONDecoder().decode(TrafficStats.self, from: $0) })
+                try session.sendProviderMessage(Data(message.utf8)) { data in
+                    continuation.resume(returning: data.flatMap { try? JSONDecoder().decode(Reply.self, from: $0) })
                 }
             } catch {
                 continuation.resume(returning: nil)
