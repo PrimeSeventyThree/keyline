@@ -48,6 +48,9 @@ for svg in "$work"/pkg/package/flags/1x1/*.svg; do
   else
     cp "$svg" "$set_dir/$code.svg"
   fi
+  # Declare a 96×96 size (avatars are at most 92 pt). Xcode stores bitmaps at the declared
+  # size next to the vector data, and the default 512×512 made the catalog about 15 MB.
+  perl -0pi -e 's/<svg\b([^>]*?)\s+width="[^"]*"/<svg$1/; s/<svg\b([^>]*?)\s+height="[^"]*"/<svg$1/; s/<svg\b/<svg width="96" height="96"/' "$set_dir/$code.svg"
   cat > "$set_dir/Contents.json" <<EOF
 {
   "images" : [ { "filename" : "$code.svg", "idiom" : "universal" } ],

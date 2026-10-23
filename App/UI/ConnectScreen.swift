@@ -30,72 +30,39 @@ struct ConnectScreen: View {
     var onSelectServer: (ServerSummary) -> Void = { _ in }
     var onChangeServer: () -> Void = {}
 
-    /// Where the stats cards go around the main column. (Two options under review.)
-    enum Layout {
-        /// Traffic cards on the left, connection cards on the right.
-        case wings
-        /// All four cards in a row below the main column.
-        case bottomStrip
-    }
-
-    var layout: Layout = .wings
-
-    /// Height of each side's pair of cards in the wings layout, so both sides line up.
+    /// Width of each side's pair of cards.
+    static let wingWidth: CGFloat = 250
+    /// Height of each side's pair of cards, so both sides line up.
     static let wingHeight: CGFloat = 280
 
     private var cards: StatsCards { StatsCards(state: state) }
 
+    /// Traffic cards on the left, connection cards on the right, the main column centred
+    /// between them.
     var body: some View {
-        switch layout {
-        case .wings:
-            HStack(spacing: 24) {
-                VStack(spacing: 12) { cards.download; cards.upload }
-                    .frame(width: 250, height: Self.wingHeight)
-                mainColumn(compact: false)
-                    .frame(maxWidth: .infinity)
-                VStack(spacing: 12) { cards.latency; cards.protection }
-                    .frame(width: 250, height: Self.wingHeight)
-            }
-            .padding(.vertical, 24)
-            .padding(.horizontal, 28)
-        case .bottomStrip:
-            VStack(spacing: 18) {
-                mainColumn(compact: true)
-                    .frame(maxHeight: .infinity)
-                HStack(alignment: .top, spacing: 12) {
-                    cards.download
-                    cards.upload
-                    cards.latency
-                    cards.protection
-                }
-                .frame(maxWidth: 1000)
-                .frame(height: 124)
-            }
-            .padding(.vertical, 22)
-            .padding(.horizontal, 28)
+        HStack(spacing: 24) {
+            VStack(spacing: 12) { cards.download; cards.upload }
+                .frame(width: Self.wingWidth, height: Self.wingHeight)
+            mainColumn
+                .frame(maxWidth: .infinity)
+            VStack(spacing: 12) { cards.latency; cards.protection }
+                .frame(width: Self.wingWidth, height: Self.wingHeight)
         }
+        .padding(.vertical, 24)
+        .padding(.horizontal, 28)
     }
 
     /// Flags, country, timer, power button and status, centred on one axis.
-    private func mainColumn(compact: Bool) -> some View {
+    private var mainColumn: some View {
         VStack(spacing: 0) {
             Spacer(minLength: 8)
-            RecentServersStrip(servers: state.recentServers, selectedID: state.server?.id,
-                               selectedSize: compact ? 76 : 92, onSelect: onSelectServer)
-            serverTitle.padding(.top, compact ? 8 : 14)
-            timer(size: compact ? 40 : 52).padding(.top, compact ? 14 : 26)
-            PowerButton(phase: state.phase, scale: compact ? 0.8 : 1, action: onToggleConnection)
-                .padding(.top, compact ? 12 : 22)
-            if compact {
-                HStack(spacing: 14) {
-                    statusLine
-                    changeServerButton
-                }
-                .padding(.top, 12)
-            } else {
-                statusLine.padding(.top, 22)
-                changeServerButton.padding(.top, 14)
-            }
+            RecentServersStrip(servers: state.recentServers, selectedID: state.server?.id, onSelect: onSelectServer)
+            serverTitle.padding(.top, 14)
+            timer.padding(.top, 26)
+            PowerButton(phase: state.phase, action: onToggleConnection)
+                .padding(.top, 22)
+            statusLine.padding(.top, 22)
+            changeServerButton.padding(.top, 14)
             Spacer(minLength: 8)
         }
     }
@@ -121,7 +88,7 @@ struct ConnectScreen: View {
         }
     }
 
-    private func timer(size: CGFloat) -> some View {
+    private var timer: some View {
         VStack(spacing: 2) {
             Text(state.phase == .connected
                  ? String(localized: "connected-for", defaultValue: "Connected for")
@@ -129,7 +96,7 @@ struct ConnectScreen: View {
                 .font(.system(size: 13, weight: .medium))
                 .foregroundColor(Theme.textSecondary)
             Text(StatsFormat.duration(state.connectedSince.map { state.now.timeIntervalSince($0) } ?? 0))
-                .font(.system(size: size, weight: .bold, design: .rounded))
+                .font(.system(size: 52, weight: .bold, design: .rounded))
                 .monospacedDigit()
                 .foregroundColor(state.phase == .connected ? Theme.textPrimary : Theme.textTertiary)
         }
@@ -171,7 +138,6 @@ struct ConnectScreen: View {
 /// The big round connect/disconnect button.
 struct PowerButton: View {
     let phase: ConnectScreenState.Phase
-    var scale: CGFloat = 1
     let action: () -> Void
 
     private var isOn: Bool { phase == .connected }
@@ -182,21 +148,21 @@ struct PowerButton: View {
             ZStack {
                 Circle()
                     .fill(isOn ? Theme.accent.opacity(0.10) : Color.white.opacity(0.03))
-                    .frame(width: 196 * scale, height: 196 * scale)
+                    .frame(width: 196, height: 196)
                 Circle()
                     .trim(from: 0, to: isBusy ? 0.72 : 1)
                     .stroke(isOn || isBusy ? Theme.accent : Color.white.opacity(0.14),
                             style: StrokeStyle(lineWidth: 5, lineCap: .round))
                     .rotationEffect(.degrees(-90))
-                    .frame(width: 176 * scale, height: 176 * scale)
+                    .frame(width: 176, height: 176)
                     .shadow(color: isOn ? Theme.accent.opacity(0.8) : .clear, radius: 16)
                 Circle()
                     .fill(RadialGradient(
                         colors: isOn ? [Theme.accent.opacity(0.95), Theme.accentDeep] : [Color.white.opacity(0.10), Color.white.opacity(0.03)],
-                        center: .center, startRadius: 4, endRadius: 82 * scale))
-                    .frame(width: 150 * scale, height: 150 * scale)
+                        center: .center, startRadius: 4, endRadius: 82))
+                    .frame(width: 150, height: 150)
                 Image(systemName: "power")
-                    .font(.system(size: 50 * scale, weight: .medium))
+                    .font(.system(size: 50, weight: .medium))
                     .foregroundColor(isOn ? .white : Theme.textSecondary)
             }
             .contentShape(Circle())
@@ -214,7 +180,6 @@ struct PowerButton: View {
 struct RecentServersStrip: View {
     let servers: [ServerSummary]
     let selectedID: String?
-    var selectedSize: CGFloat = 92
     let onSelect: (ServerSummary) -> Void
 
     var body: some View {
@@ -222,14 +187,14 @@ struct RecentServersStrip: View {
             ForEach(Self.arranged(servers.prefix(5), selectedID: selectedID)) { server in
                 let isSelected = server.id == selectedID
                 Button { onSelect(server) } label: {
-                    FlagAvatar(country: server.country, size: isSelected ? selectedSize : 40, isSelected: isSelected)
+                    FlagAvatar(country: server.country, size: isSelected ? 92 : 40, isSelected: isSelected)
                         .opacity(isSelected ? 1 : 0.75)
                 }
                 .buttonStyle(.plain)
                 .help(server.name)
             }
         }
-        .frame(height: selectedSize + 18)
+        .frame(height: 110)
     }
 
     /// The selected server in the middle, the others around it.
@@ -242,7 +207,7 @@ struct RecentServersStrip: View {
     }
 }
 
-/// The download, upload, latency and protection cards, placed by the screen's layout.
+/// The download, upload, latency and protection cards, placed in the two side columns.
 struct StatsCards {
     let state: ConnectScreenState
 

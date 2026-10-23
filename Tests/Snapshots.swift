@@ -59,13 +59,6 @@ final class Snapshots: XCTestCase {
         try render(window(.connect, connected: false) { ConnectScreen(state: SampleData.disconnected) }, named: "2-connect-disconnected")
     }
 
-    func testConnectBottomStrip() throws {
-        try render(window(.connect, connected: true) { ConnectScreen(state: SampleData.connected, layout: .bottomStrip) },
-                   named: "1b-connect-connected-bottom-strip")
-        try render(window(.connect, connected: false) { ConnectScreen(state: SampleData.disconnected, layout: .bottomStrip) },
-                   named: "2b-connect-disconnected-bottom-strip")
-    }
-
     func testConnectConnecting() throws {
         try render(window(.connect, connected: false) { ConnectScreen(state: SampleData.connecting) }, named: "3-connect-connecting")
     }
