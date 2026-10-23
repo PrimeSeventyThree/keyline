@@ -23,6 +23,7 @@
 		282CD860E62C5CDC0C3E32EA /* TunnelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */; };
 		2AE112D849FA832E067A2492 /* ConnectScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265F00859D779E565B96910E /* ConnectScreen.swift */; };
 		2B73A340504530BA327E4ACC /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
+		2C7137D7194BE91674D29A21 /* WorldMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEEA3E323EFB3003F714001 /* WorldMapView.swift */; };
 		30E14C256D26742F70C4D0D2 /* ipv4-country.bin in Resources */ = {isa = PBXBuildFile; fileRef = 071AB99FAB2B1CC3FEDAD0BE /* ipv4-country.bin */; };
 		341218597D9DDCEA4E25EF89 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87966EB241FF827053EF96FB /* AppSettings.swift */; };
 		38D536778859A167B44D4AA1 /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */; };
@@ -32,6 +33,7 @@
 		3E99C022CAB403B4002A9E42 /* MainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9BE21CEFD8CEE63EE0799C /* MainWindow.swift */; };
 		40470F115C166A69774AC543 /* KeylineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86301E2269BF708FDB7F961A /* KeylineApp.swift */; };
 		42451D94BEE4AD3003B2C629 /* AccessKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D91909B41BE445A4850BC805 /* AccessKey.swift */; };
+		4293E69D057402196FB39E2F /* WorldMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEEA3E323EFB3003F714001 /* WorldMapView.swift */; };
 		48E8F19C669D88B1DF32B891 /* AppSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6586464400EA787B68751072 /* AppSettingsTests.swift */; };
 		49F5EB949005FE0F8CE5A448 /* license-4-db-ip.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90ED15F2BFD1655CB4131D1F /* license-4-db-ip.txt */; };
 		4C6B0EC1EF500D6F2DF6A98B /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
@@ -170,6 +172,7 @@
 		4F2C950336B74F1460D611C3 /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		56CB2C9AFE0B093B9D0B7298 /* LoginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItem.swift; sourceTree = "<group>"; };
 		5A9A0C3B050B9716FCC5CDAF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		5AEEA3E323EFB3003F714001 /* WorldMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapView.swift; sourceTree = "<group>"; };
 		5FA1BD551838A0E42B9D9993 /* ServerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRepository.swift; sourceTree = "<group>"; };
 		636E5D24AEC69105346213BF /* TunnelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelProtocol.swift; sourceTree = "<group>"; };
 		6586464400EA787B68751072 /* AppSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTests.swift; sourceTree = "<group>"; };
@@ -305,6 +308,7 @@
 				18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */,
 				0699D04238955FC7E259908F /* SettingsScreen.swift */,
 				FE39212ADACEAE2605BAA89B /* Theme.swift */,
+				5AEEA3E323EFB3003F714001 /* WorldMapView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -614,6 +618,7 @@
 				604E2E3EF97522BB86C7518C /* TunnelNetworkSettingsTests.swift in Sources */,
 				7B2BB2D326E000C1805FFDA1 /* TunnelProtocol.swift in Sources */,
 				1B7BDD90A617868C92375656 /* UserFacingError.swift in Sources */,
+				4293E69D057402196FB39E2F /* WorldMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +670,7 @@
 				282CD860E62C5CDC0C3E32EA /* TunnelController.swift in Sources */,
 				97B9E4A12D12310E8D26D163 /* TunnelProtocol.swift in Sources */,
 				ACC1235B0AFE766DAE413153 /* UserFacingError.swift in Sources */,
+				2C7137D7194BE91674D29A21 /* WorldMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
