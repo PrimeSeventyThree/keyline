@@ -37,10 +37,12 @@ struct KeylineApp: App {
             RootView(systemExtension: systemExtension, tunnel: tunnel, servers: servers,
                      connection: connection, stats: stats, selection: selection, settings: settings)
                 .onAppear {
-                    appDelegate.configure(tunnel: tunnel, settings: settings)
+                    appDelegate.configure(tunnel: tunnel, settings: settings, servers: servers,
+                                          connection: connection, selection: selection)
                     systemExtension.activate()
                 }
         }
         .windowStyle(.hiddenTitleBar)
+        .handlesExternalEvents(matching: ["*"])
     }
 }

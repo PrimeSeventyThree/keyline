@@ -19,6 +19,8 @@ struct RootView: View {
     @State private var isAddingServer = false
     @State private var newAccessKey = ""
     @State private var addServerError: String?
+    @State private var addServerNote: String?
+    @State private var clipboard = ClipboardWatcher()
 
     @State private var renamingServer: ServerSummary?
     @State private var newName = ""
@@ -41,7 +43,7 @@ struct RootView: View {
                 }
             case .servers:
                 ServersScreen(state: serversState,
-                              onAdd: showAddServer,
+                              onAdd: { showAddServer() },
                               onConnect: { connect($0.id) },
                               actions: ServerActions(
                                 rename: { server in newName = server.name; renamingServer = server },
@@ -57,7 +59,7 @@ struct RootView: View {
         .frame(minWidth: 1120, minHeight: 720)
         .overlay(alignment: .bottom) { undoToast }
         .sheet(isPresented: $isAddingServer) {
-            AddServerSheet(accessKey: $newAccessKey, errorMessage: addServerError,
+            AddServerSheet(accessKey: $newAccessKey, errorMessage: addServerError, note: addServerNote,
                            onCancel: { isAddingServer = false }, onAdd: addServer)
         }
         .sheet(isPresented: $showingLicenses) { LicensesSheet(onDone: { showingLicenses = false }) }
@@ -86,6 +88,15 @@ struct RootView: View {
         .onAppear {
             if tunnel.status == .connected { stats.start(source: tunnel) }
         }
+        .onOpenURL(perform: handle)
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            checkClipboard()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .keylineShowSection)) { note in
+            if let raw = note.object as? String, let shown = MainSection(rawValue: raw) { section = shown }
+        }
+        // Links go to this window instead of opening another one.
+        .handlesExternalEvents(preferring: ["*"], allowing: ["*"])
     }
 
     // MARK: - Screen state
@@ -251,13 +262,38 @@ struct RootView: View {
         }
     }
 
-    private func showAddServer() {
-        newAccessKey = (NSPasteboard.general.string(forType: .string)).flatMap { text in
-            let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-            return trimmed.hasPrefix("ss://") || trimmed.hasPrefix("ssconf://") ? trimmed : nil
-        } ?? ""
+    /// Opens the Add server sheet, pre-filled with `accessKey` or a key on the clipboard.
+    private func showAddServer(accessKey: String? = nil, note: String? = nil) {
+        newAccessKey = accessKey ?? AccessKeyDetection.candidate(in: NSPasteboard.general.string(forType: .string)) ?? ""
+        addServerNote = note
         addServerError = nil
         isAddingServer = true
+    }
+
+    /// Offers an access key copied since Keyline was last in front, as upstream does.
+    private func checkClipboard() {
+        guard !isAddingServer else { return }
+        let pasteboard = NSPasteboard.general
+        guard let key = clipboard.newAccessKey(changeCount: pasteboard.changeCount,
+                                               text: pasteboard.string(forType: .string),
+                                               isAlreadyAdded: { servers.server(withAccessKey: $0) != nil })
+        else { return }
+        section = .servers
+        showAddServer(accessKey: key,
+                      note: String(localized: "add-server-from-clipboard", defaultValue: "Found an access key on your clipboard."))
+    }
+
+    /// ss:// and ssconf:// links open the Add server sheet, or select the server if it's
+    /// already added.
+    private func handle(_ url: URL) {
+        guard let key = AccessKeyDetection.candidate(in: url.absoluteString) else { return }
+        if let existing = servers.server(withAccessKey: key) {
+            selection.select(existing.id)
+            section = .connect
+            return
+        }
+        section = .servers
+        showAddServer(accessKey: key, note: String(localized: "add-server-from-link", defaultValue: "Opened from a link."))
     }
 
     private func addServer() {

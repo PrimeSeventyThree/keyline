@@ -1,9 +1,10 @@
 import AppKit
 
-/// Owns the menu bar item and decides what quitting does to the VPN. SwiftUI's MenuBarExtra
-/// needs macOS 13, so on the macOS 12 baseline the status item is plain AppKit.
+/// Sets up the menu bar item and decides what quitting does to the VPN. SwiftUI's
+/// MenuBarExtra needs macOS 13, so on the macOS 12 baseline the menu bar item is AppKit
+/// (StatusMenuController).
 final class AppDelegate: NSObject, NSApplicationDelegate {
-    private var statusItem: NSStatusItem?
+    private var statusMenu: StatusMenuController?
     private var tunnel: TunnelController?
     private var settings: AppSettings?
     /// Set when quitting to restart: skip the VPN question, the VPN stays as it is.
@@ -11,26 +12,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     /// Called once the app's models exist.
     @MainActor
-    func configure(tunnel: TunnelController, settings: AppSettings) {
+    func configure(tunnel: TunnelController, settings: AppSettings, servers: ServerRepository,
+                   connection: ConnectionModel, selection: ServerSelection) {
+        guard statusMenu == nil else { return } // Once, even if a second window opens.
         self.tunnel = tunnel
         self.settings = settings
-    }
-
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-        let mark = NSImage(named: "KeylineMark")
-        mark?.size = NSSize(width: 18, height: 18)
-        mark?.isTemplate = true
-        mark?.accessibilityDescription = "Keyline"
-        item.button?.image = mark
-
-        let menu = NSMenu()
-        menu.addItem(withTitle: String(localized: "Open Keyline"), action: #selector(openMainWindow), keyEquivalent: "")
-            .target = self
-        menu.addItem(.separator())
-        menu.addItem(withTitle: String(localized: "Quit Keyline"), action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q")
-        item.menu = menu
-        statusItem = item
+        statusMenu = StatusMenuController(tunnel: tunnel, servers: servers, connection: connection, selection: selection)
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
@@ -76,10 +63,5 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             app.reply(toApplicationShouldTerminate: true)
         }
         return .terminateLater
-    }
-
-    @objc private func openMainWindow() {
-        NSApp.activate(ignoringOtherApps: true)
-        NSApp.windows.first { $0.canBecomeMain }?.makeKeyAndOrderFront(nil)
     }
 }
