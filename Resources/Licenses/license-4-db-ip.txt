@@ -1,0 +1,4 @@
+ipv4-country.bin is derived from DB-IP IP to Country Lite, 2026-10
+(https://db-ip.com/db/download/ip-to-country-lite), licensed under the
+Creative Commons Attribution 4.0 International License
+(https://creativecommons.org/licenses/by/4.0/). Converted with scripts/update-geoip.sh.

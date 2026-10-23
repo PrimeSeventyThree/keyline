@@ -10,6 +10,7 @@ struct KeylineApp: App {
     @StateObject private var connection: ConnectionModel
     @StateObject private var stats = StatsSampler()
     @StateObject private var selection = ServerSelection()
+    @StateObject private var settings = AppSettings()
 
     init() {
         let systemExtension = SystemExtensionManager()
@@ -34,8 +35,11 @@ struct KeylineApp: App {
     var body: some Scene {
         WindowGroup {
             RootView(systemExtension: systemExtension, tunnel: tunnel, servers: servers,
-                     connection: connection, stats: stats, selection: selection)
-                .onAppear { systemExtension.activate() }
+                     connection: connection, stats: stats, selection: selection, settings: settings)
+                .onAppear {
+                    appDelegate.configure(tunnel: tunnel, settings: settings)
+                    systemExtension.activate()
+                }
         }
         .windowStyle(.hiddenTitleBar)
     }

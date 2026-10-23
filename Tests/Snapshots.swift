@@ -81,7 +81,7 @@ final class Snapshots: XCTestCase {
     }
 
     func testSettings() throws {
-        var state = SettingsScreenState(launchAtLogin: true)
+        var state = SettingsScreenState(launchAtLogin: true, language: .russian, languageNeedsRestart: true)
         let binding = Binding(get: { state }, set: { state = $0 })
         try render(window(.settings, connected: true) { SettingsScreen(state: binding) }, named: "6-settings")
     }
