@@ -42,12 +42,18 @@ final class ServerRepository: ObservableObject {
         servers.first { $0.id == id }
     }
 
+    /// The server added from `accessKey`, if any (surrounding whitespace ignored).
+    func server(withAccessKey accessKey: String) -> Server? {
+        let accessKey = accessKey.trimmingCharacters(in: .whitespacesAndNewlines)
+        return servers.first { (try? secrets.secret(for: $0.id)) == accessKey }
+    }
+
     /// Adds a server from an access key, named after the key or a default name.
     /// Throws `ServerError.alreadyAdded` if a server with the same key exists.
     @discardableResult
     func add(accessKey text: String) async throws -> Server {
         let accessKey = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let existing = servers.first(where: { (try? secrets.secret(for: $0.id)) == accessKey }) {
+        if let existing = server(withAccessKey: accessKey) {
             throw ServerError.alreadyAdded(serverName: existing.name)
         }
 
