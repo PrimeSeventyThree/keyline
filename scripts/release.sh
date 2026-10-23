@@ -51,14 +51,13 @@ rm -rf "$out"
 mkdir -p "$out"
 
 step "Archiving Keyline $version ($build_number)"
-# The archive is signed for development first, and development profiles only grant the plain
-# Network Extension value; the Developer ID export re-signs it (checked below).
+# The Release configuration signs with Developer ID and the Developer ID ("Mac Team Direct")
+# provisioning profiles, which grant the -systemextension Network Extension values.
 xcodebuild archive \
   -project "$repo_root/Keyline.xcodeproj" -scheme Keyline -configuration Release \
   -destination 'generic/platform=macOS' -derivedDataPath "$derived_data" \
   -archivePath "$out/Keyline.xcarchive" -allowProvisioningUpdates \
   MARKETING_VERSION="$version" CURRENT_PROJECT_VERSION="$build_number" \
-  KEYLINE_NE_PROVIDER=packet-tunnel-provider \
   | grep -E 'error:|warning: .*(sign|profile|entitle)|ARCHIVE (SUCCEEDED|FAILED)' || true
 [[ -d "$out/Keyline.xcarchive" ]] || { echo "error: archive failed" >&2; exit 1; }
 
@@ -69,8 +68,14 @@ cat > "$out/ExportOptions.plist" <<EOF
 <plist version="1.0">
 <dict>
 	<key>method</key><string>developer-id</string>
-	<key>signingStyle</key><string>automatic</string>
+	<key>signingStyle</key><string>manual</string>
+	<key>signingCertificate</key><string>Developer ID Application</string>
 	<key>teamID</key><string>$team</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>ca.pulsbeat.keyline</key><string>Mac Team Direct Provisioning Profile: ca.pulsbeat.keyline</string>
+		<key>ca.pulsbeat.keyline.tunnel</key><string>Mac Team Direct Provisioning Profile: ca.pulsbeat.keyline.tunnel</string>
+	</dict>
 </dict>
 </plist>
 EOF

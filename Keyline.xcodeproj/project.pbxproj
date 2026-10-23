@@ -498,7 +498,6 @@
 				TargetAttributes = {
 					3CD76BB338F26BD794509BCD = {
 						DevelopmentTeam = 49DY4CP2B4;
-						ProvisioningStyle = Automatic;
 					};
 					41D485CAE82568F5A7EF1BD4 = {
 						DevelopmentTeam = 49DY4CP2B4;
@@ -506,11 +505,9 @@
 					};
 					68A2A0A94C601CAF0C64544C = {
 						DevelopmentTeam = 49DY4CP2B4;
-						ProvisioningStyle = Automatic;
 					};
 					BDAAE55470CDCA63B33BC048 = {
 						DevelopmentTeam = 49DY4CP2B4;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -874,6 +871,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = TunnelExtension/KeylineTunnel.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -887,6 +886,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.pulsbeat.keyline.tunnel;
 				PRODUCT_MODULE_NAME = KeylineTunnel;
 				PRODUCT_NAME = "$(PRODUCT_BUNDLE_IDENTIFIER)";
+				PROVISIONING_PROFILE_SPECIFIER = "Mac Team Direct Provisioning Profile: ca.pulsbeat.keyline.tunnel";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 			};
@@ -941,6 +941,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = LoginHelper/KeylineLoginHelper.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = LoginHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -959,6 +961,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = App/Keyline.entitlements;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -971,6 +975,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ca.pulsbeat.keyline;
 				PRODUCT_NAME = Keyline;
+				PROVISIONING_PROFILE_SPECIFIER = "Mac Team Direct Provisioning Profile: ca.pulsbeat.keyline";
 				SDKROOT = macosx;
 			};
 			name = Release;
