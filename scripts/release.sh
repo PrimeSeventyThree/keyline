@@ -9,7 +9,9 @@
 #   --publish   also create the GitHub release with the DMG and appcast.xml
 #
 # Needs, on this Mac:
-#   - the "Developer ID Application: Pulsbeat Media Inc. (49DY4CP2B4)" certificate
+#   - the "Developer ID Application: Pulsbeat Media Inc. (49DY4CP2B4)" certificate, and the
+#     "Keyline Developer ID" and "Keyline Tunnel Developer ID" provisioning profiles (Developer
+#     ID profiles can only be created by the Account Holder, at developer.apple.com)
 #   - the notarytool keychain profile "keyline-notary" (KEYLINE_NOTARY_PROFILE to override)
 #   - the Sparkle EdDSA key in the login keychain (generate_keys --account keyline)
 set -euo pipefail
@@ -51,8 +53,8 @@ rm -rf "$out"
 mkdir -p "$out"
 
 step "Archiving Keyline $version ($build_number)"
-# The Release configuration signs automatically with the Developer ID certificate, so Xcode uses
-# its Developer ID ("Mac Team Direct") profiles, which grant the -systemextension NE values.
+# The Release configuration signs manually with the Developer ID certificate and the "Keyline
+# (Tunnel) Developer ID" profiles, which grant the -systemextension Network Extension values.
 xcodebuild archive \
   -project "$repo_root/Keyline.xcodeproj" -scheme Keyline -configuration Release \
   -destination 'generic/platform=macOS' -derivedDataPath "$derived_data" \
@@ -68,8 +70,14 @@ cat > "$out/ExportOptions.plist" <<EOF
 <plist version="1.0">
 <dict>
 	<key>method</key><string>developer-id</string>
-	<key>signingStyle</key><string>automatic</string>
+	<key>signingStyle</key><string>manual</string>
+	<key>signingCertificate</key><string>Developer ID Application</string>
 	<key>teamID</key><string>$team</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>ca.pulsbeat.keyline</key><string>Keyline Developer ID</string>
+		<key>ca.pulsbeat.keyline.tunnel</key><string>Keyline Tunnel Developer ID</string>
+	</dict>
 </dict>
 </plist>
 EOF
