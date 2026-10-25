@@ -2,11 +2,6 @@ import AppKit
 import Combine
 import NetworkExtension
 
-extension Notification.Name {
-    /// Asks the main window to show a section; `object` is the MainSection's raw value.
-    static let keylineShowSection = Notification.Name("ca.pulsbeat.keyline.showSection")
-}
-
 /// The menu bar item: an icon that dims while disconnected, and a menu with the status,
 /// Connect/Disconnect, the servers, and shortcuts into the main window.
 @MainActor
@@ -162,18 +157,14 @@ final class StatusMenuController: NSObject, NSMenuDelegate {
         updater.checkForUpdates()
     }
 
-    @objc private func openConnect() { show(.connect) }
-    @objc private func openSettings() { show(.settings) }
+    @objc private func openConnect() { Self.show(.connect) }
+    @objc private func openSettings() { Self.show(.settings) }
 
-    /// Brings the main window forward (opening a new one if it was closed) at `section`.
-    private func show(_ section: MainSection) {
+    /// Brings the main window forward at `section`, opening a new one if it was closed. A
+    /// keyline:// link does both: the window group handles external events, and AppKit's
+    /// newWindowForTab: doesn't reach it (#19).
+    static func show(_ section: MainSection) {
         NSApp.activate(ignoringOtherApps: true)
-        if let window = NSApp.windows.first(where: { $0.canBecomeMain }) {
-            window.makeKeyAndOrderFront(nil)
-        } else {
-            // SwiftUI's WindowGroup opens a new window for this standard action.
-            NSApp.sendAction(#selector(NSResponder.newWindowForTab(_:)), to: nil, from: nil)
-        }
-        NotificationCenter.default.post(name: .keylineShowSection, object: section.rawValue)
+        NSWorkspace.shared.open(section.showURL)
     }
 }

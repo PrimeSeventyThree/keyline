@@ -31,6 +31,16 @@
 				<string>ssconf</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>ca.pulsbeat.keyline.app</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>keyline</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
