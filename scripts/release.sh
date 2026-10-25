@@ -20,6 +20,7 @@
 #   - the notarytool keychain profile "keyline-notary" (KEYLINE_NOTARY_PROFILE to override)
 #   - the Sparkle EdDSA key in the login keychain (generate_keys --account keyline); the script
 #     exports it with generate_keys for signing, so no Keychain prompt appears
+#
 # macOS bash 3.2 treats an empty array as unbound under set -u, hence ${a[@]+"${a[@]}"} below.
 set -euo pipefail
 
