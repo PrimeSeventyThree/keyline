@@ -167,7 +167,10 @@ struct RootView: View {
         } message: { error in
             if let details = error.details { Text(details).font(.caption) }
         }
-        .onReceive(tunnel.$status.removeDuplicates()) { status in
+        // onChange, not onReceive(tunnel.$status): a publisher made in body is resubscribed on every
+        // update and replays the current status, and stats.stop() then published again, so the
+        // window updated in a loop (#17).
+        .onChange(of: tunnel.status) { status in
             if status == .connected {
                 stats.start(source: tunnel)
                 if let id = tunnel.tunnelID { selection.recordConnection(to: id) }

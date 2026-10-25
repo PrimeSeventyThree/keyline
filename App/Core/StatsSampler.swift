@@ -49,16 +49,17 @@ final class StatsSampler: ObservableObject {
         }
     }
 
-    /// Stops polling and clears everything, for the next connection.
+    /// Stops polling and clears everything, for the next connection. Publishes only if there
+    /// was something to clear, so calling it while stopped doesn't update the window.
     func stop() {
         task?.cancel()
         task = nil
         previous = nil
         lastLatencyCheck = nil
-        download = []
-        upload = []
-        latency = []
-        totals = TrafficStats()
+        if !download.isEmpty { download = [] }
+        if !upload.isEmpty { upload = [] }
+        if !latency.isEmpty { latency = [] }
+        if totals != TrafficStats() { totals = TrafficStats() }
     }
 
     /// Adds speeds computed from the change since the previous sample.
