@@ -4,12 +4,24 @@ on:
   pull_request:
   push:
     branches: [main]
+  # The upstream sync starts CI on its branches this way.
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  project:
+    name: Project file
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check that Keyline.xcodeproj matches project.yml
+        run: scripts/check-project.sh
+
   test:
     name: Build and test
     runs-on: macos-15
