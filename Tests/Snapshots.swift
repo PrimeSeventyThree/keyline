@@ -45,10 +45,24 @@ final class Snapshots: XCTestCase {
     // MARK: - Screens
 
     private static let windowSize = CGSize(width: 1120, height: 720)
+    /// A large window, to check that the layout scales (#24).
+    private static let largeWindowSize = CGSize(width: 1680, height: 1050)
 
-    private func window<Content: View>(_ section: MainSection, connected: Bool, @ViewBuilder _ content: () -> Content) -> some View {
+    private func window<Content: View>(_ section: MainSection, connected: Bool, size: CGSize = windowSize,
+                                       @ViewBuilder _ content: () -> Content) -> some View {
         MainWindow(section: .constant(section), isConnected: connected) { content() }
-            .frame(width: Self.windowSize.width, height: Self.windowSize.height)
+            .frame(width: size.width, height: size.height)
+    }
+
+    func testLargeWindow() throws {
+        let size = Self.largeWindowSize
+        try render(window(.connect, connected: true, size: size) { ConnectScreen(state: SampleData.connected) },
+                   named: "11a-large-connect")
+        let servers = ServersScreenState(servers: SampleData.servers, activeServerID: SampleData.toronto.id, phase: .connected)
+        try render(window(.servers, connected: true, size: size) { ServersScreen(state: servers) }, named: "11b-large-servers")
+        var settings = SettingsScreenState(launchAtLogin: true)
+        let binding = Binding(get: { settings }, set: { settings = $0 })
+        try render(window(.settings, connected: true, size: size) { SettingsScreen(state: binding) }, named: "11c-large-settings")
     }
 
     func testConnectConnected() throws {
