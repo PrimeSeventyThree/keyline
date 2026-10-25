@@ -42,6 +42,7 @@ final class ServerRepository: ObservableObject {
         } catch {
             log.error("Failed to load servers: \(error.localizedDescription, privacy: .public)")
         }
+        Task { await refreshMissingCountries() }
     }
 
     func server(withID id: String) -> Server? {
@@ -157,6 +158,14 @@ final class ServerRepository: ObservableObject {
         guard let index = servers.firstIndex(where: { $0.id == id }) else { return }
         servers[index].countryOverride = countryCode.flatMap(Country.init(code:))?.code
         persist()
+    }
+
+    /// Looks up the country of servers that have an address but no country yet, for example
+    /// because Keyline quit before the lookup after adding them was saved.
+    func refreshMissingCountries() async {
+        for server in servers where server.detectedCountryCode == nil && !server.address.isEmpty {
+            await refreshCountry(forServer: server.id)
+        }
     }
 
     /// Detects the country of server `id` from its address, offline.
