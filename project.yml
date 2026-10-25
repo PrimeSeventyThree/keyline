@@ -1,0 +1,150 @@
+# XcodeGen spec for Keyline.xcodeproj (https://github.com/yonaskolb/XcodeGen).
+# The generated Keyline.xcodeproj is checked in, so building needs only Xcode. After adding,
+# moving or removing files, or changing targets or build settings, edit this file and run
+# `xcodegen generate` from the repo root, then commit both. When branches conflict in
+# project.pbxproj, regenerate it instead of merging it by hand.
+
+name: Keyline
+options:
+  bundleIdPrefix: ca.pulsbeat
+  deploymentTarget:
+    macOS: "12.0"
+  createIntermediateGroups: true
+  developmentLanguage: en
+packages:
+  Sparkle:
+    url: https://github.com/sparkle-project/Sparkle
+    exactVersion: 2.10.0
+settings:
+  base:
+    DEVELOPMENT_TEAM: 49DY4CP2B4
+    CODE_SIGN_STYLE: Automatic
+    MACOSX_DEPLOYMENT_TARGET: "12.0"
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: 0.1.0
+    CURRENT_PROJECT_VERSION: 2
+    ENABLE_HARDENED_RUNTIME: YES
+    DEAD_CODE_STRIPPING: YES
+    GENERATE_INFOPLIST_FILE: NO
+    ARCHS: "$(ARCHS_STANDARD)"
+  configs:
+    # Development profiles grant the plain NE values; Developer ID needs the -systemextension ones.
+    Debug:
+      KEYLINE_NE_PROVIDER: packet-tunnel-provider
+    Release:
+      KEYLINE_NE_PROVIDER: packet-tunnel-provider-systemextension
+targets:
+  Keyline:
+    type: application
+    platform: macOS
+    sources:
+      - path: App
+        excludes: ["Info.plist", "*.entitlements"]
+      - Shared
+      - Resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ca.pulsbeat.keyline
+        PRODUCT_NAME: Keyline
+        INFOPLIST_FILE: App/Info.plist
+        CODE_SIGN_ENTITLEMENTS: App/Keyline.entitlements
+      configs:
+        Release:
+          CODE_SIGN_STYLE: Manual
+          CODE_SIGN_IDENTITY: Developer ID Application
+          PROVISIONING_PROFILE_SPECIFIER: Keyline Developer ID
+    dependencies:
+      - target: KeylineTunnel
+        embed: true
+      - package: Sparkle
+      - target: KeylineLoginHelper
+        embed: true
+        copy:
+          destination: wrapper
+          subpath: Contents/Library/LoginItems
+      - framework: build/core/Tun2socks.xcframework
+        embed: false
+  KeylineTunnel:
+    type: system-extension
+    platform: macOS
+    sources:
+      - path: TunnelExtension
+        excludes: ["Info.plist", "*.entitlements"]
+      - Shared
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ca.pulsbeat.keyline.tunnel
+        # A system extension bundle must be named after its bundle identifier.
+        PRODUCT_NAME: "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        PRODUCT_MODULE_NAME: KeylineTunnel
+        INFOPLIST_FILE: TunnelExtension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: TunnelExtension/KeylineTunnel.entitlements
+        # Shared/AppIcon.xcassets, so Activity Monitor shows the tunnel process with the app icon.
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        SKIP_INSTALL: YES
+      configs:
+        Release:
+          CODE_SIGN_STYLE: Manual
+          CODE_SIGN_IDENTITY: Developer ID Application
+          PROVISIONING_PROFILE_SPECIFIER: Keyline Tunnel Developer ID
+    dependencies:
+      - framework: build/core/Tun2socks.xcframework
+        embed: false
+  KeylineLoginHelper:
+    # Opens Keyline at login on macOS 12 (macOS 13+ use SMAppService on the app itself).
+    type: application
+    platform: macOS
+    sources:
+      - path: LoginHelper
+        excludes: ["Info.plist", "*.entitlements"]
+      - Shared/AppIcon.xcassets
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ca.pulsbeat.keyline.LoginHelper
+        PRODUCT_NAME: KeylineLoginHelper
+        INFOPLIST_FILE: LoginHelper/Info.plist
+        CODE_SIGN_ENTITLEMENTS: LoginHelper/KeylineLoginHelper.entitlements
+        SKIP_INSTALL: YES
+      configs:
+        Release:
+          CODE_SIGN_STYLE: Manual
+          CODE_SIGN_IDENTITY: Developer ID Application
+  KeylineTests:
+    type: bundle.unit-test
+    platform: macOS
+    # Compiles the app core directly instead of loading the app, so tests never launch
+    # Keyline or touch the system extension.
+    sources:
+      - Tests
+      - App/Core
+      - App/UI
+      - App/Assets.xcassets
+      - Resources
+      - Shared
+      - TunnelExtension/TunnelNetworkSettings.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: ca.pulsbeat.keyline.tests
+        # Xcode 26 XCTest requires macOS 14; the app and extension still target 12.
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_STYLE: Automatic
+    dependencies:
+      - framework: build/core/Tun2socks.xcframework
+        embed: false
+schemes:
+  Keyline:
+    build:
+      targets:
+        Keyline: all
+        KeylineTunnel: all
+        KeylineLoginHelper: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - KeylineTests
+    archive:
+      config: Release

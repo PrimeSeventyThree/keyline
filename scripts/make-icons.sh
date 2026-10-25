@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Builds Keyline's icons from the SVG masters in design/logo:
-# - App/Assets.xcassets/AppIcon.appiconset: every macOS app icon size, from keyline-icon.svg
+# - Shared/AppIcon.xcassets/AppIcon.appiconset: every macOS app icon size, from keyline-icon.svg
+#   (its own catalog, so the tunnel extension and the login helper get the icon without the
+#   app's other assets)
 # - App/Assets.xcassets/KeylineMark.imageset: the one-colour mark as a vector template image,
 #   from keyline-mark.svg (menu bar and in-app use)
 #
@@ -11,7 +13,7 @@ repo_root="$(cd "$(dirname "$0")/.." && pwd)"
 logo="$repo_root/design/logo"
 catalog="$repo_root/App/Assets.xcassets"
 
-icon_set="$catalog/AppIcon.appiconset"
+icon_set="$repo_root/Shared/AppIcon.xcassets/AppIcon.appiconset"
 rm -rf "$icon_set" && mkdir -p "$icon_set"
 entries=()
 for points in 16 32 128 256 512; do

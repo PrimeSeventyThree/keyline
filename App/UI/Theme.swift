@@ -2,6 +2,9 @@ import SwiftUI
 
 /// Keyline's colours and type. Dark-first, with a green accent (from the reference design).
 enum Theme {
+    /// Servers and Settings stay in a centred column this wide in a large window (#24).
+    static let contentColumnWidth: CGFloat = 960
+
     static let accent = Color(red: 0.24, green: 0.86, blue: 0.56)          // #3DDB8F
     static let accentDeep = Color(red: 0.10, green: 0.55, blue: 0.36)      // #1A8C5C
     static let warning = Color(red: 0.98, green: 0.69, blue: 0.25)

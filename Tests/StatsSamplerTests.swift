@@ -1,3 +1,4 @@
+import Combine
 import XCTest
 
 @MainActor
@@ -57,6 +58,23 @@ final class StatsSamplerTests: XCTestCase {
 
         sampler.sample(TrafficStats(bytesSent: 500, bytesReceived: 500), at: start.addingTimeInterval(5))
         XCTAssertEqual(sampler.download, [], "after a stop, the next sample starts a new series")
+    }
+
+    /// Stopping while stopped mustn't publish: the window stops it on every disconnected
+    /// status, and a publish there updated the window in a loop (#17).
+    func testStopWhileStoppedDoesNotPublish() {
+        let sampler = StatsSampler()
+        var changes = 0
+        let subscription = sampler.objectWillChange.sink { changes += 1 }
+        sampler.stop()
+        sampler.stop()
+        XCTAssertEqual(changes, 0)
+
+        sampler.recordLatency(LatencySample(milliseconds: 20))
+        changes = 0
+        sampler.stop()
+        XCTAssertEqual(changes, 1, "clearing data still publishes")
+        subscription.cancel()
     }
 
     func testPollingReadsFromTheSource() async throws {

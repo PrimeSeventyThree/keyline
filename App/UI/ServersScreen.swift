@@ -39,8 +39,10 @@ struct ServersScreen: View {
                 Spacer(minLength: 0)
             }
         }
+        .frame(maxWidth: Theme.contentColumnWidth)
         .padding(.vertical, 28)
         .padding(.horizontal, 32)
+        .frame(maxWidth: .infinity)
     }
 
     private var emptyState: some View {

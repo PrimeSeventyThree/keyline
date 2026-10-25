@@ -15,7 +15,9 @@ struct RootView: View {
     let updater: Updater
 
     @State private var section: MainSection = .connect
-    @State private var launchAtLogin = LoginItem().isEnabled
+    /// Read from the system once the window appears, never in init: SwiftUI evaluates a
+    /// @State initial value every time the view is recreated (#17).
+    @State private var launchAtLogin = false
     @State private var showingLicenses = false
     @State private var showingAutoConnectExplainer = false
     @State private var showingSplitTunnel = false
@@ -165,7 +167,10 @@ struct RootView: View {
         } message: { error in
             if let details = error.details { Text(details).font(.caption) }
         }
-        .onReceive(tunnel.$status.removeDuplicates()) { status in
+        // onChange, not onReceive(tunnel.$status): a publisher made in body is resubscribed on every
+        // update and replays the current status, and stats.stop() then published again, so the
+        // window updated in a loop (#17).
+        .onChange(of: tunnel.status) { status in
             if status == .connected {
                 stats.start(source: tunnel)
                 if let id = tunnel.tunnelID { selection.recordConnection(to: id) }
@@ -177,6 +182,7 @@ struct RootView: View {
         .onAppear {
             if tunnel.status == .connected { stats.start(source: tunnel) }
         }
+        .task { launchAtLogin = await LoginItem().isEnabled() }
         .onOpenURL(perform: handle)
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             checkClipboard()
@@ -288,14 +294,18 @@ struct RootView: View {
     }
 
     private func setLaunchAtLogin(_ enabled: Bool) {
-        do {
-            try LoginItem().setEnabled(enabled)
-        } catch {
-            shownError = UserFacingError(
-                message: String(localized: "launch-at-login-failed", defaultValue: "Keyline couldn’t change whether it opens at login."),
-                details: String(describing: error))
+        launchAtLogin = enabled
+        Task {
+            let loginItem = LoginItem()
+            do {
+                try await loginItem.setEnabled(enabled)
+            } catch {
+                shownError = UserFacingError(
+                    message: String(localized: "launch-at-login-failed", defaultValue: "Keyline couldn’t change whether it opens at login."),
+                    details: String(describing: error))
+            }
+            launchAtLogin = await loginItem.isEnabled()
         }
-        launchAtLogin = LoginItem().isEnabled
     }
 
     /// Opens a new copy of Keyline and quits this one, to apply a language change.
