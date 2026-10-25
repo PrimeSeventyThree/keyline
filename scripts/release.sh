@@ -4,8 +4,7 @@
 #
 # Usage: scripts/release.sh <version> [--tag <tag>] [--publish] [--since <ref>] [--yes]
 #   <version>   marketing version, such as 0.1.0 (the build number is the git commit count)
-#   --tag       git tag and GitHub release name (default: v<version>); a tag with "-", such as
-#               v0.1.0-beta.1, is published as a prerelease
+#   --tag       git tag and GitHub release name (default: v<version>), such as v0.1.0-beta.1
 #   --publish   also create the GitHub release with the DMG, appcast.xml and release notes
 #   --since     where the release notes start (default: the previous v* tag; see release-notes.sh)
 #   --yes       use the release notes without stopping to review them
@@ -181,13 +180,14 @@ echo "  notes/release-notes.md, and the Sparkle notes next to the DMG"
 
 if $publish; then
   step "Publishing $tag on GitHub"
-  prerelease=()
-  [[ "$tag" == *-* ]] && prerelease=(--prerelease)
   # The appcast links to the Russian notes in this release.
   assets=("$dmg" "$out/appcast.xml")
   [[ -f "$dmg_dir/Keyline-$version.ru.html" ]] && assets+=("$dmg_dir/Keyline-$version.ru.html")
+  # Every release, betas too, becomes GitHub's "latest": SUFeedURL in every installed copy is
+  # releases/latest/download/appcast.xml, and "latest" skips prereleases, so marking a beta as
+  # one would hide it from updates (and with no other release, the feed returns 404).
   # Our notes first, then GitHub's list of merged pull requests.
-  gh release create "$tag" ${prerelease[@]+"${prerelease[@]}"} --repo PrimeSeventyThree/keyline \
+  gh release create "$tag" --latest --repo PrimeSeventyThree/keyline \
     --target "$(git -C "$repo_root" rev-parse HEAD)" --title "Keyline $version ($tag)" \
     --notes-file "$notes_dir/release-notes.md" --generate-notes "${assets[@]}"
 fi
