@@ -53,5 +53,6 @@ struct KeylineApp: App {
         }
         .windowStyle(.hiddenTitleBar)
         .handlesExternalEvents(matching: ["*"])
+        .commands { KeylineCommands(updater: updater) }
     }
 }
