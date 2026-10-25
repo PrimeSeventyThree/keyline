@@ -133,7 +133,8 @@ step "Writing the Sparkle appcast"
 # it directly waits on a permission prompt. generate_keys exports it (it won't write to an
 # existing path, so no pipe) to a private temporary file, removed as soon as signing is done.
 key_dir="$(umask 077 && mktemp -d)"
-trap 'rm -P "$key_dir"/key 2>/dev/null; rm -rf "$key_dir"' EXIT
+# set -e applies in the trap too, so a missing key file (already removed) mustn't fail it.
+trap 'rm -P "$key_dir"/key 2>/dev/null || true; rm -rf "$key_dir"' EXIT
 (umask 077 && "$sparkle/bin/generate_keys" --account keyline -x "$key_dir/key" >/dev/null)
 "$sparkle/bin/generate_appcast" --ed-key-file "$key_dir/key" \
   --download-url-prefix "$repo_url/releases/download/$tag/" \
