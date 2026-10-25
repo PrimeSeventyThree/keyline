@@ -124,6 +124,36 @@ final class ServerCountryTests: XCTestCase {
         XCTAssertNil(repository.server(withID: server.id)?.country, "dynamic servers have no address until they connect")
     }
 
+    /// A server saved without a country (Keyline quit before the lookup after adding it was
+    /// saved) gets one on the next launch.
+    func testMissingCountriesAreLookedUpAtLaunch() async throws {
+        let saved = Server(id: "1", name: "Home", kind: .static, address: "203.0.113.24:6328")
+        let storage = InMemoryServerListStorage()
+        try storage.save([saved])
+        let repository = ServerRepository(storage: storage, secrets: InMemorySecretStore(["1": testStaticKey]),
+                                          configService: FakeConfigService(),
+                                          countryResolver: FakeResolver(codes: ["203.0.113.24": "CA"]))
+        for _ in 0..<50 where repository.server(withID: "1")?.detectedCountryCode == nil {
+            try await Task.sleep(nanoseconds: 10_000_000)
+        }
+        XCTAssertEqual(repository.server(withID: "1")?.detectedCountryCode, "CA")
+        XCTAssertEqual(storage.servers.first?.detectedCountryCode, "CA", "and it's saved")
+    }
+
+    func testServersWithACountryOrNoAddressAreNotLookedUpAgain() async throws {
+        var known = Server(id: "1", name: "Known", kind: .static, address: "203.0.113.24:6328")
+        known.detectedCountryCode = "CA"
+        let dynamic = Server(id: "2", name: "Dynamic", kind: .dynamic, address: "")
+        let storage = InMemoryServerListStorage()
+        try storage.save([known, dynamic])
+        let repository = ServerRepository(storage: storage, secrets: InMemorySecretStore(["1": testStaticKey, "2": "ssconf://example.com/k"]),
+                                          configService: FakeConfigService(),
+                                          countryResolver: FakeResolver(codes: ["203.0.113.24": "US"]))
+        await repository.refreshMissingCountries()
+        XCTAssertEqual(repository.server(withID: "1")?.detectedCountryCode, "CA", "an existing country is kept")
+        XCTAssertNil(repository.server(withID: "2")?.detectedCountryCode)
+    }
+
     func testListsSavedBeforeCountriesStillLoad() throws {
         let json = #"{"version":1,"servers":[{"id":"1","name":"Old","kind":"static","address":"example.com:4321"}]}"#
         let folder = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
