@@ -79,6 +79,8 @@ targets:
         PRODUCT_MODULE_NAME: KeylineTunnel
         INFOPLIST_FILE: TunnelExtension/Info.plist
         CODE_SIGN_ENTITLEMENTS: TunnelExtension/KeylineTunnel.entitlements
+        # Shared/AppIcon.xcassets, so Activity Monitor shows the tunnel process with the app icon.
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         SKIP_INSTALL: YES
       configs:
         Release:
@@ -95,6 +97,7 @@ targets:
     sources:
       - path: LoginHelper
         excludes: ["Info.plist", "*.entitlements"]
+      - Shared/AppIcon.xcassets
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: ca.pulsbeat.keyline.LoginHelper

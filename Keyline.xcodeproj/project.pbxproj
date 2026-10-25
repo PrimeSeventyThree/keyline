@@ -13,8 +13,10 @@
 		13620B42A000AC0BB8722D6C /* GoCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F137E2B0816EBD5E905312BF /* GoCore.swift */; };
 		13A9A1A6951840FEC1074457 /* CountryLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791B8C991818728A790FD72 /* CountryLookup.swift */; };
 		1544C5D49B9520439B4E7C5F /* license-2-apache-2.0.txt in Resources */ = {isa = PBXBuildFile; fileRef = 905426DBE25E2DB522982769 /* license-2-apache-2.0.txt */; };
+		16C3935B223287200E001363 /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B601EF87AE789183D3BDCF7 /* AppIcon.xcassets */; };
 		177EDD7CB2916E02C89F122D /* SOURCE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 79375BDC91FAD3FE410673F4 /* SOURCE.txt */; };
 		1B7BDD90A617868C92375656 /* UserFacingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACCD9D700A32D3462DAD9B6 /* UserFacingError.swift */; };
+		1BEE21EA30D7FDF782B537BF /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B601EF87AE789183D3BDCF7 /* AppIcon.xcassets */; };
 		1DCE618C70C185D5A11A76A2 /* ServersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2FC9C982F1AE060F3CE43 /* ServersScreen.swift */; };
 		1ED762BBA239BD9AE7F85DEC /* ServerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E99212A5EB7E2E091075B9 /* ServerSelection.swift */; };
 		1FE74E4581604F810316E19E /* Tun2socks.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83AAA4C9FD12CFD9AF548024 /* Tun2socks.xcframework */; };
@@ -41,6 +43,7 @@
 		4783A5371813EAC071AB2115 /* license-5-go-modules.txt in Resources */ = {isa = PBXBuildFile; fileRef = 791F9ACD4E37F938816BF6AA /* license-5-go-modules.txt */; };
 		48E8F19C669D88B1DF32B891 /* AppSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6586464400EA787B68751072 /* AppSettingsTests.swift */; };
 		49F5EB949005FE0F8CE5A448 /* license-4-db-ip.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90ED15F2BFD1655CB4131D1F /* license-4-db-ip.txt */; };
+		4A81CD58D1A4851BB6A401AF /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B601EF87AE789183D3BDCF7 /* AppIcon.xcassets */; };
 		4C6B0EC1EF500D6F2DF6A98B /* KeylineIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */; };
 		4FF49B424052D23DC4E6D847 /* TestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCA31CED0F58A9BC0D5A76D /* TestSupport.swift */; };
 		527F805969DD10E77F3B2E54 /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CB2C9AFE0B093B9D0B7298 /* LoginItem.swift */; };
@@ -111,6 +114,7 @@
 		DDB0BA1455F12C5351B4E64E /* StatsSamplerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770496910F77BE7A389DCC9 /* StatsSamplerTests.swift */; };
 		DDBBCC94FD76A1345877F7C1 /* ReportSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB7A8C3DE517B620CAECEEE4 /* ReportSheet.swift */; };
 		E2752AE1F66B7A035CCD5B0E /* ErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B17B8C3AE376F80D78A116 /* ErrorTests.swift */; };
+		E4BA882A35C4F9E24DB5B46C /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B601EF87AE789183D3BDCF7 /* AppIcon.xcassets */; };
 		E6049793A02A43CA3B61AB8F /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417F0DFC8DDE061CF4A5959C /* PacketTunnelProvider.swift */; };
 		E67AE48E1A14F8898C6B02A1 /* KeylineError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DB074B771331C5DEA789C5 /* KeylineError.swift */; };
 		E87FF913F1C6C350CBD5223E /* ServerRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4C9B26E43CCDAA766F02CED /* ServerRepositoryTests.swift */; };
@@ -196,6 +200,7 @@
 		56CB2C9AFE0B093B9D0B7298 /* LoginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItem.swift; sourceTree = "<group>"; };
 		5A9A0C3B050B9716FCC5CDAF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		5AEEA3E323EFB3003F714001 /* WorldMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldMapView.swift; sourceTree = "<group>"; };
+		5B601EF87AE789183D3BDCF7 /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
 		5FA1BD551838A0E42B9D9993 /* ServerRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRepository.swift; sourceTree = "<group>"; };
 		636E5D24AEC69105346213BF /* TunnelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TunnelProtocol.swift; sourceTree = "<group>"; };
 		6586464400EA787B68751072 /* AppSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTests.swift; sourceTree = "<group>"; };
@@ -321,6 +326,7 @@
 		37BDEE8F3D7C5D28A372937C /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				5B601EF87AE789183D3BDCF7 /* AppIcon.xcassets */,
 				77DB074B771331C5DEA789C5 /* KeylineError.swift */,
 				89CE94F534F237C3E314DE13 /* KeylineIdentifiers.swift */,
 				4C9BF311AA59F095992055F4 /* SplitTunnel.swift */,
@@ -452,6 +458,7 @@
 			buildConfigurationList = F14CB17D8C6A561DF0AC19A0 /* Build configuration list for PBXNativeTarget "KeylineLoginHelper" */;
 			buildPhases = (
 				1C9BB1CF643BDA30626B681E /* Sources */,
+				C836C0BD8371ABDB239D11BA /* Resources */,
 			);
 			buildRules = (
 			);
@@ -488,6 +495,7 @@
 			buildConfigurationList = 212782E1B39F90C7C23206C8 /* Build configuration list for PBXNativeTarget "KeylineTunnel" */;
 			buildPhases = (
 				5B96813DE7FB9BC89E9183E9 /* Sources */,
+				ABA5D76DBE91992CE2C2AB1D /* Resources */,
 				3DBC524790A2C896901E7390 /* Frameworks */,
 			);
 			buildRules = (
@@ -580,6 +588,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16C3935B223287200E001363 /* AppIcon.xcassets in Resources */,
 				BDCBA87F16D12CD018F82D2E /* Assets.xcassets in Resources */,
 				672D64BE091CC9D9A6906BDF /* Localizable.xcstrings in Resources */,
 				177EDD7CB2916E02C89F122D /* SOURCE.txt in Resources */,
@@ -592,10 +601,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ABA5D76DBE91992CE2C2AB1D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4BA882A35C4F9E24DB5B46C /* AppIcon.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C836C0BD8371ABDB239D11BA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A81CD58D1A4851BB6A401AF /* AppIcon.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFD6C9F588B2988694139941 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BEE21EA30D7FDF782B537BF /* AppIcon.xcassets in Resources */,
 				EC83278C63F7644B71CFF4C5 /* Assets.xcassets in Resources */,
 				D47F29F007A6D48D8029D3A7 /* Localizable.xcstrings in Resources */,
 				5BD8AD2B26DCBCC503C7CEDE /* SOURCE.txt in Resources */,
@@ -927,6 +953,7 @@
 		6E3C69C0228C96DEFE930783 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TunnelExtension/KeylineTunnel.entitlements;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
@@ -974,6 +1001,7 @@
 		90625B9A1055EDA30D751958 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TunnelExtension/KeylineTunnel.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
