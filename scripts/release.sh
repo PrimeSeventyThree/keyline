@@ -163,7 +163,7 @@ key_dir="$(umask 077 && mktemp -d)"
 # set -e applies in the trap too, so a missing key file (already removed) mustn't fail it.
 trap 'rm -P "$key_dir"/key 2>/dev/null || true; rm -rf "$key_dir"' EXIT
 (umask 077 && "$sparkle/bin/generate_keys" --account keyline -x "$key_dir/key" >/dev/null)
-# Notes named after the DMG: the English ones are embedded, the Russian ones linked.
+# Notes named after the DMG (Keyline-<version>.<lang>.html): the appcast links each by language.
 cp "$notes_dir"/Keyline-"$version"*.html "$dmg_dir"/
 "$sparkle/bin/generate_appcast" --ed-key-file "$key_dir/key" \
   --download-url-prefix "$repo_url/releases/download/$tag/" \
@@ -180,9 +180,11 @@ echo "  notes/release-notes.md, and the Sparkle notes next to the DMG"
 
 if $publish; then
   step "Publishing $tag on GitHub"
-  # The appcast links to the Russian notes in this release.
+  # The appcast links to the notes in this release.
   assets=("$dmg" "$out/appcast.xml")
-  [[ -f "$dmg_dir/Keyline-$version.ru.html" ]] && assets+=("$dmg_dir/Keyline-$version.ru.html")
+  for page in "$dmg_dir"/Keyline-"$version".*.html; do
+    if [[ -f "$page" ]]; then assets+=("$page"); fi
+  done
   # Every release, betas too, becomes GitHub's "latest": SUFeedURL in every installed copy is
   # releases/latest/download/appcast.xml, and "latest" skips prereleases, so marking a beta as
   # one would hide it from updates (and with no other release, the feed returns 404).

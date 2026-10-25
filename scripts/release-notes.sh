@@ -10,8 +10,8 @@
 # in English only. Paid calls go through openrouter.sh's budget guard.
 #
 # Writes, into <out-dir>:
-#   Keyline-<version>.html     English notes, embedded in the Sparkle appcast
-#   Keyline-<version>.ru.html  Russian notes; the appcast links to it (uploaded with the release)
+#   Keyline-<version>.en.html  English notes \ linked from the Sparkle appcast by language;
+#   Keyline-<version>.ru.html  Russian notes /  both are uploaded with the release
 #   release-notes.md           both languages, for the GitHub release
 #   notes.json                 the notes as data, to edit and render again with --from
 #
@@ -195,24 +195,30 @@ render_markdown() {
     | join("\n\n")'
 }
 
-en_html="$(render_html en)"
-ru_html="$(render_html ru)"
-# A fragment, so generate_appcast embeds it in the appcast.
-printf '%s\n' "$en_html" > "$out_dir/Keyline-$version.html"
-# Sparkle opens linked notes as a page, so this one is a whole document with its charset.
-if [[ -n "$ru_html" ]]; then
-  cat > "$out_dir/Keyline-$version.ru.html" <<EOF
+# Writes Keyline-<version>.<lang>.html, a whole page with its charset, or removes it when there
+# are no notes in that language. Each becomes a releaseNotesLink with xml:lang in the appcast.
+# Both languages have to be links: with a single link Sparkle shows it whatever the language,
+# and a link wins over an embedded description, so embedding English showed Russian to everyone.
+write_page() {
+  local lang=$1 html
+  html="$(render_html "$lang")"
+  if [[ -z "$html" ]]; then
+    rm -f "$out_dir/Keyline-$version.$lang.html"
+    return
+  fi
+  cat > "$out_dir/Keyline-$version.$lang.html" <<EOF
 <!DOCTYPE html>
-<html lang="ru"><head><meta charset="utf-8"><title>Keyline $version</title>
+<html lang="$lang"><head><meta charset="utf-8"><title>Keyline $version</title>
 <style>body { font: 13px -apple-system, sans-serif; margin: 12px 16px; } h3 { font-size: 13px; margin: 12px 0 4px; } ul { margin: 0; padding-left: 20px; }
 @media (prefers-color-scheme: dark) { body { color: #e6e6e6; background: transparent; } }</style>
 </head><body>
-$ru_html
+$html
 </body></html>
 EOF
-else
-  rm -f "$out_dir/Keyline-$version.ru.html"
-fi
+}
+write_page en
+write_page ru
+ru_html="$(render_html ru)"
 {
   render_markdown en
   if [[ -n "$ru_html" ]]; then
@@ -220,7 +226,7 @@ fi
   fi
 } > "$out_dir/release-notes.md"
 
-log "wrote $out_dir: Keyline-$version.html${ru_html:+, Keyline-$version.ru.html}, release-notes.md, notes.json"
+log "wrote $out_dir: Keyline-$version.en.html${ru_html:+, Keyline-$version.ru.html}, release-notes.md, notes.json"
 [[ -s "$OPENROUTER_LEDGER" ]] && log "AI usage: $(openrouter_spent)"
 if $preview; then
   cat "$out_dir/release-notes.md"
