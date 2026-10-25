@@ -21,6 +21,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                                           updater: updater)
     }
 
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        // No window tabs (Show Tab Bar, Merge All Windows) and no Start Dictation or Emoji & Symbols
+        // in the Edit menu: Keyline has one window and one text field. Separators left by the menu
+        // groups KeylineCommands removes are tidied whenever the menu bar opens.
+        NSWindow.allowsAutomaticWindowTabbing = false
+        UserDefaults.standard.register(defaults: [
+            "NSDisabledDictationMenuItem": true,
+            "NSDisabledCharacterPaletteMenuItem": true,
+        ])
+        NotificationCenter.default.addObserver(forName: NSMenu.didBeginTrackingNotification, object: nil, queue: .main) { note in
+            guard let menu = note.object as? NSMenu, menu == NSApp.mainMenu else { return }
+            menu.removeRedundantSeparators()
+        }
+    }
+
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         false // The menu bar item keeps the app running.
     }

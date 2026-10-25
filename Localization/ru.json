@@ -38,6 +38,7 @@
   "launch-at-login-failed": "Keyline не удалось изменить настройку открытия при входе.",
   "licenses": "Лицензии",
   "menu-check-updates": "Проверить обновления…",
+  "menu-close": "Закрыть",
   "menu-connect-to": "Подключиться к %@",
   "menu-connected-to": "Подключено к %@",
   "menu-connected-to-place": "Подключено к %1$@ (%2$@)",
