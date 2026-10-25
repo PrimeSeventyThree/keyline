@@ -1,0 +1,120 @@
+name: Upstream sync
+
+# Weekly: when Outline tags a newer macOS client release, move third_party/outline-apps to it,
+# rebuild the Go core, run the tests and open a pull request with what changed upstream
+# (scripts/upstream-sync.sh writes the report). It never merges; that stays a person's call.
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # Mondays, 07:00 UTC
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Upstream tag to sync to, such as client_macos/v1.22.3-rc.1 (default: the newest)"
+        required: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write # starts CI on the new branch; pushes with this token don't trigger workflows
+
+concurrency:
+  group: upstream-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync with upstream
+    runs-on: macos-15
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Find the newest upstream release
+        id: check
+        env:
+          TAG_INPUT: ${{ inputs.tag }}
+        run: scripts/upstream-sync.sh ${TAG_INPUT:+--tag "$TAG_INPUT"} --report "$RUNNER_TEMP/report.md"
+
+      - name: Skip if a pull request for it exists
+        id: existing
+        if: steps.check.outputs.up_to_date == 'false'
+        env:
+          BRANCH: ${{ steps.check.outputs.branch }}
+        run: |
+          # Open, merged or closed: a closed one means it was turned down, so don't reopen it weekly.
+          pr="$(gh pr list --head "$BRANCH" --state all --json url --jq '.[0].url // empty')"
+          if [[ -n "$pr" ]]; then
+            echo "Already handled in $pr"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Select the latest stable Xcode
+        if: steps.existing.outputs.skip == 'false'
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - uses: actions/setup-go@v5
+        if: steps.existing.outputs.skip == 'false'
+        with:
+          go-version: "1.25.14"
+          cache: false
+
+      - name: Move the submodule and refresh the licences
+        if: steps.existing.outputs.skip == 'false'
+        run: scripts/upstream-sync.sh --tag "${{ steps.check.outputs.tag }}" --apply --report "$RUNNER_TEMP/report.md"
+
+      - name: Build the Go core and run the tests
+        id: tests
+        if: steps.existing.outputs.skip == 'false'
+        continue-on-error: true
+        run: |
+          rm -rf build/core
+          set -o pipefail
+          scripts/test.sh CODE_SIGNING_ALLOWED=NO 2>&1 | tee "$RUNNER_TEMP/test.log"
+
+      - name: Open the pull request
+        if: steps.existing.outputs.skip == 'false'
+        env:
+          BRANCH: ${{ steps.check.outputs.branch }}
+          TAG: ${{ steps.check.outputs.tag }}
+          VERSION: ${{ steps.check.outputs.version }}
+          TESTS: ${{ steps.tests.outcome }}
+        run: |
+          {
+            cat "$RUNNER_TEMP/report.md"
+            echo
+            echo "## Tests"
+            echo
+            if [[ "$TESTS" == success ]]; then
+              echo "The Go core built and the unit tests passed:"
+            else
+              echo "> [!CAUTION]"
+              echo "> The Go core build or the unit tests failed. End of the log:"
+            fi
+            echo
+            echo '```'
+            grep -E 'error:|Executed [0-9]+ tests|TEST (SUCCEEDED|FAILED)|built:' "$RUNNER_TEMP/test.log" | tail -15 || true
+            echo '```'
+            echo
+            echo "Before merging: work through **To port by hand**, then build a DMG and connect with a real access key."
+            echo
+            echo "Opened by the weekly [upstream sync]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)."
+          } > "$RUNNER_TEMP/body.md"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$BRANCH"
+          git add third_party/outline-apps Resources/Licenses
+          git commit -m "Update the Outline core to $VERSION" -m "Moves third_party/outline-apps to upstream's $TAG."
+          git push -u origin "$BRANCH"
+          gh pr create --base main --head "$BRANCH" --title "Update the Outline core to $VERSION" --body-file "$RUNNER_TEMP/body.md"
+          # Pushes made with this workflow's token don't start other workflows, so start CI here.
+          gh workflow run ci.yml --ref "$BRANCH"

@@ -41,7 +41,17 @@ only activates system extensions from there.
 [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`) and checked in, so
 building needs only Xcode. When you add, move or remove files, or change targets or build
 settings, edit `project.yml`, run `xcodegen generate`, and commit both. If branches conflict in
-`project.pbxproj`, regenerate it rather than merging it by hand.
+`project.pbxproj`, regenerate it rather than merging it by hand. CI fails when the two don't
+match; `scripts/check-project.sh` runs the same check locally, with the pinned XcodeGen version.
+
+### Keeping up with upstream
+
+`third_party/outline-apps` is pinned to an Outline macOS client release. Every Monday the
+[Upstream sync](.github/workflows/upstream-sync.yml) workflow checks for a newer
+`client_macos/*` tag. When there is one, it moves the submodule, rebuilds the Go core, runs the
+tests and opens a pull request listing the Go core changes, the upstream files behind our
+ported Swift files (to port by hand), and any Go or dependency changes. It never merges.
+`scripts/upstream-sync.sh` prints the same report locally.
 
 ## Testing
 
