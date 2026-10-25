@@ -25,6 +25,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         false // The menu bar item keeps the app running.
     }
 
+    /// Clicking the Dock icon with the window closed opens it again (#19).
+    @MainActor
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows: Bool) -> Bool {
+        guard !hasVisibleWindows else { return true }
+        StatusMenuController.show(.connect)
+        return false
+    }
+
     @MainActor
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         guard let tunnel, let settings else { return .terminateNow }

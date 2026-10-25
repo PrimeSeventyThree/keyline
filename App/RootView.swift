@@ -187,9 +187,6 @@ struct RootView: View {
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             checkClipboard()
         }
-        .onReceive(NotificationCenter.default.publisher(for: .keylineShowSection)) { note in
-            if let raw = note.object as? String, let shown = MainSection(rawValue: raw) { section = shown }
-        }
         // Links go to this window instead of opening another one.
         .handlesExternalEvents(preferring: ["*"], allowing: ["*"])
     }
@@ -408,9 +405,13 @@ struct RootView: View {
                       note: String(localized: "add-server-from-clipboard", defaultValue: "Found an access key on your clipboard."))
     }
 
-    /// ss:// and ssconf:// links open the Add server sheet, or select the server if it's
-    /// already added.
+    /// keyline://show links show a section. ss:// and ssconf:// links open the Add server
+    /// sheet, or select the server if it's already added.
     private func handle(_ url: URL) {
+        if let shown = MainSection(showURL: url) {
+            section = shown
+            return
+        }
         guard let key = AccessKeyDetection.candidate(in: url.absoluteString) else { return }
         if let existing = servers.server(withAccessKey: key) {
             selection.select(existing.id)

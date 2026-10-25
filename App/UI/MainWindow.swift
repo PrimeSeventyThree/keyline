@@ -19,6 +19,15 @@ enum MainSection: String, CaseIterable, Identifiable {
         case .settings: return "gearshape"
         }
     }
+
+    /// keyline://show/<section>, which opens the main window at this section.
+    var showURL: URL { URL(string: "keyline://show/\(rawValue)")! }
+
+    /// The section a keyline://show link asks for; keyline://show alone is Connect.
+    init?(showURL url: URL) {
+        guard url.scheme == "keyline", url.host == "show" else { return nil }
+        self.init(rawValue: url.pathComponents.dropFirst().first ?? MainSection.connect.rawValue)
+    }
 }
 
 /// The window frame: a slim sidebar and the selected screen on the themed background.

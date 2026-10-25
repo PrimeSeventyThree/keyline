@@ -94,6 +94,7 @@
 		C0E714E0B0CD23DA1ED818D6 /* LoginItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016DF3F0CC4BFB8E4752AB98 /* LoginItemTests.swift */; };
 		C176B00EF5D319C2D2AE514C /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20CFE108A620F3E25E31D1E2 /* Server.swift */; };
 		C271C1FAA56EF9D330C5B070 /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F2C950336B74F1460D611C3 /* OnboardingScreen.swift */; };
+		C50A2BCF976A26052B997D51 /* MainSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000B93EF0629084D253B1199 /* MainSectionTests.swift */; };
 		C7EFB8B85711F074D06796C0 /* TunnelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE382D1BEBD9C866FD6B7172 /* TunnelController.swift */; };
 		C9FF9612F78BBECB426EC32A /* CrashReports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094AF2FE796B07F3D15AEA92 /* CrashReports.swift */; };
 		CA4A5922E477DDD416BCA8EE /* StatsSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA8A4013E0E62E1B843BD3CF /* StatsSampler.swift */; };
@@ -176,6 +177,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		000B93EF0629084D253B1199 /* MainSectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSectionTests.swift; sourceTree = "<group>"; };
 		016DF3F0CC4BFB8E4752AB98 /* LoginItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItemTests.swift; sourceTree = "<group>"; };
 		0699D04238955FC7E259908F /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		071AB99FAB2B1CC3FEDAD0BE /* ipv4-country.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = "ipv4-country.bin"; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				E54281549E8AAB5E782EB02D /* LayoutTests.swift */,
 				0A68A9FAFDD0EA11F8F541E9 /* LocalizationTests.swift */,
 				016DF3F0CC4BFB8E4752AB98 /* LoginItemTests.swift */,
+				000B93EF0629084D253B1199 /* MainSectionTests.swift */,
 				92CF965064A0F05AD0B61A96 /* SampleData.swift */,
 				E4C9B26E43CCDAA766F02CED /* ServerRepositoryTests.swift */,
 				A76E79F9D2AF0758B50BBBC8 /* Snapshots.swift */,
@@ -679,6 +682,7 @@
 				A994A290B2BA836652DE632D /* LocalizationTests.swift in Sources */,
 				9EB5287E42ECAC9A25573317 /* LoginItem.swift in Sources */,
 				C0E714E0B0CD23DA1ED818D6 /* LoginItemTests.swift in Sources */,
+				C50A2BCF976A26052B997D51 /* MainSectionTests.swift in Sources */,
 				3E99C022CAB403B4002A9E42 /* MainWindow.swift in Sources */,
 				223722CFCFBAEC5511CF67E6 /* OnboardingScreen.swift in Sources */,
 				67D35FEB549BEE343DF9C6C5 /* ReportSheet.swift in Sources */,
