@@ -13,7 +13,8 @@
 #     "Keyline Developer ID" and "Keyline Tunnel Developer ID" provisioning profiles (Developer
 #     ID profiles can only be created by the Account Holder, at developer.apple.com)
 #   - the notarytool keychain profile "keyline-notary" (KEYLINE_NOTARY_PROFILE to override)
-#   - the Sparkle EdDSA key in the login keychain (generate_keys --account keyline)
+#   - the Sparkle EdDSA key in the login keychain (generate_keys --account keyline); the script
+#     exports it with generate_keys for signing, so no Keychain prompt appears
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "$0")/.." && pwd)"
@@ -40,8 +41,8 @@ step() { printf '\n==> %s\n' "$*"; }
 
 [[ -z "$(git -C "$repo_root" status --porcelain --untracked-files=no)" ]] \
   || { echo "error: commit your changes first; releases are built from committed code" >&2; exit 1; }
-security find-identity -v -p codesigning | grep -q "$identity" \
-  || { echo "error: \"$identity\" is not in the keychain" >&2; exit 1; }
+identities="$(security find-identity -v -p codesigning)"
+[[ "$identities" == *"$identity"* ]] || { echo "error: \"$identity\" is not in the keychain" >&2; exit 1; }
 [[ -d "$repo_root/build/core/Tun2socks.xcframework" ]] || "$repo_root/core/build-xcframework.sh"
 if [[ ! -x "$sparkle/bin/generate_appcast" ]]; then
   mkdir -p "$sparkle"
@@ -90,12 +91,15 @@ app="$out/export/Keyline.app"
 step "Checking signatures and entitlements"
 codesign --verify --deep --strict "$app"
 tunnel="$app/Contents/Library/SystemExtensions/ca.pulsbeat.keyline.tunnel.systemextension"
+# (Output captured first: with pipefail, grep -q closing the pipe early would fail codesign.)
 for bundle in "$app" "$tunnel" "$app/Contents/Library/LoginItems/KeylineLoginHelper.app"; do
-  codesign -dvv "$bundle" 2>&1 | grep -q "Authority=$identity" \
+  details="$(codesign -dvv "$bundle" 2>&1)"
+  [[ "$details" == *"Authority=$identity"* ]] \
     || { echo "error: $(basename "$bundle") is not signed with $identity" >&2; exit 1; }
 done
 for bundle in "$app" "$tunnel"; do
-  codesign -d --entitlements :- "$bundle" 2>/dev/null | grep -q "packet-tunnel-provider-systemextension" \
+  entitlements="$(codesign -d --entitlements :- "$bundle" 2>/dev/null)"
+  [[ "$entitlements" == *"packet-tunnel-provider-systemextension"* ]] \
     || { echo "error: $(basename "$bundle") lacks the Developer ID Network Extension entitlement" >&2; exit 1; }
 done
 
@@ -125,9 +129,16 @@ xcrun stapler staple "$dmg"
 spctl --assess --type open --context context:primary-signature --verbose=2 "$dmg"
 
 step "Writing the Sparkle appcast"
-"$sparkle/bin/generate_appcast" --account keyline \
+# The key's Keychain item trusts only generate_keys, which created it, so generate_appcast reading
+# it directly waits on a permission prompt. generate_keys exports it (it won't write to an
+# existing path, so no pipe) to a private temporary file, removed as soon as signing is done.
+key_dir="$(umask 077 && mktemp -d)"
+trap 'rm -P "$key_dir"/key 2>/dev/null; rm -rf "$key_dir"' EXIT
+(umask 077 && "$sparkle/bin/generate_keys" --account keyline -x "$key_dir/key" >/dev/null)
+"$sparkle/bin/generate_appcast" --ed-key-file "$key_dir/key" \
   --download-url-prefix "$repo_url/releases/download/$tag/" \
   --link "$repo_url" -o "$out/appcast.xml" "$dmg_dir"
+rm -P "$key_dir/key"
 grep -q 'sparkle:edSignature' "$out/appcast.xml" || { echo "error: appcast is not signed" >&2; exit 1; }
 
 echo
