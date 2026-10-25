@@ -2,11 +2,16 @@
 # Builds a Keyline release: signed with Developer ID, notarized and stapled, as a DMG with a
 # Sparkle appcast, in build/release/<tag>.
 #
-# Usage: scripts/release.sh <version> [--tag <tag>] [--publish]
+# Usage: scripts/release.sh <version> [--tag <tag>] [--publish] [--since <ref>] [--yes]
 #   <version>   marketing version, such as 0.1.0 (the build number is the git commit count)
 #   --tag       git tag and GitHub release name (default: v<version>); a tag with "-", such as
 #               v0.1.0-beta.1, is published as a prerelease
-#   --publish   also create the GitHub release with the DMG and appcast.xml
+#   --publish   also create the GitHub release with the DMG, appcast.xml and release notes
+#   --since     where the release notes start (default: the previous v* tag; see release-notes.sh)
+#   --yes       use the release notes without stopping to review them
+#
+# The release notes (scripts/release-notes.sh) come first, so you can review and edit them
+# before the long build and notarization.
 #
 # Needs, on this Mac:
 #   - the "Developer ID Application: Pulsbeat Media Inc. (49DY4CP2B4)" certificate, and the
@@ -15,17 +20,22 @@
 #   - the notarytool keychain profile "keyline-notary" (KEYLINE_NOTARY_PROFILE to override)
 #   - the Sparkle EdDSA key in the login keychain (generate_keys --account keyline); the script
 #     exports it with generate_keys for signing, so no Keychain prompt appears
+# macOS bash 3.2 treats an empty array as unbound under set -u, hence ${a[@]+"${a[@]}"} below.
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "$0")/.." && pwd)"
-version="${1:?usage: scripts/release.sh <version> [--tag <tag>] [--publish]}"
+version="${1:?usage: scripts/release.sh <version> [--tag <tag>] [--publish] [--since <ref>] [--yes]}"
 shift
 tag="v$version"
 publish=false
+review=true
+notes_args=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --tag) tag="$2"; shift 2 ;;
     --publish) publish=true; shift ;;
+    --since) notes_args=(--since "$2"); shift 2 ;;
+    --yes) review=false; shift ;;
     *) echo "unknown option: $1" >&2; exit 2 ;;
   esac
 done
@@ -52,6 +62,23 @@ fi
 build_number="$(git -C "$repo_root" rev-list --count HEAD)"
 rm -rf "$out"
 mkdir -p "$out"
+
+step "Writing the release notes"
+notes_dir="$out/notes"
+"$repo_root/scripts/release-notes.sh" "$version" "$notes_dir" ${notes_args[@]+"${notes_args[@]}"}
+if $review && [[ -t 0 ]]; then
+  while true; do
+    printf '\n%s\n\n' "$(cat "$notes_dir/release-notes.md")"
+    read -r -p "Use these release notes? [Y]es, [e]dit, [q]uit: " answer
+    case "$answer" in
+      "" | y | Y) break ;;
+      e | E)
+        "${EDITOR:-vi}" "$notes_dir/notes.json"
+        "$repo_root/scripts/release-notes.sh" "$version" "$notes_dir" --from "$notes_dir/notes.json" ;;
+      q | Q) echo "stopped before building" >&2; exit 1 ;;
+    esac
+  done
+fi
 
 step "Archiving Keyline $version ($build_number)"
 # The Release configuration signs manually with the Developer ID certificate and the "Keyline
@@ -136,8 +163,11 @@ key_dir="$(umask 077 && mktemp -d)"
 # set -e applies in the trap too, so a missing key file (already removed) mustn't fail it.
 trap 'rm -P "$key_dir"/key 2>/dev/null || true; rm -rf "$key_dir"' EXIT
 (umask 077 && "$sparkle/bin/generate_keys" --account keyline -x "$key_dir/key" >/dev/null)
+# Notes named after the DMG: the English ones are embedded, the Russian ones linked.
+cp "$notes_dir"/Keyline-"$version"*.html "$dmg_dir"/
 "$sparkle/bin/generate_appcast" --ed-key-file "$key_dir/key" \
   --download-url-prefix "$repo_url/releases/download/$tag/" \
+  --release-notes-url-prefix "$repo_url/releases/download/$tag/" \
   --link "$repo_url" -o "$out/appcast.xml" "$dmg_dir"
 rm -P "$key_dir/key"
 grep -q 'sparkle:edSignature' "$out/appcast.xml" || { echo "error: appcast is not signed" >&2; exit 1; }
@@ -146,12 +176,17 @@ echo
 echo "Release ready in $out:"
 echo "  $(basename "$dmg")  (notarized, stapled)"
 echo "  appcast.xml"
+echo "  notes/release-notes.md, and the Sparkle notes next to the DMG"
 
 if $publish; then
   step "Publishing $tag on GitHub"
   prerelease=()
   [[ "$tag" == *-* ]] && prerelease=(--prerelease)
-  gh release create "$tag" "${prerelease[@]}" --repo PrimeSeventyThree/keyline \
+  # The appcast links to the Russian notes in this release.
+  assets=("$dmg" "$out/appcast.xml")
+  [[ -f "$dmg_dir/Keyline-$version.ru.html" ]] && assets+=("$dmg_dir/Keyline-$version.ru.html")
+  # Our notes first, then GitHub's list of merged pull requests.
+  gh release create "$tag" ${prerelease[@]+"${prerelease[@]}"} --repo PrimeSeventyThree/keyline \
     --target "$(git -C "$repo_root" rev-parse HEAD)" --title "Keyline $version ($tag)" \
-    --generate-notes "$dmg" "$out/appcast.xml"
+    --notes-file "$notes_dir/release-notes.md" --generate-notes "${assets[@]}"
 fi
