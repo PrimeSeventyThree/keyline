@@ -17,6 +17,9 @@ final class ServerRepository: ObservableObject {
     private let configService: TunnelConfigService
     private let countryResolver: CountryResolving?
     private let log = Logger.keyline("servers")
+    /// Access keys by server ID, read from the Keychain once at launch, so lookups such as the
+    /// clipboard check don't query the Keychain for every server.
+    private var accessKeys: [String: String] = [:]
     /// The last forgotten server, its position and access key, kept for undo.
     private var lastForgotten: (server: Server, index: Int, accessKey: String)?
 
@@ -28,10 +31,13 @@ final class ServerRepository: ObservableObject {
         self.countryResolver = countryResolver
         do {
             // A server without its key in the Keychain can't connect; drop it.
-            servers = try storage.load().filter { server in
-                let hasKey = (try? secrets.secret(for: server.id)) != nil
-                if !hasKey { log.error("Dropping server \(server.id, privacy: .public): access key missing") }
-                return hasKey
+            for server in try storage.load() {
+                guard let accessKey = try? secrets.secret(for: server.id) else {
+                    log.error("Dropping server \(server.id, privacy: .public): access key missing")
+                    continue
+                }
+                accessKeys[server.id] = accessKey
+                servers.append(server)
             }
         } catch {
             log.error("Failed to load servers: \(error.localizedDescription, privacy: .public)")
@@ -45,7 +51,7 @@ final class ServerRepository: ObservableObject {
     /// The server added from `accessKey`, if any (surrounding whitespace ignored).
     func server(withAccessKey accessKey: String) -> Server? {
         let accessKey = accessKey.trimmingCharacters(in: .whitespacesAndNewlines)
-        return servers.first { (try? secrets.secret(for: $0.id)) == accessKey }
+        return servers.first { accessKeys[$0.id] == accessKey }
     }
 
     /// Adds a server from an access key, named after the key or a default name.
@@ -72,10 +78,12 @@ final class ServerRepository: ObservableObject {
 
         try secrets.setSecret(accessKey, for: server.id)
         servers.append(server)
+        accessKeys[server.id] = accessKey
         do {
             try storage.save(servers)
         } catch {
             servers.removeLast()
+            accessKeys[server.id] = nil
             try? secrets.deleteSecret(for: server.id)
             throw error
         }
@@ -93,7 +101,7 @@ final class ServerRepository: ObservableObject {
     /// Removes a server. `undoForget` brings back the most recently forgotten one.
     func forget(id: String) {
         guard let index = servers.firstIndex(where: { $0.id == id }) else { return }
-        let accessKey = (try? secrets.secret(for: id)) ?? ""
+        let accessKey = accessKeys.removeValue(forKey: id) ?? ""
         lastForgotten = (servers.remove(at: index), index, accessKey)
         do {
             try secrets.deleteSecret(for: id)
@@ -113,6 +121,7 @@ final class ServerRepository: ObservableObject {
             log.error("Failed to restore access key: \(error.localizedDescription, privacy: .public)")
             return
         }
+        accessKeys[id] = forgotten.accessKey
         servers.insert(forgotten.server, at: min(forgotten.index, servers.count))
         lastForgotten = nil
         persist()

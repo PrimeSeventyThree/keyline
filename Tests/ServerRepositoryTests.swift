@@ -105,6 +105,14 @@ final class ServerRepositoryTests: XCTestCase {
 
     // MARK: - Loading
 
+    func testDuplicateCheckDoesNotReadTheKeychain() async throws {
+        let server = try await repository.add(accessKey: testStaticKey)
+        let reloaded = makeRepository()
+        try secrets.deleteSecret(for: server.id)
+        XCTAssertEqual(reloaded.server(withAccessKey: " \(testStaticKey)\n")?.id, server.id,
+                       "keys loaded at launch are kept, so lookups don't query the Keychain")
+    }
+
     func testLoadDropsServersWithoutKeys() async throws {
         let kept = try await repository.add(accessKey: "\(testStaticKey)#Kept")
         let lost = try await repository.add(accessKey: "ssconf://example.com/x#Lost")
