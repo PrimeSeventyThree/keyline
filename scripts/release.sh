@@ -13,7 +13,8 @@
 #     "Keyline Developer ID" and "Keyline Tunnel Developer ID" provisioning profiles (Developer
 #     ID profiles can only be created by the Account Holder, at developer.apple.com)
 #   - the notarytool keychain profile "keyline-notary" (KEYLINE_NOTARY_PROFILE to override)
-#   - the Sparkle EdDSA key in the login keychain (generate_keys --account keyline)
+#   - the Sparkle EdDSA key in the login keychain (generate_keys --account keyline); the script
+#     exports it with generate_keys for signing, so no Keychain prompt appears
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "$0")/.." && pwd)"
@@ -128,9 +129,16 @@ xcrun stapler staple "$dmg"
 spctl --assess --type open --context context:primary-signature --verbose=2 "$dmg"
 
 step "Writing the Sparkle appcast"
-"$sparkle/bin/generate_appcast" --account keyline \
+# The key's Keychain item trusts only generate_keys, which created it, so generate_appcast reading
+# it directly waits on a permission prompt. generate_keys exports it (it won't write to an
+# existing path, so no pipe) to a private temporary file, removed as soon as signing is done.
+key_dir="$(umask 077 && mktemp -d)"
+trap 'rm -P "$key_dir"/key 2>/dev/null; rm -rf "$key_dir"' EXIT
+(umask 077 && "$sparkle/bin/generate_keys" --account keyline -x "$key_dir/key" >/dev/null)
+"$sparkle/bin/generate_appcast" --ed-key-file "$key_dir/key" \
   --download-url-prefix "$repo_url/releases/download/$tag/" \
   --link "$repo_url" -o "$out/appcast.xml" "$dmg_dir"
+rm -P "$key_dir/key"
 grep -q 'sparkle:edSignature' "$out/appcast.xml" || { echo "error: appcast is not signed" >&2; exit 1; }
 
 echo
