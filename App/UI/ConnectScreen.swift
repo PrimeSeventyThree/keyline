@@ -33,26 +33,43 @@ struct ConnectScreen: View {
     var onChangeServer: () -> Void = {}
     var onSetupAction: () -> Void = {}
 
-    /// Width of each side's pair of cards.
-    static let wingWidth: CGFloat = 250
-    /// Height of each side's pair of cards, so both sides line up.
-    static let wingHeight: CGFloat = 280
+    /// Each side's pair of cards at the minimum window size; both sides line up.
+    static let minimumWingSize = CGSize(width: 250, height: 280)
+    /// The screen's size at the minimum window size (1120 × 720 less the sidebar).
+    static let minimumScreenSize = CGSize(width: 1020, height: 720)
+    /// How much the cards grow in a large window: 250 to 340 pt wide.
+    static let maximumWingScale: CGFloat = 1.36
+    /// Beyond this width the layout stops spreading and stays centred.
+    static let maximumLayoutWidth: CGFloat = 1400
+
+    /// The cards grow with the screen, keeping their proportions, from the minimum size up to
+    /// `maximumWingScale` (#24).
+    static func wingSize(forScreen size: CGSize) -> CGSize {
+        let scale = min(size.width / minimumScreenSize.width, size.height / minimumScreenSize.height)
+        let clamped = min(max(scale, 1), maximumWingScale)
+        return CGSize(width: (minimumWingSize.width * clamped).rounded(), height: (minimumWingSize.height * clamped).rounded())
+    }
 
     private var cards: StatsCards { StatsCards(state: state) }
 
     /// Traffic cards on the left, connection cards on the right, the main column centred
     /// between them.
     var body: some View {
-        HStack(spacing: 24) {
-            VStack(spacing: 12) { cards.download; cards.upload }
-                .frame(width: Self.wingWidth, height: Self.wingHeight)
-            mainColumn
-                .frame(maxWidth: .infinity)
-            VStack(spacing: 12) { cards.latency; cards.protection }
-                .frame(width: Self.wingWidth, height: Self.wingHeight)
+        GeometryReader { geometry in
+            let wing = Self.wingSize(forScreen: geometry.size)
+            HStack(spacing: 24) {
+                VStack(spacing: 12) { cards.download; cards.upload }
+                    .frame(width: wing.width, height: wing.height)
+                mainColumn
+                    .frame(maxWidth: .infinity)
+                VStack(spacing: 12) { cards.latency; cards.protection }
+                    .frame(width: wing.width, height: wing.height)
+            }
+            .frame(maxWidth: Self.maximumLayoutWidth)
+            .padding(.vertical, 24)
+            .padding(.horizontal, 28)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(.vertical, 24)
-        .padding(.horizontal, 28)
         .background(
             WorldMapView()
                 .padding(.horizontal, 20)

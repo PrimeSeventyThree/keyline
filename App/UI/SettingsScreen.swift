@@ -110,8 +110,10 @@ struct SettingsScreen: View {
             Spacer(minLength: 0)
         }
         .toggleStyle(KeylineToggleStyle())
+        .frame(maxWidth: Theme.contentColumnWidth)
         .padding(.vertical, 28)
         .padding(.horizontal, 32)
+        .frame(maxWidth: .infinity)
     }
 
     private func section<Content: View>(_ title: String, @ViewBuilder content: () -> Content) -> some View {
