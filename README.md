@@ -60,7 +60,7 @@ the system extension or the VPN. CI runs them on every pull request.
 | `App/` | SwiftUI app: main window and menu bar item |
 | `App/Core/` | App logic without UI: access keys, servers, Keychain, tunnel control, errors |
 | `TunnelExtension/` | Packet tunnel system extension |
-| `Shared/` | Code compiled into both targets |
+| `Shared/` | Code compiled into both targets, and the app icon (also in the login helper) |
 | `Tests/` | Unit tests |
 | `scripts/` | Build, test and release scripts |
 | `project.yml` | XcodeGen spec that generates `Keyline.xcodeproj` |
