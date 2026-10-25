@@ -101,7 +101,9 @@ jobs:
             fi
             echo
             echo '```'
-            grep -E 'error:|Executed [0-9]+ tests|TEST (SUCCEEDED|FAILED)|built:' "$RUNNER_TEMP/test.log" | tail -15 || true
+            grep -E 'error:|built:' "$RUNNER_TEMP/test.log" | head -10 || true
+            grep -E 'Executed [0-9]+ tests' "$RUNNER_TEMP/test.log" | tail -1 || true
+            grep -E 'TEST (SUCCEEDED|FAILED)' "$RUNNER_TEMP/test.log" | tail -1 || true
             echo '```'
             echo
             echo "Before merging: work through **To port by hand**, then build a DMG and connect with a real access key."
